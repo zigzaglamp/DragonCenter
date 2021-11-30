@@ -1,15 +1,19 @@
+-- 상담 일지
+-- 실제
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 1, '19-02-09', 3, '취업연계과정에 대한 전반적인 설명');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 2, '19-02-09', 3, '취업연계과정이 알바도 포함되는건지 질문에 대한 답변');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 3, '19-02-09', 5, '선생님 연락처 안내');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 4, '19-02-09', 4, '비전공자에 대한 고민 상담');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 5, '19-02-09', 1, '커리큘럼에 대한 안내');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 6, '19-02-09', 4, '적성에 맞는지에 대한 고민 상담');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 7, '19-01-09', 4, '직무에 대한 고민 상담');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 8, '19-01-09', 1, '수업에 대한 방향성');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 9, '19-01-09', 1, '수업시수에 관한 안내');
+insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 10, '19-01-09', 1, '수업내용과 관련된 추가질문 설명');
 
 
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '여기에는 대체 어떤말이 들어가야할까?');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '배고프다.');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '고기먹고싶다.');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '삼겹살 먹고싶다.');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '소고기도 먹고싶다.');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '안창살, 치마살, 부채살 기똥찬데...');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '라면끓여먹을까??');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '계란후라이라도 해먹을까');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '적당히 먹다 말아야지..');
-insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, '하...');
+
+-- 더미
 insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 349, '21-01-09', 2, 'test1');
 insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 125, '21-06-28', 2, 'test2');
 insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 87, '21-08-23', 3, 'test3');
