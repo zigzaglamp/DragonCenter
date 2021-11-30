@@ -1,3 +1,13 @@
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,1,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,2,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,3,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,4,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,5,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,6,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,7,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,8,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,9,1);
+insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,10,1);
 --행 1
 insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,16,1);
 --행 2

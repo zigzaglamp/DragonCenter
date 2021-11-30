@@ -1,46 +1,56 @@
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (1,5,to_date('21-02-09, 'yy-mm-dd'),'최신 버전을 설치하시는 경우 영상과 조금 다르니 아래 링크에서 업데이트 된 설명을 따라 진행해주세요 ^^');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (2,3,to_date('21-09-22, 'yy-mm-dd'),'아래 링크의 설명을 참고 부탁드립니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (3,8,to_date('21-03-02, 'yy-mm-dd'),'vscode 하단의 terminal (터미널) 탭에서 아래 명령 입력 후 엔터 치시면 됩니다. 터미널 탭이 보이지 않는다면 파이썬 파일을 1회 이상 실행하세요');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (4,2,to_date('21-12-27, 'yy-mm-dd'),'print() 함수는 괄호 안에 넣는 어떤 값을 출력하는 역할을 합니다. 그 안에는 여러 변수들을 합쳐서, 즉 a + b + c 이런 식으로 변수들을 합쳐서 출력할 수가 있지요.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (5,10,to_date('20-11-03, 'yy-mm-dd'),' ctrl + k + c (주석 설정) 또는 ctrl + k + u (주석 해제) 를 누르시면 됩니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (6,6,to_date('20-03-17, 'yy-mm-dd'),'소스코드 작성중인 파일, 또는 동일 경로 내에 과거에 생성한 파일명을 random.py 로 하셨을텐데 my_random.py 등과 같이 변경해주셔야 합니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (7,3,to_date('19-02-15, 'yy-mm-dd'),'from 을 쓰게 되면 내가 원하는 일부분만 사용할수 있습니다. import 를 쓰게 되면 내가 필요로 하지 않는 녀석들도 사용할수 있게 되지요.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (8,9,to_date('19-02-17, 'yy-mm-dd'),'1학년에 5개 반이 있는데 쉬는시간에 학생주임 선생님이 방송으로 5개 반 반장 모두 교무실로 호출합니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (9,3,to_date('20-04-12, 'yy-mm-dd'),'코드 윗쪽에 아래 내용이 포함되었는지 확인해주세요.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (10,7,to_date('21-05-15, 'yy-mm-dd'),'네, 중복값은 제외합니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (11,1,to_date('20-06-23, 'yy-mm-dd'),'간단한 방법으로는 아래와 같이 find 함수의 2번째 인자 (시작 위치) 값을 넘겨서 처리하실 수 있습니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (12,1,to_date('19-12-25, 'yy-mm-dd'),'visual studio code 가 아닌 다른 ide (파이참 등) 에서 실행하시는 경우 출력결과가 조금 다를 수 있습니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (13,5,to_date('21-08-23, 'yy-mm-dd'),'네 맞습니다. 연습 삼아 써보시라고 한 것이지, 어차피 랜덤으로 샘플링 하는거라 실제로는 셔플 동작은 없어도 됩니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (14,3,to_date('20-08-07, 'yy-mm-dd'),'네 가능합니다. 아래 예제 코드를 참고해주세요.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (15,5,to_date('20-04-19, 'yy-mm-dd'),'함수 내에서 어떤 동작을 수행하고 나서 값을 반환해주는 게 return 을 통해서 가능합니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (16,1,to_date('20-10-16, 'yy-mm-dd'),'정규식 (regular expression) 을 이용해서 다음과 같이 할 수 있습니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (17,2,to_date('21-03-28, 'yy-mm-dd'),'파일을 열고 닫지 않아도 동작은 할 수 있지만 소스코드 내 다른 곳에서 똑같은 파일에 접근하는 경우 이미 파일이 열려 있으면 lock 상태가 되기 때문');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (18,5,to_date('19-03-15, 'yy-mm-dd'),'소스코드 작성중인 파일명을 pickle.py 로 하셨을텐데 my_pickle.py 등과 같이 변경해주셔야 합니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (19,10,to_date('21-09-27, 'yy-mm-dd'),'pickle.dump 를 통해 생성된 파일은 에디터에서 읽을 수 있는 텍스트 형태가 아닌 바이너리 형태로 저장되므로 읽을 수 없는 것이 맞습니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (20,10,to_date('19-12-08, 'yy-mm-dd'),'읽어오는 방법에 rb 가 있고 rt 가 있습니다. 이는 binary 와 text 의 줄임말입니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (21,4,to_date('21-12-09, 'yy-mm-dd'),'쉽게 구분짓자면 클래스 내의 메소드를 정의할 때는 self 를 적으시고, 클래스 외부의 일반 함수를 정의하실 때에는 self 없이 해주시면 됩니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (22,7,to_date('19-02-26, 'yy-mm-dd'),'유닛은 생성되고 나서 전쟁을 할 때만 필요할 때마다 1시로 공격, 5시로 공격 등 방향을 지정합니다. ');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (23,4,to_date('20-05-06, 'yy-mm-dd'),'본 영상에 나오는 표지 제목 및 설명 중 "연산자 오버로딩"은 잘못된 워딩이며 "메소드 오버라이딩"이 올바른 표현입니다. 강의 오류이며 혼란을 드려 대단히 죄송합니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (24,1,to_date('21-05-11, 'yy-mm-dd'),'다중 상속 코드를 작성했을 때, super() 를 쓰면 순서상 맨 "처음" 클래스(예제에서는 flyable) 에 대해서 __init__ 함수가 호출 됩니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (25,5,to_date('21-05-23, 'yy-mm-dd'),'5이상 20이하의 값을 얻기 위해서 randint(5, 20) 이나 randrange(5, 21) 로 작성해야 합니다. 강의 오류이며 혼란을 드려 대단히 죄송합니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (26,1,to_date('21-01-03, 'yy-mm-dd'),'__str__ 이 없어도 msg 에 입력한 값이 동일하게 출력됩니다. 하지만 만약 에러 메시지를 개발자가 변경하여 ');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (27,1,to_date('21-02-17, 'yy-mm-dd'),' 하단에 나오는 버전 정보가 다를텐데, vscode 에서 버전 나오는 부분 클릭하셔서 터미널에 나오는 버전과 같은 것');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (28,1,to_date('21-01-02, 'yy-mm-dd'),'파이썬 설치할때 add python 3.x to path 부분 체크가 안되었나봐요. 아래 링크의 설명을 따라 환경변수 설정을 직접 해주셔도 되구요');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (29,3,to_date('19-05-04, 'yy-mm-dd'),'실수로 한 줄 실행 단축키(shift + enter)가 눌려진 모양이네요. ');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (30,1,to_date('20-01-21, 'yy-mm-dd'),'한 줄 전체 선택은 shift + home (커서 위치로부터 앞으로) 또는 shift + end (커서 위치로부터 뒤로) 를 통해 가능합니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (31,1,to_date('20-07-22, 'yy-mm-dd'),'그래서 일종의 약속으로 정한 것이 있는데, 다른 사람과 함께 작업하기 위해, 또는 미래의 자신이 코드를 알아보기 쉽게 하도록 위해');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (32,6,to_date('20-07-14, 'yy-mm-dd'),'만약 6/3 을 해도 정수 2가 아닌 2.0 으로 출력이 됩니다. 이를 피하려면, 아래와 같이 // 를 하거나 (소수점 버림) int 로 감싸면 (정수형으로 변환) 됩니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (33,5,to_date('21-11-28, 'yy-mm-dd'),'화면 축소는 ctrl 과 - 버튼을 함께, 화면 확대는 ctrl 과 + 버튼을 함께 누르면 됩니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (34,10,to_date('20-10-08, 'yy-mm-dd'),'cls (의미 : clear screen) 라고 입력하시면 됩니다. 맥에서는 clear 라고 해주세요.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (35,1,to_date('19-02-20, 'yy-mm-dd'),'예제와 같이 소스코드 내용과 함께 에러메시지가 나타난다면 그 바로 윗 문장의 닫는 괄호 ) 가 누락되었을 가능성이 가장 큽니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (36,1,to_date('20-08-25, 'yy-mm-dd'),'들여쓰기에 tab 과 space 가 혼용되었을 가능성이 있습니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (37,3,to_date('21-09-07, 'yy-mm-dd'),'if, while, for, def 등 : 으로 끝나는 문장 다음에 나타나는 들여쓰기 중 잘못된 부분이 있어서 그렇습니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (38,6,to_date('20-05-13, 'yy-mm-dd'),'키보드의 backspace 근처(왼쪽이나 아래)에 있습니다. |, \ 등의 문자가 그려져 있는 키 입니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (39,5,to_date('19-09-01, 'yy-mm-dd'),'아래 링크의 설명을 따라 설정을 변경해주세요.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (40,4,to_date('21-02-07, 'yy-mm-dd'),'두 사람이 있습니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (41,4,to_date('19-04-14, 'yy-mm-dd'),'java란 무엇인가?');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (42,8,to_date('21-07-21, 'yy-mm-dd'),'먼저 위키백과에 작성되어있는 내용입니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (43,10,to_date('20-10-14, 'yy-mm-dd'),'자바(java)는 자바로 기술된 프로그램 개발 및 실행을 할 수 있는 소프트웨어 모임의 총칭이다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) 
+     values (1,1,to_date('19-02-02’, 'yy-mm-dd'),'아래 코드를 보자. 지금까지 무수히 많은 예제에서 사용했던 코드다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (2,1,to_date('19-02-02’, 'yy-mm-dd'),'이것이 화면에 어떤 내용을 출력하는 것이라는 건 이미 알고 있다. ');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (3,1,to_date('19-02-02’, 'yy-mm-dd'),' 하지만 도대체 우리가 정의한 적이 없는 이 명령은 무엇일까?를 생각해볼 때가 왔다. ');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (4,1,to_date('19-02-02’, 'yy-mm-dd'),'문법적으로 봤을 때 println은 메소드가 틀림없다. 그런데 메소드 앞에 Sytem.out이 있다. ');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (5,1,to_date('19-02-03’, 'yy-mm-dd'),'System은 클래스이고 out은 그 클래스의 필드(변수)이다. ');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (6,1,to_date('19-02-03’, 'yy-mm-dd'),'API란 자바 시스템을 제어하기 위해서 자바에서 제공하는 명령어들을 의미한다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (7,1,to_date('19-02-03’, 'yy-mm-dd'),'Java SE(JDK)를 설치하면 자바 시스템을 제어하기 위한 API를 제공한다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (8,1,to_date('19-02-03’, 'yy-mm-dd'),'자바 개발자들은 자바에서 제공한 API를 이용해서 자바 애플리케이션을 만들게 된다. ');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (9,1,to_date('19-02-04’, 'yy-mm-dd'),'패키지 java.lang.*의 클래스들도 자바에서 제공하는 API 중의 하나라고 할 수 있다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
+      values (10,1,to_date('19-02-04’, 'yy-mm-dd'),'API가 무엇인지 궁금하다면 아래의 동영상을 시청하자.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (11,1,to_date('20-06-23', 'yy-mm-dd'),'간단한 방법으로는 아래와 같이 find 함수의 2번째 인자 (시작 위치) 값을 넘겨서 처리하실 수 있습니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (12,1,to_date('19-12-25', 'yy-mm-dd'),'visual studio code 가 아닌 다른 ide (파이참 등) 에서 실행하시는 경우 출력결과가 조금 다를 수 있습니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (13,5,to_date('21-08-23', 'yy-mm-dd'),'네 맞습니다. 연습 삼아 써보시라고 한 것이지, 어차피 랜덤으로 샘플링 하는거라 실제로는 셔플 동작은 없어도 됩니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (14,3,to_date('20-08-07', 'yy-mm-dd'),'네 가능합니다. 아래 예제 코드를 참고해주세요.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (15,5,to_date('20-04-19', 'yy-mm-dd'),'함수 내에서 어떤 동작을 수행하고 나서 값을 반환해주는 게 return 을 통해서 가능합니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (16,1,to_date('20-10-16', 'yy-mm-dd'),'정규식 (regular expression) 을 이용해서 다음과 같이 할 수 있습니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (17,2,to_date('21-03-28', 'yy-mm-dd'),'파일을 열고 닫지 않아도 동작은 할 수 있지만 소스코드 내 다른 곳에서 똑같은 파일에 접근하는 경우 이미 파일이 열려 있으면 lock 상태가 되기 때문');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (18,5,to_date('19-03-15', 'yy-mm-dd'),'소스코드 작성중인 파일명을 pickle.py 로 하셨을텐데 my_pickle.py 등과 같이 변경해주셔야 합니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (19,10,to_date('21-09-27', 'yy-mm-dd'),'pickle.dump 를 통해 생성된 파일은 에디터에서 읽을 수 있는 텍스트 형태가 아닌 바이너리 형태로 저장되므로 읽을 수 없는 것이 맞습니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (20,10,to_date('19-12-08', 'yy-mm-dd'),'읽어오는 방법에 rb 가 있고 rt 가 있습니다. 이는 binary 와 text 의 줄임말입니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (21,4,to_date('21-12-09', 'yy-mm-dd'),'쉽게 구분짓자면 클래스 내의 메소드를 정의할 때는 self 를 적으시고, 클래스 외부의 일반 함수를 정의하실 때에는 self 없이 해주시면 됩니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (22,7,to_date('19-02-26', 'yy-mm-dd'),'유닛은 생성되고 나서 전쟁을 할 때만 필요할 때마다 1시로 공격, 5시로 공격 등 방향을 지정합니다. ');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (23,4,to_date('20-05-06', 'yy-mm-dd'),'본 영상에 나오는 표지 제목 및 설명 중 "연산자 오버로딩"은 잘못된 워딩이며 "메소드 오버라이딩"이 올바른 표현입니다. 강의 오류이며 혼란을 드려 대단히 죄송합니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (24,1,to_date('21-05-11', 'yy-mm-dd'),'다중 상속 코드를 작성했을 때, super() 를 쓰면 순서상 맨 "처음" 클래스(예제에서는 flyable) 에 대해서 __init__ 함수가 호출 됩니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (25,5,to_date('21-05-23', 'yy-mm-dd'),'5이상 20이하의 값을 얻기 위해서 randint(5, 20) 이나 randrange(5, 21) 로 작성해야 합니다. 강의 오류이며 혼란을 드려 대단히 죄송합니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (26,1,to_date('21-01-03', 'yy-mm-dd'),'__str__ 이 없어도 msg 에 입력한 값이 동일하게 출력됩니다. 하지만 만약 에러 메시지를 개발자가 변경하여 ');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (27,1,to_date('21-02-17', 'yy-mm-dd'),' 하단에 나오는 버전 정보가 다를텐데, vscode 에서 버전 나오는 부분 클릭하셔서 터미널에 나오는 버전과 같은 것');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (28,1,to_date('21-01-02', 'yy-mm-dd'),'파이썬 설치할때 add python 3.x to path 부분 체크가 안되었나봐요. 아래 링크의 설명을 따라 환경변수 설정을 직접 해주셔도 되구요');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (29,3,to_date('19-05-04', 'yy-mm-dd'),'실수로 한 줄 실행 단축키(shift + enter)가 눌려진 모양이네요. ');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (30,1,to_date('20-01-21', 'yy-mm-dd'),'한 줄 전체 선택은 shift + home (커서 위치로부터 앞으로) 또는 shift + end (커서 위치로부터 뒤로) 를 통해 가능합니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (31,1,to_date('20-07-22', 'yy-mm-dd'),'그래서 일종의 약속으로 정한 것이 있는데, 다른 사람과 함께 작업하기 위해, 또는 미래의 자신이 코드를 알아보기 쉽게 하도록 위해');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (32,6,to_date('20-07-14', 'yy-mm-dd'),'만약 6/3 을 해도 정수 2가 아닌 2.0 으로 출력이 됩니다. 이를 피하려면, 아래와 같이 // 를 하거나 (소수점 버림) int 로 감싸면 (정수형으로 변환) 됩니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (33,5,to_date('21-11-28', 'yy-mm-dd'),'화면 축소는 ctrl 과 - 버튼을 함께, 화면 확대는 ctrl 과 + 버튼을 함께 누르면 됩니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (34,10,to_date('20-10-08', 'yy-mm-dd'),'cls (의미 : clear screen) 라고 입력하시면 됩니다. 맥에서는 clear 라고 해주세요.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (35,1,to_date('19-02-20', 'yy-mm-dd'),'예제와 같이 소스코드 내용과 함께 에러메시지가 나타난다면 그 바로 윗 문장의 닫는 괄호 ) 가 누락되었을 가능성이 가장 큽니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (36,1,to_date('20-08-25', 'yy-mm-dd'),'들여쓰기에 tab 과 space 가 혼용되었을 가능성이 있습니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (37,3,to_date('21-09-07', 'yy-mm-dd'),'if, while, for, def 등 : 으로 끝나는 문장 다음에 나타나는 들여쓰기 중 잘못된 부분이 있어서 그렇습니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (38,6,to_date('20-05-13', 'yy-mm-dd'),'키보드의 backspace 근처(왼쪽이나 아래)에 있습니다. |, \ 등의 문자가 그려져 있는 키 입니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (39,5,to_date('19-09-01', 'yy-mm-dd'),'아래 링크의 설명을 따라 설정을 변경해주세요.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (40,4,to_date('21-02-07', 'yy-mm-dd'),'두 사람이 있습니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (41,4,to_date('19-04-14', 'yy-mm-dd'),'java란 무엇인가?');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (42,8,to_date('21-07-21', 'yy-mm-dd'),'먼저 위키백과에 작성되어있는 내용입니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (43,10,to_date('20-10-14', 'yy-mm-dd'),'자바(java)는 자바로 기술된 프로그램 개발 및 실행을 할 수 있는 소프트웨어 모임의 총칭이다.');
 --행 43
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (43,10,to_date('20-10-14', 'yy-mm-dd'),'자바(java)는 자바로 기술된 프로그램 개발 및 실행을 할 수 있는 소프트웨어 모임의 총칭이다. 자바 프로그램은 운영체제나 하드웨어에 의존하지 않는 바이트 코드(중간 언어)인 추상적인 코드로 구현된다. 따라서, 자바 프로그램을 실행하기 위해서는 자바 가상 머신(jvm)과 개발에 필요한 표준 라이브러리 세트와 컴파일러의 환경만 맞추면 자바 프로그램은 모든 환경에서 동일하게 동작한다. 이러한 실행환경과 개발환경을 제공하는 것이 자바 플랫폼이다.');
 --행 44
@@ -557,3 +567,15 @@ insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (299,3,to_date('20-11-11', 'yy-mm-dd'),'exerd 파일에 사용된 논리/물리명을 바탕으로 용어사전을 자동 생성할 수 있습니다.');
 --행 300
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (300,8,to_date('21-05-19', 'yy-mm-dd'),'오라클의 연결 문자를 직접 입력 할 수 있습니다.');
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (301,1,to_date('20-12-12', 'yy-mm-dd'),'최신 버전을 설치하시는 경우 영상과 조금 다르니 아래 링크에서 업데이트 된 설명을 따라 진행해주세요 ^^‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (302,2,to_date('21-02-19', 'yy-mm-dd'),'아래 링크의 설명을 참고 부탁드립니다.‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (303,3,to_date('20-06-26', 'yy-mm-dd'),'vscode 하단의 TERMINAL (터미널) 탭에서 아래 명령 입력 후 엔터 치시면 됩니다. 터미널 탭이 보이지 않는다면 파이썬 파일을 1회 이상 실행하세요‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (304,4,to_date('19-04-14', 'yy-mm-dd'),'print() 함수는 괄호 안에 넣는 어떤 값을 출력하는 역할을 합니다. 그 안에는 여러 변수들을 합쳐서, 즉 a + b + c 이런 식으로 변수들을 합쳐서 출력할 수가 있지요.‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (305,5,to_date('19-10-13', 'yy-mm-dd'),' Ctrl + k + c (주석 설정) 또는 Ctrl + k + u (주석 해제) 를 누르시면 됩니다.‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (306,6,to_date('20-06-26', 'yy-mm-dd'),'소스코드 작성중인 파일, 또는 동일 경로 내에 과거에 생성한 파일명을 random.py 로 하셨을텐데 my_random.py 등과 같이 변경해주셔야 합니다.‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (307,7,to_date('21-12-07', 'yy-mm-dd'),'from 을 쓰게 되면 내가 원하는 일부분만 사용할수 있습니다. import 를 쓰게 되면 내가 필요로 하지 않는 녀석들도 사용할수 있게 되지요.‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (308,8,to_date('20-09-28', 'yy-mm-dd'),'1학년에 5개 반이 있는데 쉬는시간에 학생주임 선생님이 방송으로 5개 반 반장 모두 교무실로 호출합니다.‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (309,9,to_date('21-07-21', 'yy-mm-dd'),'코드 윗쪽에 아래 내용이 포함되었는지 확인해주세요.‘);
+insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (310,10,to_date('19-04-14', 'yy-mm-dd'),'네, 중복값은 제외합니다.‘);
+
+

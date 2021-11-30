@@ -1,3 +1,13 @@
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,1,to_date('19-02-02’, 'yy-mm-dd'),'코드가 이해 안되요');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,2,to_date('19-02-02’, 'yy-mm-dd'),'화면에 출력하려면 어떻게 해야하나요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,3,to_date('19-02-02’, 'yy-mm-dd'),'이 명령의 의미는 무엇인가요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,4,to_date('19-02-02’, 'yy-mm-dd'),'println은 어떤 기능인가요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,5,to_date('19-02-03’, 'yy-mm-dd'),'System이 뭐에요');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,6,to_date(‘19-02-03’, 'yy-mm-dd'),'API가 뭔가요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,7,to_date('19-02-03’, 'yy-mm-dd'),'Java SE(JDK)랑 API랑 무슨 관계에요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,8,to_date('19-02-03’, 'yy-mm-dd'),'자바 애플리케이션이 뭐에요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,9,to_date(‘19-02-04’, 'yy-mm-dd'),'패키지랑 API 이해가 안되요');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,10,to_date('19-02-04’, 'yy-mm-dd'),'API강의 녹화 있나요?');
 --행 1
 insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,133,to_date('21-09-22', 'yy-mm-dd'),'c 문자열과 특정 문자를 입력받아 특정 문자 이전의 문자를 출력하는 코드');
 --행 2
@@ -598,3 +608,24 @@ insert into tblQuestion (question_seq, student_seq, question_date, question_cont
 insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,253,to_date('21-05-19', 'yy-mm-dd'),'파이썬 윈도우 실행 상태에서 버튼 바꾸기 질문입니다');
 --행 300
 insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,242,to_date('21-05-18', 'yy-mm-dd'),'파이썬 윈도우 실행 질문');
+--행 1
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,133,to_date('21-09-22', 'yy-mm-dd'),'c 문자열과 특정 문자를 입력받아 특정 문자 이전의 문자를 출력하는 코드');
+--행 2
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,299,to_date('21-03-02', 'yy-mm-dd'),'c 날짜범위를 입력받는 방법');
+--행 3
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,181,to_date('21-12-27', 'yy-mm-dd'),'c언어 과제 문자열에서 찾는 문자열의 이전 문자들을 리턴');
+--행 4
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,290,to_date('20-11-03', 'yy-mm-dd'),'파이썬 리스트 관련 질문입니다.');
+--행 5
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,272,to_date('20-03-17', 'yy-mm-dd'),'요즘 많이 사용하는 오라클 데이터베이스 버젼이 무엇인가요??? (저는 대학교 다닐 때와 졸업 후 개인적으로 공부할 때 11g를 사용했습니다!!!)');
+--행 6
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,211,to_date('19-02-15', 'yy-mm-dd'),'파이썬 질문이요! 하다가 도저히 안되서');
+--행 7
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,59,to_date('19-02-17', 'yy-mm-dd'),'파이썬기초 국가별 iso2코드를 대륙명으로 변환하기');
+--행 8
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,200,to_date('20-04-12', 'yy-mm-dd'),'c언어 텍스트 입출력 질문');
+--행 9
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,93,to_date('21-05-15', 'yy-mm-dd'),'++연산자로 시간 출력하기');
+--행 10
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,173,to_date('20-06-23', 'yy-mm-dd'),'pygame mask 충돌');
+

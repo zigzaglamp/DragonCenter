@@ -1,4 +1,13 @@
---행1
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,1);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,2);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,3);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,4);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,5);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,6);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,7);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,8);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,9);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,10);
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,8,296);
 --행 2
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,11,81);
