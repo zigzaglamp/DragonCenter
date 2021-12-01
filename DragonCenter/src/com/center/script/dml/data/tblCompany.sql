@@ -1,13 +1,38 @@
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)비스아이티','010-4753-9430',18);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)바루소프트','010-9701-2685',17);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'케이비즈소프트','010-1337-2163',18);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'보안그룹모비딕','010-3316-5636',3);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'엠에스링크앤솔루션','010-6957-9471',4);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'주식회사 넷아이디','010-5661-8127',23);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'싸이버로지텍','010-9214-7223',14);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)userve','010-6614-9392',23);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'이노라이브 주식회사','010-8492-7142',19);
-insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주) 이베리','010-3933-6848',19);
+--
+drop table tblcompany;
+drop sequence company_seq;
+--
+create table tblCompany (
+	company_seq NUMBER,
+	company_name varchar2(50) NOT NULL,
+	company_tel varchar2(20) NOT NULL,
+	area_seq NUMBER NOT NULL
+);
+
+create sequence company_seq;
+
+ALTER TABLE tblCompany
+	ADD CONSTRAINT tblc_company_seq_pk PRIMARY KEY (company_seq);
+
+alter table tblCompany
+    add constraint tblc_area_seq_fk foreign key(area_seq) references tblArea(area_seq);
+
+
+
+--실제
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)비스아이티','070-453-9430',10);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)바루소프트','070-9701-2685',8);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'케이비즈소프트','070-1337-2163',20);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'보안그룹모비딕','070-3316-5636',8);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'엠에스링크앤솔루션','070-6957-9471',18);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'주식회사 넷아이디','070-5661-8127',5);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'싸이버로지텍','070-9214-7223',3);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)userve','070-6614-9392',20);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'이노라이브 주식회사','070-8492-7142',17);
+insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주) 이베리','070-3933-6848',12);
+
+--더미
+
 insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'이비즈테크','010-2544-6287',14);
 insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'이비즈테크','010-2042-4441',14);
 insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)씨아이피시스템','010-6596-4793',17);
