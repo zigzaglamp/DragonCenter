@@ -1,13 +1,54 @@
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,1,10,3200,to_date('19/07/03','rr/mm/dd'),to_date('19/09/21','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,31,8,2800,to_date('19/07/06','rr/mm/dd'),to_date('19/09/01','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,17,20,2400,to_date('19/07/08','rr/mm/dd'),to_date('19/10/11','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,3,8,2600,to_date('19/07/11','rr/mm/dd'),to_date('19/11/25','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,8,18,3100,to_date('19/08/05','rr/mm/dd'),to_date('19/09/15','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,30,5,3400,to_date('19/08/10','rr/mm/dd'),to_date('19/09/22','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,41,3,3000,to_date('19/08/18','rr/mm/dd'),to_date('19/10/16','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,41,20,4000,to_date('19/08/19','rr/mm/dd'),to_date('19/11/25','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,7,17,2400,to_date('19/08/23','rr/mm/dd'),to_date('19/11/23','rr/mm/dd'));
-insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,5,12,3500,to_date('19/08/25','rr/mm/dd'),to_date('19/12/22','rr/mm/dd'));
+--
+drop table tblRecruitInfo;
+drop sequence ri_seq;
+--
+create table tblRecruitInfo (
+    ri_seq number,
+    company_seq number not null,
+    rc_seq number not null,
+    ri_salary number not null,
+    ri_startdate date default sysdate not null,
+    ri_enddate date not null
+);
+
+
+create sequence ri_seq;
+
+alter table tblRecruitInfo
+    add constraint tblri_ri_seq_pk primary key(ri_seq);
+    
+alter table tblRecruitInfo
+    add constraint tblri_company_seq_fk foreign key(company_seq) references tblCompany(company_seq);
+
+alter table tblRecruitInfo
+    add constraint tblri_rc_seq_fk foreign key(rc_seq) references tblRecruitCategory(rc_seq);
+
+
+
+--실제
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,1,10,3200,to_date('19/07/03','rr/mm/dd'),to_date('19/09/21','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,2,8,2800,to_date('19/07/06','rr/mm/dd'),to_date('19/09/01','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,3,20,2400,to_date('19/07/08','rr/mm/dd'),to_date('19/10/11','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,4,8,2600,to_date('19/07/11','rr/mm/dd'),to_date('19/11/25','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,5,18,3100,to_date('19/08/05','rr/mm/dd'),to_date('19/09/15','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,6,5,3400,to_date('19/08/10','rr/mm/dd'),to_date('19/09/22','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,7,3,3000,to_date('19/08/18','rr/mm/dd'),to_date('19/10/16','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,8,20,4000,to_date('19/08/19','rr/mm/dd'),to_date('19/11/25','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,9,17,2400,to_date('19/08/23','rr/mm/dd'),to_date('19/11/23','rr/mm/dd'));
+insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate)
+    values (ri_seq.nextVal,10,12,3500,to_date('19/08/25','rr/mm/dd'),to_date('19/12/22','rr/mm/dd'));
+
+--더미
+
 insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,5,12,3500,to_date('20/02/01','rr/mm/dd'),to_date('18/02/22','rr/mm/dd'));
 insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,50,16,3600,to_date('18/03/03','rr/mm/dd'),to_date('18/01/06','rr/mm/dd'));
 insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,20,17,3700,to_date('20/03/27','rr/mm/dd'),to_date('18/02/08','rr/mm/dd'));
@@ -99,3 +140,5 @@ insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_
 insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,27,14,4000,to_date('18/02/17','rr/mm/dd'),to_date('18/01/24','rr/mm/dd'));
 insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,40,8,3000,to_date('18/03/18','rr/mm/dd'),to_date('20/02/23','rr/mm/dd'));
 insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,48,13,3100,to_date('19/02/01','rr/mm/dd'),to_date('19/03/18','rr/mm/dd'));
+
+
