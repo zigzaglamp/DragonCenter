@@ -1,23 +1,39 @@
+   
+ create table tblAnswer (
+    question_seq number not null,
+    teacher_seq number not null,
+    answer_regdate date default sysdate not null,
+    answer_content varchar2(300) not null
+);
+
+alter table tblAnswer
+    add constraint tbla_question_seq_pk primary key(question_seq);
+alter table tblAnswer
+    add constraint tbla_question_seq_fk foreign key(question_seq) references tblQuestion(question_seq);
+alter table tblAnswer
+    add constraint tbla_teacher_seq_fk foreign key(teacher_seq) references tblTeacher(teacher_seq);
+
+
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) 
-     values (1,1,to_date('19-02-02’, 'yy-mm-dd'),'아래 코드를 보자. 지금까지 무수히 많은 예제에서 사용했던 코드다.');
+     values (1,1,to_date('19-02-02', 'yy-mm-dd'),'아래 코드를 보자. 지금까지 무수히 많은 예제에서 사용했던 코드다.');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (2,1,to_date('19-02-02’, 'yy-mm-dd'),'이것이 화면에 어떤 내용을 출력하는 것이라는 건 이미 알고 있다. ');
+      values (2,1,to_date('19-02-02', 'yy-mm-dd'),'이것이 화면에 어떤 내용을 출력하는 것이라는 건 이미 알고 있다. ');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (3,1,to_date('19-02-02’, 'yy-mm-dd'),' 하지만 도대체 우리가 정의한 적이 없는 이 명령은 무엇일까?를 생각해볼 때가 왔다. ');
+      values (3,1,to_date('19-02-02', 'yy-mm-dd'),' 하지만 도대체 우리가 정의한 적이 없는 이 명령은 무엇일까?를 생각해볼 때가 왔다. ');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (4,1,to_date('19-02-02’, 'yy-mm-dd'),'문법적으로 봤을 때 println은 메소드가 틀림없다. 그런데 메소드 앞에 Sytem.out이 있다. ');
+      values (4,1,to_date('19-02-02', 'yy-mm-dd'),'문법적으로 봤을 때 println은 메소드가 틀림없다. 그런데 메소드 앞에 Sytem.out이 있다. ');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (5,1,to_date('19-02-03’, 'yy-mm-dd'),'System은 클래스이고 out은 그 클래스의 필드(변수)이다. ');
+      values (5,1,to_date('19-02-03', 'yy-mm-dd'),'System은 클래스이고 out은 그 클래스의 필드(변수)이다. ');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (6,1,to_date('19-02-03’, 'yy-mm-dd'),'API란 자바 시스템을 제어하기 위해서 자바에서 제공하는 명령어들을 의미한다.');
+      values (6,1,to_date('19-02-03', 'yy-mm-dd'),'API란 자바 시스템을 제어하기 위해서 자바에서 제공하는 명령어들을 의미한다.');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (7,1,to_date('19-02-03’, 'yy-mm-dd'),'Java SE(JDK)를 설치하면 자바 시스템을 제어하기 위한 API를 제공한다.');
+      values (7,1,to_date('19-02-03', 'yy-mm-dd'),'Java SE(JDK)를 설치하면 자바 시스템을 제어하기 위한 API를 제공한다.');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (8,1,to_date('19-02-03’, 'yy-mm-dd'),'자바 개발자들은 자바에서 제공한 API를 이용해서 자바 애플리케이션을 만들게 된다. ');
+      values (8,1,to_date('19-02-03', 'yy-mm-dd'),'자바 개발자들은 자바에서 제공한 API를 이용해서 자바 애플리케이션을 만들게 된다. ');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (9,1,to_date('19-02-04’, 'yy-mm-dd'),'패키지 java.lang.*의 클래스들도 자바에서 제공하는 API 중의 하나라고 할 수 있다.');
+      values (9,1,to_date('19-02-04', 'yy-mm-dd'),'패키지 java.lang.*의 클래스들도 자바에서 제공하는 API 중의 하나라고 할 수 있다.');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content)
-      values (10,1,to_date('19-02-04’, 'yy-mm-dd'),'API가 무엇인지 궁금하다면 아래의 동영상을 시청하자.');
+      values (10,1,to_date('19-02-04', 'yy-mm-dd'),'API가 무엇인지 궁금하다면 아래의 동영상을 시청하자.');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (11,1,to_date('20-06-23', 'yy-mm-dd'),'간단한 방법으로는 아래와 같이 find 함수의 2번째 인자 (시작 위치) 값을 넘겨서 처리하실 수 있습니다.');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (12,1,to_date('19-12-25', 'yy-mm-dd'),'visual studio code 가 아닌 다른 ide (파이참 등) 에서 실행하시는 경우 출력결과가 조금 다를 수 있습니다.');
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (13,5,to_date('21-08-23', 'yy-mm-dd'),'네 맞습니다. 연습 삼아 써보시라고 한 것이지, 어차피 랜덤으로 샘플링 하는거라 실제로는 셔플 동작은 없어도 됩니다.');
@@ -567,15 +583,3 @@ insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (299,3,to_date('20-11-11', 'yy-mm-dd'),'exerd 파일에 사용된 논리/물리명을 바탕으로 용어사전을 자동 생성할 수 있습니다.');
 --행 300
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (300,8,to_date('21-05-19', 'yy-mm-dd'),'오라클의 연결 문자를 직접 입력 할 수 있습니다.');
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (301,1,to_date('20-12-12', 'yy-mm-dd'),'최신 버전을 설치하시는 경우 영상과 조금 다르니 아래 링크에서 업데이트 된 설명을 따라 진행해주세요 ^^‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (302,2,to_date('21-02-19', 'yy-mm-dd'),'아래 링크의 설명을 참고 부탁드립니다.‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (303,3,to_date('20-06-26', 'yy-mm-dd'),'vscode 하단의 TERMINAL (터미널) 탭에서 아래 명령 입력 후 엔터 치시면 됩니다. 터미널 탭이 보이지 않는다면 파이썬 파일을 1회 이상 실행하세요‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (304,4,to_date('19-04-14', 'yy-mm-dd'),'print() 함수는 괄호 안에 넣는 어떤 값을 출력하는 역할을 합니다. 그 안에는 여러 변수들을 합쳐서, 즉 a + b + c 이런 식으로 변수들을 합쳐서 출력할 수가 있지요.‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (305,5,to_date('19-10-13', 'yy-mm-dd'),' Ctrl + k + c (주석 설정) 또는 Ctrl + k + u (주석 해제) 를 누르시면 됩니다.‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (306,6,to_date('20-06-26', 'yy-mm-dd'),'소스코드 작성중인 파일, 또는 동일 경로 내에 과거에 생성한 파일명을 random.py 로 하셨을텐데 my_random.py 등과 같이 변경해주셔야 합니다.‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (307,7,to_date('21-12-07', 'yy-mm-dd'),'from 을 쓰게 되면 내가 원하는 일부분만 사용할수 있습니다. import 를 쓰게 되면 내가 필요로 하지 않는 녀석들도 사용할수 있게 되지요.‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (308,8,to_date('20-09-28', 'yy-mm-dd'),'1학년에 5개 반이 있는데 쉬는시간에 학생주임 선생님이 방송으로 5개 반 반장 모두 교무실로 호출합니다.‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (309,9,to_date('21-07-21', 'yy-mm-dd'),'코드 윗쪽에 아래 내용이 포함되었는지 확인해주세요.‘);
-insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (310,10,to_date('19-04-14', 'yy-mm-dd'),'네, 중복값은 제외합니다.‘);
-
-
