@@ -1,13 +1,29 @@
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'류소리’,‘951219-2213985’,‘010-7447-8983’,5);
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'서진환’,‘901116-1737816’,‘010-4042-3999’,3);
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'탁경아’,‘940213-2937414’,‘010-6162-2161’,1); -- 시연 학생
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'제갈인우’,‘971205-1917991’,‘010-4925-8871’,2);
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'류지성’,‘901002-1279588’,‘010-9161-7778’,4);
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'배성빈’,‘940115-1245324’,‘010-1116-1512’,1);
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'류승하’,‘961213-2663254’,‘010-2928-2226’,2);
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'사공영수’,‘991015-1281333’,‘010-4854-4900’,3);
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'홍철민’,‘911012-1394614’,‘010-7553-3233’,1);
-insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'전세호’,‘910209-1936562’,‘010-9322-5042’,1);
+create table tblStudent (
+    student_seq number not null,
+    student_name varchar2(20) not null,
+    student_ssn varchar2(14) not null,
+    student_tel varchar2(30) not null,
+    student_coursenum number not null
+);
+
+create sequence student_seq;
+
+alter table tblStudent
+    add constraint tbls_student_seq_pk primary key(student_seq);
+
+alter table tblStudent
+    add constraint tbls_student_ssn_uq unique(student_ssn);
+    
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'류소리','951219-2213985','010-7447-8983',5);
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'서진환','901116-1737816','010-4042-3999',3);
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'탁경아','940213-2937414','010-6162-2161',1); -- 시연 학생
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'제갈인우','971205-1917991','010-4925-8871',2);
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'류지성','901002-1279588','010-9161-7778',4);
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'배성빈','940115-1245324','010-1116-1512',1);
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'류승하','961213-2663254','010-2928-2226',2);
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'사공영수','991015-1281333','010-4854-4900',3);
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'홍철민','911012-1394614','010-7553-3233',1);
+insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)  values (student_seq.nextVal,'전세호','910209-1936562','010-9322-5042',1);
 
 --행 1
 insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum) values (student_seq.nextVal,'임전지','750914-1949635','010-3131-6325',5);
@@ -609,4 +625,3 @@ insert into tblStudent (student_seq, student_name, student_ssn, student_tel, stu
 insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum) values (student_seq.nextVal,'오승연','911017-2357523','010-3141-8462',1);
 --행 300
 insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum) values (student_seq.nextVal,'한연하','751108-2922915','010-5767-6708',4);
-
