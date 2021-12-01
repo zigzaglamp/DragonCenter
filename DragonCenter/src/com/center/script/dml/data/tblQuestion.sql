@@ -1,13 +1,31 @@
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,1,to_date('19-02-02’, 'yy-mm-dd'),'코드가 이해 안되요');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,2,to_date('19-02-02’, 'yy-mm-dd'),'화면에 출력하려면 어떻게 해야하나요?');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,3,to_date('19-02-02’, 'yy-mm-dd'),'이 명령의 의미는 무엇인가요?');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,4,to_date('19-02-02’, 'yy-mm-dd'),'println은 어떤 기능인가요?');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,5,to_date('19-02-03’, 'yy-mm-dd'),'System이 뭐에요');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,6,to_date(‘19-02-03’, 'yy-mm-dd'),'API가 뭔가요?');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,7,to_date('19-02-03’, 'yy-mm-dd'),'Java SE(JDK)랑 API랑 무슨 관계에요?');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,8,to_date('19-02-03’, 'yy-mm-dd'),'자바 애플리케이션이 뭐에요?');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,9,to_date(‘19-02-04’, 'yy-mm-dd'),'패키지랑 API 이해가 안되요');
-insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,10,to_date('19-02-04’, 'yy-mm-dd'),'API강의 녹화 있나요?');
+
+create table tblQuestion (
+	question_seq number not null,
+	student_seq number not null,
+	question_date date not null,
+	question_content varchar2(300) not null
+);
+
+create sequence question_seq;
+
+alter table tblQuestion
+    add constraint tblq_question_seq_pk primary key(question_seq);
+   
+alter table tblQuestion
+    add constraint tblq_student_seq_fk foreign key(student_seq) references tblStudent(student_seq);
+    
+    
+--tblquestion
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,1,to_date('19-02-02', 'yy-mm-dd'),'코드가 이해 안되요');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,2,to_date('19-02-02', 'yy-mm-dd'),'화면에 출력하려면 어떻게 해야하나요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,3,to_date('19-02-02', 'yy-mm-dd'),'이 명령의 의미는 무엇인가요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,4,to_date('19-02-02', 'yy-mm-dd'),'println은 어떤 기능인가요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,5,to_date('19-02-03', 'yy-mm-dd'),'System이 뭐에요');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,6,to_date('19-02-03', 'yy-mm-dd'),'API가 뭔가요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,7,to_date('19-02-03', 'yy-mm-dd'),'Java SE(JDK)랑 API랑 무슨 관계에요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,8,to_date('19-02-03', 'yy-mm-dd'),'자바 애플리케이션이 뭐에요?');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,9,to_date('19-02-04', 'yy-mm-dd'),'패키지랑 API 이해가 안되요');
+insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,10,to_date('19-02-04', 'yy-mm-dd'),'API강의 녹화 있나요?');
 --행 1
 insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,133,to_date('21-09-22', 'yy-mm-dd'),'c 문자열과 특정 문자를 입력받아 특정 문자 이전의 문자를 출력하는 코드');
 --행 2
@@ -628,4 +646,3 @@ insert into tblQuestion (question_seq, student_seq, question_date, question_cont
 insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,93,to_date('21-05-15', 'yy-mm-dd'),'++연산자로 시간 출력하기');
 --행 10
 insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,173,to_date('20-06-23', 'yy-mm-dd'),'pygame mask 충돌');
-
