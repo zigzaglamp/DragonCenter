@@ -34,12 +34,12 @@ begin
     insert into tblTeacher (teacher_seq, teacher_name, teacher_ssn, teacher_tel) 
         values (teacher_seq.nextVal, pname, pssn, ptel);
         
-    dbms_output.put_line('교사 등록 성공: No.' || teacher_seq.nextVal || ' ' || pname 
+    dbms_output.put_line('교사 등록 성공: No.' || teacher_seq.currtVal || ' ' || pname 
                             || '(주민등록번호: ' || substr(pssn, 1, 8) || '******' 
                             || ', tel: ' || ptel || ')');
 exception
     when others then
-        dbms_output.put_line('교사 등록 실패: No.' || teacher_seq.nextVal || ' ' || pname 
+        dbms_output.put_line('교사 등록 실패: No.' || teacher_seq.currVal || ' ' || pname 
                                 || '(주민등록번호: ' || substr(pssn, 1, 8) || '******' 
                                 || ', tel: ' || ptel || ')');
         dbms_output.put_line(sqlerrm);
@@ -154,11 +154,11 @@ begin
     insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) 
         values (st_seq.nextVal, psseq, ptseq);
         
-    dbms_output.put_line('강의 가능 교사 등록 성공: No.' || st_seq.nextVal || ' ' 
+    dbms_output.put_line('강의 가능 교사 등록 성공: No.' || st_seq.currVal || ' ' 
                             || ptname || ' - ' || psname);
 exception
     when others then
-        dbms_output.put_line('강의 가능 교사 등록 실패: No.' || st_seq.nextVal || ' ' 
+        dbms_output.put_line('강의 가능 교사 등록 실패: No.' || st_seq.currVal || ' ' 
                                 || ptname || ' - ' || psname);
         dbms_output.put_line(sqlerrm);
 end procAddSubjectTeacher;
