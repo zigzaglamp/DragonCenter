@@ -22,7 +22,7 @@ order by course_seq;
 
 
 --------------------------------------------------------------------------------
--- 2. 과정 정보 등록; 번호, 이름, 기간(5.5, 6, 7) 입력
+-- 2. 과정 정보 등록; 이름, 기간(5.5, 6, 7) 입력
 --------------------------------------------------------------------------------
 create or replace procedure procAddCourse (
     pname varchar2,
@@ -33,11 +33,11 @@ begin
     insert into tblCourse (course_seq, course_name, course_period) 
         values (course_seq.nextVal, pname, pperiod);
         
-    dbms_output.put_line('과정 등록 성공 : No.' || course_seq.currVal || ' ' 
+    dbms_output.put_line('과정 등록 성공: No.' || course_seq.currVal || ' ' 
                             || pname || '(' || pperiod || '개월)');
 exception
     when others then
-        dbms_output.put_line('과정 등록 실패 : No.' || course_seq.currVal || ' ' 
+        dbms_output.put_line('과정 등록 실패: No.' || course_seq.currVal || ' ' 
                                 || pname || '(' || pperiod || '개월)'); 
         dbms_output.put_line(sqlerrm);
 end procAddCourse;
@@ -61,11 +61,11 @@ begin
                          course_period = pperiod
     where course_seq = pseq;
     
-    dbms_output.put_line('과정 변경 성공 : No.' || pseq || ' ' 
+    dbms_output.put_line('과정 변경 성공: No.' || pseq || ' ' 
                             || pname || '(' || pperiod || '개월)');
 exception
     when others then
-        dbms_output.put_line('과정 변경 실패 : No.' || pseq || ' '
+        dbms_output.put_line('과정 변경 실패: No.' || pseq || ' '
                                 || pname || '(' || pperiod || '개월)');
         dbms_output.put_line(sqlerrm);
 end procUpdateCourse;
@@ -91,11 +91,11 @@ begin
     delete from tblCourse 
     where course_seq = pseq;
     
-    dbms_output.put_line('과정 삭제 성공 : No.' || pseq || ' ' 
+    dbms_output.put_line('과정 삭제 성공: No.' || pseq || ' ' 
                             || pname || '(' || pperiod || '개월)');
 exception
     when others then
-        dbms_output.put_line('과정 삭제 실패 : No.' || pseq || ' '                
+        dbms_output.put_line('과정 삭제 실패: No.' || pseq || ' '                
                                 || pname || '(' || pperiod || '개월)');
         dbms_output.put_line(sqlerrm);
 end procDeleteCourse;
@@ -123,7 +123,7 @@ order by subject_seq;
 
 
 --------------------------------------------------------------------------------
--- 2. 과목 정보 등록; 번호, 이름, 기간(0.5~4.5) 입력
+-- 2. 과목 정보 등록; 이름, 기간(0.5~4.5) 입력
 --------------------------------------------------------------------------------
 create or replace procedure procAddSubject (
     pname varchar2,
@@ -134,11 +134,11 @@ begin
     insert into tblSubject (subject_seq, subject_name, subject_period)
         values (subject_seq.nextVal, pname, pperiod);
         
-    dbms_output.put_line('과목 등록 성공 : No.' || subject_seq.currVal || ' ' 
+    dbms_output.put_line('과목 등록 성공: No.' || subject_seq.currVal || ' ' 
                             || pname || '(' || to_char(pperiod, '0.0') || '개월)');
 exception
     when others then
-        dbms_output.put_line('과목 등록 실패 : No.' || subject_seq.currVal || ' ' 
+        dbms_output.put_line('과목 등록 실패: No.' || subject_seq.currVal || ' ' 
                                 || pname || '(' || to_char(pperiod, '0.0') || '개월)'); 
         dbms_output.put_line(sqlerrm);
 end procAddSubject;
@@ -162,11 +162,11 @@ begin
                           subject_period = pperiod
     where subject_seq = pseq;
     
-    dbms_output.put_line('과목 변경 성공 : No.' || pseq || ' ' 
+    dbms_output.put_line('과목 변경 성공: No.' || pseq || ' ' 
                             || pname || '(' || to_char(pperiod, '0.0') || '개월)');
 exception
     when others then
-        dbms_output.put_line('과목 변경 실패 : No.' || pseq || ' '
+        dbms_output.put_line('과목 변경 실패: No.' || pseq || ' '
                                 || pname || '(' || to_char(pperiod, '0.0') || '개월)');
         dbms_output.put_line(sqlerrm);
 end procUpdateSubject;
@@ -192,11 +192,11 @@ begin
     delete from tblSubject 
     where subject_seq = pseq;
     
-    dbms_output.put_line('과목 삭제 성공 : No.' || pseq || ' ' 
+    dbms_output.put_line('과목 삭제 성공: No.' || pseq || ' ' 
                             || pname || '(' || to_char(pperiod, '0.0') || '개월)');
 exception
     when others then
-        dbms_output.put_line('과목 삭제 실패 : No.' || pseq || ' '                
+        dbms_output.put_line('과목 삭제 실패: No.' || pseq || ' '                
                                 || pname || '(' ||to_char(pperiod, '0.0') || '개월)');
         dbms_output.put_line(sqlerrm);
 end procDeleteSubject;
@@ -224,7 +224,7 @@ order by room_seq;
 
 
 --------------------------------------------------------------------------------
--- 2. 강의실 정보 등록; 번호, 이름, 수용 인원(26, 30) 입력
+-- 2. 강의실 정보 등록; 이름, 수용 인원(26, 30) 입력
 --------------------------------------------------------------------------------
 create or replace procedure procAddRoom (
     pname varchar2,
@@ -235,11 +235,11 @@ begin
     insert into tblRoom (room_seq, room_name, room_capacity)
         values (room_seq.nextval , pname, pcapacity);
         
-    dbms_output.put_line('강의실 등록 성공 : No.' || room_seq.currVal || ' ' 
+    dbms_output.put_line('강의실 등록 성공: No.' || room_seq.currVal || ' ' 
                             || pname || '(수용: ' || pcapacity || '명)');
 exception
     when others then
-        dbms_output.put_line('강의실 등록 실패 : No.' || room_seq.currVal || ' ' 
+        dbms_output.put_line('강의실 등록 실패: No.' || room_seq.currVal || ' ' 
                                 || pname || '(수용: ' || pcapacity || '명)');
         dbms_output.put_line(sqlerrm);
 end procAddRoom;
@@ -263,11 +263,11 @@ begin
                        room_capacity = pcapacity
     where room_seq = pseq;
     
-    dbms_output.put_line('강의실 변경 성공 : No.' || pseq || ' ' 
+    dbms_output.put_line('강의실 변경 성공: No.' || pseq || ' ' 
                             || pname || '(수용: ' || pcapacity || '명)');
 exception
     when others then
-        dbms_output.put_line('강의실 변경 실패 : No.' || pseq || ' '
+        dbms_output.put_line('강의실 변경 실패: No.' || pseq || ' '
                                 || pname || '(수용: ' || pcapacity || '명)');
         dbms_output.put_line(sqlerrm);
 end procUpdateRoom;
@@ -293,11 +293,11 @@ begin
     delete from tblRoom 
     where room_seq = pseq;
     
-    dbms_output.put_line('강의실 삭제 성공 : No.' || pseq || ' ' 
+    dbms_output.put_line('강의실 삭제 성공: No.' || pseq || ' ' 
                             || pname || '(수용: ' || pcapacity || '명)');
 exception
     when others then
-        dbms_output.put_line('강의실 삭제 실패 : No.' || pseq || ' ' 
+        dbms_output.put_line('강의실 삭제 실패: No.' || pseq || ' ' 
                                 || pname || '(수용: ' || pcapacity || '명)');
         dbms_output.put_line(sqlerrm);
 end procDeleteRoom;
@@ -327,7 +327,7 @@ order by b.book_seq;
 
 
 --------------------------------------------------------------------------------
--- 2. 교재 정보 등록; 번호, 교재명, 출판사, 가격, 과목 번호 입력
+-- 2. 교재 정보 등록; 교재명, 출판사, 가격, 과목 번호 입력
 --------------------------------------------------------------------------------
 create or replace procedure procAddBook (
     pname varchar2,
