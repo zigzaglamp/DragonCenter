@@ -153,7 +153,10 @@ from tblTeacher tt inner join tblTeacherManagement ttm
     on (toc.course_seq = tc.course_seq) inner join tblSubject ts
     on (tos.subject_seq = ts.subject_seq) inner join tblRoom tr
     on (toc.room_seq = tr.room_seq) inner join tblBook tb
-    on (ts.subject_seq = tb.subject_seq)
+    on (ts.subject_seq = tb.subject_seq) inner join (select max(tm_seq) as final
+                                                     from tblTeacherManagement
+                                                     group by oc_seq) ttmr
+    on (ttm.tm_seq = ttmr.final)
 where tt.teacher.seq = 교사번호;
 
 
@@ -234,7 +237,10 @@ select
 from tblOpenCourse toc inner join tblCourse tc
     on (toc.course_seq = tc.course_seq) inner join tblTeacherManagement ttm
     on (ttm.oc_seq = toc.oc_seq) inner join tblTeacher tt
-    on (tt.teacher_seq = ttm.teacher_seq)
+    on (tt.teacher_seq = ttm.teacher_seq) inner join (select max(tm_seq) as final
+                                                      from tblTeacherManagement
+                                                      group by oc_seq) ttmr
+    on (ttm.tm_seq = ttmr.final)
 where tt.teacher_seq = 교사_번호;
 
 
@@ -256,7 +262,10 @@ from tblCourse tc inner join tblOpenCourse toc
     on (tos.subject_seq = ts.subject_seq) inner join tblRoom tr
     on (toc.room_seq = tr.room_seq) inner join tblTeacherManagement ttm
     on (ttm.oc_seq = toc.oc_seq) inner join tblTeacher tt
-    on (tt.teacher_seq = ttm.teacher_seq)
+    on (tt.teacher_seq = ttm.teacher_seq) inner join (select max(tm_seq) as final
+                                                      from tblTeacherManagement
+                                                      group by oc_seq) ttmr
+    on (ttm.tm_seq = ttmr.final)
 where tt.teacher_seq = 교사_번호
     and toc.oc_seq = 개설_과정_번호;
 
@@ -297,5 +306,8 @@ from tblTeacher tt inner join tblTeacherManagement ttm
     on (ttm.oc_seq = toc.oc_seq) inner join tblOpenSubject tos
     on (toc.oc_seq = tos.oc_seq) inner join tblCourse tc
     on (toc.course_seq = tc.course_seq) inner join tblSubject ts
-    on (tos.subject_seq = ts.subject_seq)
+    on (tos.subject_seq = ts.subject_seq) inner join (select max(tm_seq) as final
+                                                      from tblTeacherManagement
+                                                      group by oc_seq) ttmr
+    on (ttm.tm_seq = ttmr.final) 
 order by toc.oc_startdate desc;
