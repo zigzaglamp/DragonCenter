@@ -1,9 +1,9 @@
 --------------------------------------------------------------------------------
 -- A-1. 기초 정보 관리
---  1) 과정 정보 관리(등록, 조회, 수정, 삭제)
---  2) 과목 정보 관리(등록, 조회, 수정, 삭제)
---  3) 강의실 정보 관리(등록, 조회, 수정, 삭제)
---  4) 교재 정보 관리(등록, 조회, 수정, 삭제)
+--  1) 과정 정보 관리(조회, 등록, 수정, 삭제)
+--  2) 과목 정보 관리(조회, 등록, 수정, 삭제)
+--  3) 강의실 정보 관리(조회, 등록, 수정, 삭제)
+--  4) 교재 정보 관리(조회, 등록, 수정, 삭제)
 --------------------------------------------------------------------------------
 
 
@@ -79,7 +79,7 @@ end;
 -- 4. 과정 정보 삭제; 해당 번호의 과정 삭제
 --------------------------------------------------------------------------------
 create or replace procedure procDeleteCourse (
-    pseq in number,
+    pseq number,
     pname out varchar2,
     pperiod out number    
 )
@@ -180,7 +180,7 @@ end;
 -- 4. 과목 정보 삭제; 해당 과목 번호의 과목 삭제
 --------------------------------------------------------------------------------
 create or replace procedure procDeleteSubject (
-    pseq in number,
+    pseq number,
     pname out varchar2,
     pperiod out number    
 )
@@ -218,8 +218,9 @@ end;
 select 
     room_seq as "번호",
     room_name as "이름",
-    room_capacity || '석' as "수용 인원"
-from tblRoom;
+    room_capacity || '명' as "수용 인원"
+from tblRoom
+order by room_seq;
 
 
 --------------------------------------------------------------------------------
@@ -235,11 +236,11 @@ begin
         values (room_seq.nextval , pname, pcapacity);
         
     dbms_output.put_line('강의실 등록 성공 : No.' || room_seq.currVal || ' ' 
-                            || pname || '(수용: ' || pcapacity || '석)');
+                            || pname || '(수용: ' || pcapacity || '명)');
 exception
     when others then
         dbms_output.put_line('강의실 등록 실패 : No.' || room_seq.currVal || ' ' 
-                                || pname || '(수용: ' || pcapacity || '석)');
+                                || pname || '(수용: ' || pcapacity || '명)');
         dbms_output.put_line(sqlerrm);
 end procAddRoom;
 
@@ -263,11 +264,11 @@ begin
     where room_seq = pseq;
     
     dbms_output.put_line('강의실 변경 성공 : No.' || pseq || ' ' 
-                            || pname || '(수용: ' || pcapacity || '석)');
+                            || pname || '(수용: ' || pcapacity || '명)');
 exception
     when others then
         dbms_output.put_line('강의실 변경 실패 : No.' || pseq || ' '
-                                || pname || '(수용: ' || pcapacity || '석)');
+                                || pname || '(수용: ' || pcapacity || '명)');
         dbms_output.put_line(sqlerrm);
 end procUpdateRoom;
 
@@ -293,11 +294,11 @@ begin
     where room_seq = pseq;
     
     dbms_output.put_line('강의실 삭제 성공 : No.' || pseq || ' ' 
-                            || pname || '(수용: ' || pcapacity || '석)');
+                            || pname || '(수용: ' || pcapacity || '명)');
 exception
     when others then
         dbms_output.put_line('강의실 삭제 실패 : No.' || pseq || ' ' 
-                                || pname || '(수용: ' || pcapacity || '석)');
+                                || pname || '(수용: ' || pcapacity || '명)');
         dbms_output.put_line(sqlerrm);
 end procDeleteRoom;
 
@@ -305,7 +306,7 @@ declare
     vname tblRoom.room_name%type;
     vcapacity number;   
 begin
-    procDeleteRoomt(번호, vname, vcapacity);
+    procDeleteRoom(번호, vname, vcapacity);
 end;
 
 
@@ -422,5 +423,7 @@ declare
     vpublisher tblBook.book_publisher%type;
     vprice number;
 begin
-    procDeleteRoomt(번호, vname, vpublisher, vprice);
+    procDeleteBook(번호, vname, vpublisher, vprice);
 end;
+
+
