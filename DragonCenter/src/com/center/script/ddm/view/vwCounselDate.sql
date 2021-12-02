@@ -1,4 +1,4 @@
--- counseling distributed by date
+-- counseling distributed by date. this view contains counseling log, course name and student name.
 CREATE OR REPLACE VIEW vwCounselDate
 AS
 SELECT 
