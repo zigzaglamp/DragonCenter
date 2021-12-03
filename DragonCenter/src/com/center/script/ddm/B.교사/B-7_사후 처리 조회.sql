@@ -73,7 +73,7 @@ select
            
   from vwstudentinfo v 
     inner join tblpostmanagement p
-        on v.enrollment_seq = p.enrollment_seq
+        on v.eseq = p.enrollment_seq
             inner join tblemployee e
                 on p.pm_seq = e.pm_seq
                     inner join tblrecruitcategory rc
@@ -105,7 +105,5 @@ from tblRecruitInfo r
                                 inner join tblpostmanagement p
                                     on p.pm_seq = j.pm_seq 
                                         inner join vwstudentinfo s
-                                            on p.enrollment_seq =s.enrollment_seq;
-
-
+                                            on p.enrollment_seq =s.eseq;
 
