@@ -1,5 +1,3 @@
-drop table tblinterview;
-
 create table tblInterview (
     interviewer_seq number not null,
     interview_date date default sysdate,
@@ -28,7 +26,14 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(11, '2020-04-20', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(12, '2021-02-16', 'N');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(13, '2021-12-15', 'N');
+insert into tblinterview(interviewer_seq, interview_date, interview_result) values(13, '2020-06-15', 'N');
+
+insert into tblinterview(interviewer_seq, interview_date, interview_result) values(21, '2020-03-14', 'N');
+insert into tblinterview(interviewer_seq, interview_date, interview_result) values(73, '2021-04-20', 'Y');
+insert into tblinterview(interviewer_seq, interview_date, interview_result) values(150, '2021-08-26', 'Y');
+insert into tblinterview(interviewer_seq, interview_date, interview_result) values(247, '2019-11-14', 'N');
+insert into tblinterview(interviewer_seq, interview_date, interview_result) values(271, '2019-10-08', 'N');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(14, '2019-09-19', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(15, '2020-09-05', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(16, '2019-08-04', 'Y');
@@ -36,7 +41,7 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(18, '2020-04-16', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(19, '2019-04-11', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(20, '2021-09-03', 'N');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(21, '2021-12-14', 'N');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(22, '2020-07-18', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(23, '2020-04-11', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(24, '2019-01-03', 'Y');
@@ -67,7 +72,7 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(49, '2020-06-21', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(50, '2020-03-04', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(51, '2020-04-06', 'N');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(52, '2019-10-13', 'Y');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(53, '2020-12-07', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(54, '2020-03-19', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(55, '2021-02-20', 'Y');
@@ -88,7 +93,7 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(70, '2020-03-15', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(71, '2020-12-14', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(72, '2020-04-16', 'Y');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(73, '2021-12-20', 'Y');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(74, '2020-07-20', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(75, '2020-07-16', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(76, '2019-07-07', 'Y');
@@ -128,7 +133,7 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(110, '2021-08-11', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(111, '2021-03-03', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(112, '2020-12-28', 'N');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(113, '2020-12-04', 'N');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(114, '2020-01-09', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(115, '2019-10-09', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(116, '2020-08-02', 'Y');
@@ -162,10 +167,10 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(144, '2019-09-08', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(145, '2021-03-19', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(146, '2021-11-14', 'Y');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(147, '2020-01-05', 'N');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(148, '2019-05-10', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(149, '2019-05-23', 'Y');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(150, '2021-12-26', 'Y');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(151, '2019-08-11', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(152, '2019-01-12', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(153, '2019-12-04', 'Y');
@@ -262,9 +267,9 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(244, '2019-06-27', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(245, '2020-03-19', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(246, '2020-12-09', 'Y');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(247, '2021-12-14', 'N');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(248, '2021-09-24', 'N');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(249, '2019-05-22', 'Y');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(250, '2020-08-11', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(251, '2019-11-14', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(252, '2019-07-11', 'Y');
@@ -286,7 +291,7 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(268, '2019-05-13', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(269, '2021-07-16', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(270, '2019-08-14', 'N');
-insert into tblinterview(interviewer_seq, interview_date, interview_result) values(271, '2021-12-08', 'N');
+
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(272, '2020-10-13', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(273, '2019-08-17', 'N');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(274, '2021-09-20', 'N');
@@ -316,3 +321,4 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(298, '2020-06-01', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(299, '2020-03-05', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(300, '2021-07-20', 'Y');
+insert into tblinterview(interviewer_seq, interview_date, interview_result) values(302, '2019-09-20', 'Y');

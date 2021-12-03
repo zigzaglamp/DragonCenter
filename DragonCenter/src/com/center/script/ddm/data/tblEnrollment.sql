@@ -1,3 +1,19 @@
+create table tblEnrollment (
+    enrollment_seq number not null, 
+    oc_seq number not null,
+    student_seq number not null
+);
+
+create sequence enrollment_seq;
+
+alter table tblEnrollment
+    add constraint tble_enrollment_seq_pk primary key(enrollment_seq);
+alter table tblEnrollment
+    add constraint tble_oc_seq_fk foreign key (oc_seq) references tblOpenCourse(oc_seq);
+alter table tblEnrollment
+    add constraint tble_student_seq_fk foreign key (student_seq) references tblStudent(student_seq);   
+
+
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,1);
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,2);
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,3);
@@ -8,6 +24,7 @@ insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollme
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,8);
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,9);
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,1,10);
+
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,8,296);
 --행 2
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,11,81);
@@ -607,3 +624,50 @@ insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollme
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,15,202);
 --행 300
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,11,58);
+
+
+--실제 수강신청 (인원초과)
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,270);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,271);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,272);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,273);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,274);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,275);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,276);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,277);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,278);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,279);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,280);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,281);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,282);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,283);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,284);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,285);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,286);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,287);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,288);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,289);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,290);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,291);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,292);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,293);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,294);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,295);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,296);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,297);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,298);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,21,299);
+
+--실제 수강신청 인원 아직 안참
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,170);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,171);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,172);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,173);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,174);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,175);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,176);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,177);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,178);
+insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) values (enrollment_seq.nextVal,22,179);
+
+commit;
