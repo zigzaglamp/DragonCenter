@@ -28,7 +28,6 @@ order by seq, hopedate;
 ----------------------------------------------------------------------------------------------------------------------
 -- A-8-2.면접 신청 일자와 가능일자를 비교하여 면접 확정일을 입력한다.
 ----------------------------------------------------------------------------------------------------------------------
-
 --면접 일자 없는 것만 뽑아오기
 select * from vwInterviewNull;
 
@@ -58,6 +57,24 @@ insert into tblInterview(interviewer_seq, interview_date, interview_result)
 
 --평일인 경우 확정일자 반복해서 입력
 --프로시저 loop 이용
+DECLARE
+      V_CNT NUMBER(2) := 0;    --초기값
+      vcount number :=0;
+BEGIN
+    select count(*) into vcount from vwthismonthhopedate tm inner join  vwinterviewnull n on tm.interviewer_seq = n."면접번호"
+where n."확정 면접일" is null and instr(tm.interviewer_name,'*')=0;
+    LOOP
+    EXIT WHEN V_CNT = vcount;
+    V_CNT := V_CNT + 1;   
+      insert into tblinterview(interviewer_seq, interview_date, interview_result) 
+    values((select tm.interviewer_seq from vwthismonthhopedate tm inner join  vwinterviewnull n on tm.interviewer_seq = n."면접번호" where n."확정 면접일" is null
+    and instr(tm.interviewer_name,'*')=0 and rownum =1),
+    (select tm.regdate from vwthismonthhopedate tm inner join  vwinterviewnull n on tm.interviewer_seq = n."면접번호" where n."확정 면접일" is null
+    and instr(tm.interviewer_name,'*')=0 and rownum =1),
+    null);
+    END LOOP;
+END;
+
 
 ----------------------------------------------------------------------------------------------------------------------
 -- A-8-3. 면접 응시 완료자들은 면접 합격 여부를 입력한다.
@@ -82,21 +99,47 @@ UPDATE tblInterview
 select * from vwcourseinfo where oc_startdate>sysdate ;
 
 select 
-    o.oc_seq, s.course_name , count(*) as cnt
+    o.oc_seq, s.ccourse_name , count(*) as cnt
 from vwstudentinfo s 
     left join tblenrollment e
-        on s.enrollment_seq = e.enrollment_seq
+        on s.eseq = e.enrollment_seq
             inner join tblopencourse o
                 on e.oc_seq = o.oc_seq
 where o.oc_startdate>sysdate
-group by o.oc_seq, s.course_name order by count(*) desc;
+group by o.oc_seq, s.ccourse_name order by count(*) desc;
 
 
 
 
 --개설 예정 과정이 정원 초과인지 아닌지 확인하기
 --프로시저 이용
+declare
+    vcnt number;
+begin
+    select count(*) as cnt
+     into vcnt
+from vwstudentinfo s 
+    inner join tblenrollment e
+        on s.enrollment_seq = e.enrollment_seq
+            inner join tblopencourse o
+                on e.oc_seq = o.oc_seq
+                    where o.oc_startdate> sysdate;
 
+     if vcnt <= 26 then
+        insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum)
+        values (student_seq.nextval, 
+        (select name from vwinterviewinfo where result = 'Y' and seq = 302),--면접자 번호 수기 입력
+        '951219-0000001',--수기 입력
+        (select tel from vwinterviewinfo where result = 'Y' and seq = 302),--면접자 번호 수기 입력
+        (select oc_seq from vwinterviewinfo where result = 'Y' and seq = 302)--면접자 번호 수기 입력
+                );
+        dbms_output.put_line('입력 완료');  
+        elsif vcnt >= 27 and vcnt<=30 then
+        dbms_output.put_line('수강 인원 확인 후 입력해주세요');  
+        else 
+        DBMS_OUTPUT.PUT_LINE('다른 개설과정으로 입력하세요.');
+    end if;
+end;
 
 --과정 수기 입력
 --뷰사용
@@ -113,4 +156,3 @@ insert into tblStudent (student_seq, student_name, student_ssn, student_tel, stu
 --면접 합격자 수강신청에 넣기 
 insert into tblEnrollment (enrollment_seq, oc_seq, student_seq) 
     values (enrollment_seq.nextVal,과정번호,학생번호);
-

@@ -17,7 +17,7 @@
           p.pm_jobseeker as "취업지원 희망 여부" 
   from vwstudentinfo v 
     inner join tblpostmanagement p
-        on v.enrollment_seq = p.enrollment_seq
+        on v.eseq = p.enrollment_seq
             inner join tbljobseeker j
                 on p.pm_seq = j.pm_seq;
 
@@ -30,7 +30,7 @@
           p.pm_jobseeker as "취업지원 희망 여부" 
   from vwstudentinfo v 
     inner join tblpostmanagement p
-        on v.enrollment_seq = p.enrollment_seq
+        on v.eseq = p.enrollment_seq
             inner join tbljobseeker j
                 on p.pm_seq = j.pm_seq
                 where p.pm_employee = 'Y'
@@ -48,7 +48,7 @@
           rc.rc_name as "취업 분야"
   from vwstudentinfo v 
     inner join tblpostmanagement p
-        on v.enrollment_seq = p.enrollment_seq
+        on v.eseq = p.enrollment_seq
             inner join tblemployee e
                 on p.pm_seq = e.pm_seq
                     inner join tblrecruitcategory rc
@@ -73,7 +73,7 @@ select
            
   from vwstudentinfo v 
     inner join tblpostmanagement p
-        on v.enrollment_seq = p.enrollment_seq
+        on v.eseq = p.enrollment_seq
             inner join tblemployee e
                 on p.pm_seq = e.pm_seq
                     inner join tblrecruitcategory rc
@@ -105,7 +105,7 @@ from tblRecruitInfo r
                                 inner join tblpostmanagement p
                                     on p.pm_seq = j.pm_seq 
                                         inner join vwstudentinfo s
-                                            on p.enrollment_seq =s.enrollment_seq;
+                                            on p.enrollment_seq =s.eseq;
 
 
 
