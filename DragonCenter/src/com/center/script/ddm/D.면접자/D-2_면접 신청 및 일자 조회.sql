@@ -13,8 +13,26 @@ select
 from vwcourseinfo where  instr(course_name, '웹') >0 ;
 
 
+
 --면접일을 입력하는 시스템 시간이 과정 시작일보다 빠른지 확인한 뒤 insert
---프로시저 사용
+set serverout on;
+
+declare
+    vdate date;
+begin
+    select oc_startdate into vdate from vwCourseInfo where oc_seq =22;
+     if vdate >= to_date(sysdate,'yy/mm/dd') then
+        insert into tblInterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date)
+        values (interviewer_seq.nextval, 
+        '희망', --이름
+        '010-1111-2222', --번호 
+        22, --희망과정
+        to_date('2021-12-21', --면접 희망날짜 <개설과정 시작일
+        'YY-MM-DD') 
+        );
+        dbms_output.put_line('입력 완료');  
+    end if;
+end;
 
 ----------------------------------------------------------------------------------------------------------------------
 --D-2-2. 면접 신청한 뒤 관리자의 승인을 받아 확정 면접일자가 결정된다. > 관리자 확정면접일자
