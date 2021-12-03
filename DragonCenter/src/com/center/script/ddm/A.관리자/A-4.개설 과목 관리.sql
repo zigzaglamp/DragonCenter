@@ -30,3 +30,45 @@ update tblbook set book_name where subject_seq = 3;
 update tblbook set book_publisher where subject_seq = 3;
 update tblbook set book_price where subject_seq = 3;
 delete from tblbook where subject_seq = 3;
+
+------------------------------개설 과목 입력------------------------------------
+begin
+procNewSubject(60,5,'20-10-24','20-11-30');
+end; -- 기초과목번호 subject_seq, 소속개설과정번호 oc_seq
+-------------------------------------------------------------------------------
+create or replace procedure procNewSubject(
+    psub1 number,
+    poc1 number,
+    posdate1 date,
+    posdate2 date
+    --select * from tblcourse;
+    --select * from tblsubject;
+    --select * from tblopencourse;
+    --select * from tblopensubject;
+)
+is
+    psub1check number;
+    poc1check number;
+    posdate1check date;
+    posdate2check date;
+begin
+
+    select subject_seq into psub1check from tblsubject where subject_seq = psub1;
+    select oc_seq into poc1check from tblopencourse where oc_seq = poc1;
+    select oc_startdate into posdate1check from tblopencourse where oc_seq = poc1;
+    select oc_enddate into posdate2check from tblopencourse where oc_seq = poc1;
+    if psub1 = psub1check and
+       poc1 = poc1check and
+       posdate1 >= posdate1check and
+       posdate2 <= posdate2check then
+        insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
+               values ((select max(os_seq)+1 from tblopensubject), psub1, poc1, posdate1, posdate2);
+    else
+    dbms_output.put_line('해당개설과정의 날짜범위를 벗어났습니다.');
+    end if;
+exception
+    when NO_DATA_FOUND then
+    psub1check := 0;
+    poc1check := 0;
+    dbms_output.put_line('유효하지않는값존재');
+end procNewsubject;

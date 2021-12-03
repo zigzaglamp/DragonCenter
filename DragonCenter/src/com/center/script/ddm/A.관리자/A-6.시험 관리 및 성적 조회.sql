@@ -14,12 +14,13 @@ from tblopensubject os
      order by os.os_seq;
 -- A-6.2) 교육생 개인이 수강한 모든 개설 과목에 대한 성적 정보(개설 과목명, 개설 과목 기간, 교사명, 출결, 필기, 실기) 출력
 select
-distinct sj.subject_name as "개설과목명",
-    os.os_startdate || '~' || os.os_enddate as "개설 과목 기간",
-    t.teacher_name "교사명",
+    distinct sj.subject_name as "개설과목명",
+    os.os_startdate as "시작일",
+    os.os_enddate as "종료일",
     sc.score_exam as "필기성적",
     sc.score_skill as "실기성적",
-    sc.score_attendance as "출결성적"
+    sc.score_attendance as "출결성적",
+    t.teacher_name "교사명"
 from tblstudent s
  inner join tblenrollment e
   on s.student_seq = e.student_seq
@@ -31,12 +32,12 @@ from tblstudent s
         on sj.subject_seq = os.subject_seq
          inner join tblteachermanagement tm
           on oc.oc_seq = tm.oc_seq
-           inner join tblteacher t
-            on tm.teacher_seq = t.teacher_seq
-             inner join tblscore sc
-              on os.oc_seq = sc.os_seq
-               where s.student_seq = 3
-                order by sj.subject_name;
+           inner join tblscore sc
+            on os.oc_seq = sc.os_seq
+             inner join tblteacher t
+              on tm.teacher_seq = t.teacher_seq
+               where e.student_seq = 3
+                order by os.os_startdate;
 -- A-6.3) 개설 과목별 성적 출력(과정명, 개설과정기간, 강의실명, 개설과목명, 교사명, 교육생 이름, 교육생주민번호, 필기, 실기 출력                                                                
 select
 distinct c.course_name as "과정명",
