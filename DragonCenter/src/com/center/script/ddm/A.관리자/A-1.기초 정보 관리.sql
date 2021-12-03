@@ -13,17 +13,47 @@
 --------------------------------------------------------------------------------
 -- 1. 과정 정보 조회; 번호, 이름, 기간 출력
 --------------------------------------------------------------------------------
-select 
-    course_seq as "번호",
-    course_name as "과정명",
-    course_period || '개월' as "기간"
-from tblCourse
-order by course_seq;
+declare
+    vresult sys_refcursor;
+    vrow tblCourse%rowtype;
+begin
+    procGetCourse(vresult);
+    
+    dbms_output.put_line('-----------------------------------------------------------------------------');
+    dbms_output.put_line('|No.|' || lpad('과정명(기간)', 39) || lpad('|',33));
+    loop
+        fetch vresult into vrow;
+        exit when vresult%notfound;
+        dbms_output.put_line('-----------------------------------------------------------------------------');
+        dbms_output.put_line('|' || to_char(vrow.course_seq, '99') || '|  ' 
+                                || rpad(vrow.course_name || '(' 
+                                || vrow.course_period || '개월)', 69) || '|');
+    end loop;
+    dbms_output.put_line('-----------------------------------------------------------------------------');
+end;
+
+
+    /* 과정 조회 프로시저 */
+create or replace procedure procGetCourse(
+    presult out sys_refcursor
+)
+is
+begin
+    open presult
+        for select * from tblCourse order by course_seq;
+end procGetCourse;
 
 
 --------------------------------------------------------------------------------
 -- 2. 과정 정보 등록; 이름, 기간(5.5, 6, 7) 입력
 --------------------------------------------------------------------------------
+begin
+--    procAddCourse(과정명, 기간);
+    procAddCourse('짱 쉬운 개발자 과정', 5.5);
+end;
+
+
+    /* 과정 등록 프로시저 */
 create or replace procedure procAddCourse (
     pname varchar2,
     pperiod number
@@ -42,14 +72,17 @@ exception
         dbms_output.put_line(sqlerrm);
 end procAddCourse;
 
-begin
-    procAddCourse(과정명, 기간);
-end;
-
 
 --------------------------------------------------------------------------------
 -- 3. 과정 정보 수정; 해당 번호의 과정 수정
 --------------------------------------------------------------------------------
+begin
+--    procUpdateCourse(번호, 과정명, 기간);
+    procUpdateCourse(56, '약간 어려운 개발자 과정', 5.5);
+end;
+
+
+    /* 과정 수정 프로시저 */
 create or replace procedure procUpdateCourse (
     pseq number,
     pname varchar2,
@@ -70,14 +103,19 @@ exception
         dbms_output.put_line(sqlerrm);
 end procUpdateCourse;
 
-begin
-    procUpdateCourse(번호, 과정명, 기간);
-end;
-
 
 --------------------------------------------------------------------------------
 -- 4. 과정 정보 삭제; 해당 번호의 과정 삭제
 --------------------------------------------------------------------------------
+declare
+    vc tblCourse%rowtype;
+begin
+    procDeleteCourse(번호, vc.course_name, vc.course_period);
+    procDeleteCourse(56, vc.course_name, vc.course_period);
+end;
+
+
+    /* 과정 삭제 프로시저 */
 create or replace procedure procDeleteCourse (
     pseq number,
     pname out varchar2,
@@ -100,13 +138,6 @@ exception
         dbms_output.put_line(sqlerrm);
 end procDeleteCourse;
 
-declare
-    vname tblCourse.course_name%type;
-    vperiod number;   
-begin
-    procDeleteCourse(번호, vname, vperiod);
-end;
-
 
 
 --------------------------------------------------------------------------------
@@ -125,6 +156,12 @@ order by subject_seq;
 --------------------------------------------------------------------------------
 -- 2. 과목 정보 등록; 이름, 기간(0.5~4.5) 입력
 --------------------------------------------------------------------------------
+begin
+    procAddSubject(과목명, 기간);
+end;
+
+
+    /* 과목 등록 프로시저 */
 create or replace procedure procAddSubject (
     pname varchar2,
     pperiod number
@@ -143,14 +180,16 @@ exception
         dbms_output.put_line(sqlerrm);
 end procAddSubject;
 
-begin
-    procAddSubject(과목명, 기간);
-end;
-
 
 --------------------------------------------------------------------------------
 -- 3. 과목 정보 수정; 해당 번호의 이름, 기간 수정
 --------------------------------------------------------------------------------
+begin
+    procUpdateSubject(번호, 과목명, 기간);
+end;
+
+
+    /* 과목 수정 프로시저 */
 create or replace procedure procUpdateSubject (
     pseq number,
     pname varchar2,
@@ -171,14 +210,19 @@ exception
         dbms_output.put_line(sqlerrm);
 end procUpdateSubject;
 
-begin
-    procUpdateSubject(번호, 과목명, 기간);
-end;
-
 
 --------------------------------------------------------------------------------
 -- 4. 과목 정보 삭제; 해당 과목 번호의 과목 삭제
 --------------------------------------------------------------------------------
+declare
+    vname tblSubject.subject_name%type;
+    vperiod number;   
+begin
+    procDeleteSubject(번호, vname, vperiod);
+end;
+
+
+    /* 과목 삭제 프로시저 */
 create or replace procedure procDeleteSubject (
     pseq number,
     pname out varchar2,
@@ -201,14 +245,6 @@ exception
         dbms_output.put_line(sqlerrm);
 end procDeleteSubject;
 
-declare
-    vname tblSubject.subject_name%type;
-    vperiod number;   
-begin
-    procDeleteSubject(번호, vname, vperiod);
-end;
-
-
 
 --------------------------------------------------------------------------------
 -- A-1.3) 강의실 정보 관리(tblRoom)
@@ -226,6 +262,12 @@ order by room_seq;
 --------------------------------------------------------------------------------
 -- 2. 강의실 정보 등록; 이름, 수용 인원(26, 30) 입력
 --------------------------------------------------------------------------------
+begin
+    procAddRoom(강의실명, 인원);
+end;
+
+
+    /* 강의실 등록 프로시저 */
 create or replace procedure procAddRoom (
     pname varchar2,
     pcapacity number
@@ -244,14 +286,16 @@ exception
         dbms_output.put_line(sqlerrm);
 end procAddRoom;
 
-begin
-    procAddRoom(강의실명, 인원);
-end;
-
 
 --------------------------------------------------------------------------------
 -- 3. 강의실 정보 수정; 해당 강의실 번호의 이름, 수용인원 수정
 --------------------------------------------------------------------------------
+begin
+    procUpdateRoom(번호, 강의실명, 인원);
+end;
+
+
+    /* 강의실 수정 프로시저 */
 create or replace procedure procUpdateRoom (
     pseq number,
     pname varchar2,
@@ -272,14 +316,19 @@ exception
         dbms_output.put_line(sqlerrm);
 end procUpdateRoom;
 
-begin
-    procUpdateRoom(번호, 강의실명, 인원);
-end;
-
 
 --------------------------------------------------------------------------------
 -- 4. 강의실 정보 삭제; 해당 강의실 번호의 강의실 정보 삭제
 --------------------------------------------------------------------------------
+declare
+    vname tblRoom.room_name%type;
+    vcapacity number;   
+begin
+    procDeleteRoom(번호, vname, vcapacity);
+end;
+
+
+    /* 강의실 삭제 프로시저 */
 create or replace procedure procDeleteRoom (
     pseq number,
     pname out varchar2,
@@ -302,14 +351,6 @@ exception
         dbms_output.put_line(sqlerrm);
 end procDeleteRoom;
 
-declare
-    vname tblRoom.room_name%type;
-    vcapacity number;   
-begin
-    procDeleteRoom(번호, vname, vcapacity);
-end;
-
-
 
 --------------------------------------------------------------------------------
 -- A-1.4) 교재 정보 관리(tblBook)
@@ -329,6 +370,12 @@ order by b.book_seq;
 --------------------------------------------------------------------------------
 -- 2. 교재 정보 등록; 교재명, 출판사, 가격, 과목 번호 입력
 --------------------------------------------------------------------------------
+begin
+    procAddBook(교재명, 출판사, 가격, 과목_번호);
+end;
+
+
+    /* 교재 등록 프로시저 */
 create or replace procedure procAddBook (
     pname varchar2,
     ppublisher varchar2,
@@ -351,14 +398,16 @@ exception
         dbms_output.put_line(sqlerrm);
 end procAddBook;
 
-begin
-    procAddBook(교재명, 출판사, 가격, 과목_번호);
-end;
-
 
 --------------------------------------------------------------------------------
 -- 3. 교재 정보 수정; 해당 교재 번호의 교재명, 출판사, 가격, 과목 번호 수정
 --------------------------------------------------------------------------------
+begin
+    procUpdateBook(번호, 교재명, 출판사, 가격, 과목_번호);
+end;
+
+
+    /* 교재 수정 프로시저 */
 create or replace procedure procUpdateBook (
     pseq number,
     pname varchar2,
@@ -385,14 +434,20 @@ exception
         dbms_output.put_line(sqlerrm);
 end procUpdateBook;
 
-begin
-    procUpdateBook(번호, 교재명, 출판사, 가격, 과목_번호);
-end;
-
 
 --------------------------------------------------------------------------------
 -- 4. 교재 정보 삭제; 해당 번호의 교재 정보 삭제
 --------------------------------------------------------------------------------
+declare
+    vname tblBook.book_name%type;
+    vpublisher tblBook.book_publisher%type;
+    vprice number;
+begin
+    procDeleteBook(번호, vname, vpublisher, vprice);
+end;
+
+
+    /* 교재 삭제 프로시저 */
 create or replace procedure procDeleteBook (
     pseq number,
     pname out varchar2,
@@ -416,14 +471,7 @@ exception
                                 || '(출판사: ' || ppublisher 
                                 || ', 가격: ' || pprice || '원)');
         dbms_output.put_line(sqlerrm);
-end procDeleteRoom;
+end procDeleteBook;
 
-declare
-    vname tblBook.book_name%type;
-    vpublisher tblBook.book_publisher%type;
-    vprice number;
-begin
-    procDeleteBook(번호, vname, vpublisher, vprice);
-end;
 
 
