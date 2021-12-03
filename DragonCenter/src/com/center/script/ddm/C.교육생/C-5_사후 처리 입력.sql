@@ -6,6 +6,24 @@
 ----------------------------------------------------------------------------------------------------------------------
 --사후관리 종강 후 인지 확인하기
 --프로시저 사용
+set serverout on;
+
+declare
+    vdate date;
+begin
+    select max(enddate) into vdate from vwStudentInfo where sseq=291;
+     if vdate <= to_date(sysdate,'yy/mm/dd') then
+       insert into tblPostManagement (pm_seq,enrollment_seq,pm_employee,pm_jobseeker) 
+        values (
+        pm_seq.nextVal, --사후관리번호
+        1,--수강신청번호
+        'N',--취업여부
+        'Y');--취업 알선 희망 여부
+        dbms_output.put_line('입력 완료');  
+        else
+        DBMS_OUTPUT.PUT_LINE('조기취업자인 경우 수기 입력해주세요');
+    end if;
+end;
 
 --사후관리 수기입력
 insert into tblPostManagement (pm_seq,enrollment_seq,pm_employee,pm_jobseeker) 
