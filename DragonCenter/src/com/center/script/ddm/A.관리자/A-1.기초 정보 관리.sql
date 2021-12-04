@@ -110,7 +110,7 @@ end procUpdateCourse;
 declare
     vc tblCourse%rowtype;
 begin
-    procDeleteCourse(번호, vc.course_name, vc.course_period);
+--    procDeleteCourse(번호, vc.course_name, vc.course_period);
     procDeleteCourse(56, vc.course_name, vc.course_period);
 end;
 
