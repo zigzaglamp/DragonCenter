@@ -1,31 +1,40 @@
--- A-7. 관리자 -> 학생 출결 조회
+-- A-7 관리자 -> 학생 출결 조회
 -- 특정 과정, 특정 인원, 특정 기간에 대한 출결 조회
 
 -- 프로시저(관리자 -> 학생 출결 조회)
 create or replace procedure procAdminAttendance
 (
-    pcseq number,
-    psseq number,
-    pyear number,
-    pmonth number,
-    pday number,
+    pcseq number, -- 과정 번호
+    psseq number, -- 학생 번호
+    pyear number, -- 년
+    pmonth number, -- 월
+    pday number, -- 일
     presult out sys_refcursor
 )
 is
 begin
 
+    -- 특정 과정 조회
     if pcseq != 0 and psseq = 0 and pyear = 0 and pmonth = 0 and pday = 0 then
         open presult
             for select * from vwattendance where "과정번호" = pcseq and "교사상태" = '배치';
+            
+    -- 특정 과정, 특정 인원 조회        
     elsif pcseq != 0 and psseq != 0 and pyear = 0 and pmonth = 0 and pday = 0 then
         open presult
             for select * from vwattendance where "과정번호" = pcseq and "학생번호" = psseq and "교사상태" = '배치';
+            
+    -- 특정 과정, 특정 인원, 특정 연도 조회            
     elsif pcseq != 0 and psseq != 0 and pyear != 0 and pmonth = 0 and pday = 0 then
         open presult
             for select * from vwattendance where "과정번호" = pcseq and "학생번호" = psseq and to_char("출결일", 'YYYY') = to_char(pyear) and "교사상태" = '배치';
+            
+    -- 특정 과정, 특정 인원, 특정 연도, 특정월 조회            
     elsif pcseq != 0 and psseq != 0 and pyear != 0 and pmonth != 0 and pday = 0 then
         open presult
             for select * from vwattendance where "과정번호" = pcseq and "학생번호" = psseq and to_char("출결일", 'YYYY') = to_char(pyear) and to_number(to_char("출결일", 'MM')) = pmonth and "교사상태" = '배치';
+            
+    -- 특정 과정, 특정 인원, 특정 연도, 특정월, 특정일 조회             
     elsif pcseq != 0 and psseq != 0 and pyear != 0 and pmonth != 0 and pday != 0 then
         open presult
             for select * from vwattendance where "과정번호" = pcseq and "학생번호" = psseq and to_char("출결일", 'YYYY') = to_char(pyear) and to_number(to_char("출결일", 'MM')) = pmonth 
@@ -34,7 +43,7 @@ begin
     
 exception
     when others then
-        dbms_output.put_line('값을 잘못 입력하셨습니다');    
+        dbms_output.put_line('잘못된 값입니다');    
 
 end procAdminAttendance;
 
@@ -65,5 +74,13 @@ begin
         dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
         
     end loop;
+    
+exception
+    when others then
+        dbms_output.put_line('잘못된 값입니다');        
   
 end;
+
+
+
+
