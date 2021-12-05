@@ -21,10 +21,11 @@ declare
 begin
     procGetOpenCourse(vresult);
     
+    dbms_output.put_line('[개설 과정 조회]');
     dbms_output.put_line('---------------------------------------------------------------------------------');
     dbms_output.put_line('|No.|' || lpad('과정명', 24) || lpad('|', 21) 
                             || lpad('기간', 11) || lpad('|', 7) 
-                            || '강의실' || ' |' || '수용' || '|');
+                            || ' 강의실' || '|' || '수용' || '|');
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
@@ -57,62 +58,121 @@ end procGetOpenCourse;
 --------------------------------------------------------------------------------
 -- 2. 개설 과정 등록; 과정번호, 시작일, 강의실 번호 입력
 --------------------------------------------------------------------------------
-declare
-    vc tblCourse%rowtype;
-    vr tblRoom%rowtype;
 begin
---    procAddOpenCourse(과정_번호, 시작일, 강의실_번호, vcname, vcperiod, vrname);
-    procAddOpenCourse(3, '21-12-05', 3, vc.course_name, vc.course_period, vr.room_name);
+--    procAddOpenCourse(과정_번호, 강의실_번호, 시작일);
+    procAddOpenCourse(3, 4, '21-12-25');
 end;
+
+
+    /* 개설 가능한 날짜 함수 */
+create or replace function fnValidDate (
+    pdate date
+) return varchar2
+is
+    vcnt number;
+    vcheck varchar2(1);
+begin
+    select count(*)
+        into vcnt 
+    from tblHoliday 
+    where holiday_date = pdate;
+    
+    if to_char(pdate, 'd') in ('1', '7') 
+        or pdate < sysdate 
+        or vcnt > 0 then
+        vcheck := 'N';
+    else
+        vcheck := 'Y';
+    end if;
+    
+    return vcheck;
+end fnValidDate;
+
+
+    /* 개설 가능한 강의실 함수 */
+create or replace function fnValidRoom (
+    pseq number,
+    pstartdate date
+) return varchar2
+is
+    vdate date;
+    vcheck varchar2(1);
+begin
+    select max(oc_enddate)
+        into vdate 
+    from vwOpenCourse 
+    where room_seq = pseq;
+    
+    if vdate > pstartdate then
+        vcheck := 'N';
+    else
+        vcheck := 'Y';
+    end if;
+    
+    return vcheck;
+end fnValidRoom;
+
+
+    /* 개설 과정 종료일 계산 함수 */
+create or replace function fnEnddate (
+    pdate date,
+    pperiod number
+) return date
+is
+begin
+    return add_months(pdate, pperiod);
+end fnEnddate;
 
 
     /* 개설 과정 등록 프로시저 */
 create or replace procedure procAddOpenCourse (
-    pcseq number, 
-    pstartdate date, 
+    pseq number, 
     prseq number,
-    pcname out varchar2,
-    pcperiod out number,
-    prname out varchar2
+    pstartdate date
 )
 is
-    vinfo varchar2(300);
+    vc tblCourse%rowtype;
+    vr tblRoom%rowtype;
+    venddate date;
 begin
-    select course_name, course_period
-        into pcname, pcperiod from tblCourse
-    where course_seq = pcseq;
-    select room_name
-        into prname from tblRoom
-    where room_seq = prseq;
+    select * into vc from tblCourse
+    where course_seq = pseq;
 
-    vinfo := ('No.' || oc_seq.currVal || ' ' || pcname 
-                || '(' || pstartdate || ' ~ ' || add_months(pstartdate, pcperiod) 
-                || ', ' || prname || ')');
+    select * into vr from tblRoom
+    where room_seq = prseq;
     
-    if pstartdate < sysdate then
-        dbms_output.put_line('개설 과정 등록 실패: ' || '시작일 부적합');
+    venddate := fnEnddate(pstartdate, vc.course_period);
+    
+    dbms_output.put_line('[개설 과정 등록]' || chr(10) 
+                            || 'No.' || oc_seq.nextVal || ' ' || vc.course_name 
+                            || '(' || pstartdate || ' ~ ' || venddate 
+                            || ', ' || vr.room_name || ')');
+
+    if fnValidDate(pstartdate) = 'N' then
+        dbms_output.put_line('실패; 시작일 부적합');
+    elsif fnValidDate(venddate) = 'N' then
+        dbms_output.put_line('실패; 종료일 부적합');
+    elsif fnvalidRoom(prseq, pstartdate) = 'N' then
+        dbms_output.put_line('실패; 강의실 부적합');
     else
         insert into tblOpenCourse (oc_seq, course_seq, oc_startdate, oc_enddate, room_seq) 
-            values(oc_seq.nextval, pcseq, pstartdate, add_months(pstartdate, pcperiod), prseq);
-        dbms_output.put_line('개설 과정 등록 성공: ' || vinfo);
+            values(oc_seq.currval, pseq, pstartdate, venddate, prseq);
+            
+        dbms_output.put_line('성공!');
     end if;
     
 exception
     when others then
-        dbms_output.put_line('개설 과정 등록 실패:');
-        dbms_output.put_line(sqlerrm);
+        dbms_output.put_line('실패; ' || sqlerrm);
 end procAddOpenCourse;
 
 
 --------------------------------------------------------------------------------
 -- 3. 개설 과정 수정; 해당 번호의 과정 번호, 시작일, 종료일, 강의실 수정
 --------------------------------------------------------------------------------
-declare
-    vcname tblCourse.course_name%type;
-    vrname tblRoom.room_name%type;
 begin
---    procUpdateOpenCourse(번호, 과정_번호, 시작일, 종료일, 강의실_번호, vcname, vrname);
-    procUpdateOpenCourse(43, 1, '21-12-13', '22-02-05', 3, vcname, vrname);
+--    procUpdateOpenCourse(번호, 과정_번호, 시작일, 종료일, 강의실_번호);
+    procUpdateOpenCourse(50, 3, '21-12-13', '22-02-03', 2);
 end;
 
     
@@ -122,89 +182,102 @@ create or replace procedure procUpdateOpenCourse (
     pcseq number, 
     pstartdate date,
     penddate date,  
-    prseq number,
-    pcname out varchar2,
-    prname out varchar2
+    prseq number
 )
 is
+    voc tblOpenCourse%rowtype;
+    vcbefore tblCourse%rowtype;
+    vrbefore tblRoom%rowtype;
+    vc tblCourse%rowtype;
+    vr tblRoom%rowtype;
 begin
-    select course_name
-        into pcname from tblCourse
-    where course_seq = pcseq;
-    select room_name
-        into prname from tblRoom
-    where room_seq = prseq;
-    update tblOpenCourse set course_seq = pcseq,
-                             oc_startdate = pstartdate,
-                             oc_enddate = penddate,
-                             room_seq = prseq
+    select * into voc from tblOpenCourse
     where oc_seq = pseq;
+
+    select * into vcbefore from tblCourse
+    where course_seq = voc.course_seq;
+
+    select * into vrbefore from tblRoom
+    where room_seq = voc.room_seq;
+
+    dbms_output.put_line('[개설 과정 수정]' || chr(10) 
+                            || 'No.' || pseq || ' ' || vcbefore.course_name 
+                            || '(' || voc.oc_startdate || ' ~ ' || voc.oc_enddate 
+                            || ', ' || vrbefore.room_name || ')');
+
+    select * into vc from tblCourse
+    where course_seq = pcseq;
+
+    select * into vr from tblRoom
+    where room_seq = prseq;
     
-    vinfo := ('No.' || oc_seq.currVal || ' ' || pcname 
-                || '(' || pstartdate || ' ~ ' || add_months(pstartdate, pcperiod) 
-                || ', ' || prname || ')');
-        
-    if pstartdate < sysdate then
-        dbms_output.put_line('개설 과정 수정 실패: ' || '시작일 부적합');
-    elsif penddate < pstartdate then
-        dbms_output.put_line('개설 과정 수정 실패: ' || '종료일 부적합');
+    dbms_output.put_line('-> No.' || pseq || ' ' || vc.course_name 
+                            || '(' || pstartdate || ' ~ ' || penddate 
+                            || ', ' || vr.room_name || ')');
+    
+    if fnValidDate(pstartdate) = 'N' then
+        dbms_output.put_line('실패; 시작일 부적합');
+    elsif fnValidDate(penddate) = 'N' 
+        or penddate < pstartdate then
+        dbms_output.put_line('실패; 종료일 부적합');
+    elsif fnvalidRoom(prseq, pstartdate) = 'N' then
+        dbms_output.put_line('실패; 강의실 부적합');
     else 
-        insert into tblOpenCourse (oc_seq, course_seq, oc_startdate, oc_enddate, room_seq) 
-            values(oc_seq.nextval, pcseq, pstartdate, add_months(pstartdate, pcperiod), prseq);
-        dbms_output.put_line('개설 과정 수정 성공: ' || vinfo);
+        update tblOpenCourse set course_seq = pcseq, 
+                                 oc_startdate = pstartdate,
+                                 oc_enddate = penddate,
+                                 room_seq = prseq
+        where oc_seq = pseq;
+        
+        dbms_output.put_line('성공!');
     end if;
     
 exception
     when others then
-        dbms_output.put_line('개설 과정 수정 실패:');
-        dbms_output.put_line(sqlerrm);
+        dbms_output.put_line('실패; ' || sqlerrm);
 end procUpdateOpenCourse;
 
 
 --------------------------------------------------------------------------------
 -- 4. 개설 과정 삭제; 해당 번호의 개설 과정 정보 삭제
 --------------------------------------------------------------------------------
-declare
-    vo tblOpenCourse%rowtype; 
-    vc tblCourse%rowtype;
-    vr tblRoom%rowtype;
 begin
---    procDeleteOpenCourse(번호, vc.course_seq, vo.oc_startdate, vo.oc_enddate, vr.room_seq, vc.course_name, vr.room_name);
-    procDeleteOpenCourse(43, vc.course_seq, vo.oc_startdate, vo.oc_enddate, vr.room_seq, vc.course_name, vr.room_name);
+--    procDeleteOpenCourse(번호);
+    procDeleteOpenCourse(51);
 end;
 
 
     /* 개설 과정 삭제 프로시저 */
 create or replace procedure procDeleteOpenCourse (
-    pseq number,
-    pcseq out number, 
-    pstartdate out date,
-    penddate out date,  
-    prseq out number,
-    pcname out varchar2,
-    prname out varchar2
+    pseq number
 )
 is
+    voc tblOpenCourse%rowtype;
+    vc tblCourse%rowtype;
+    vr tblRoom%rowtype;
+    venddate date;
 begin
-    select course_seq, oc_startdate, oc_enddate, room_seq
-        into pcseq, pstartdate, penddate, prseq from tblOpenCourse
+    select * into voc from tblOpenCourse
     where oc_seq = pseq;
-    select course_name
-        into pcname from tblCourse
-    where course_seq = pcseq;
-    select room_name
-        into prname from tblRoom
-    where room_seq = prseq;
+    
+    select * into vc from tblCourse
+    where course_seq = voc.course_seq;
+
+    select * into vr from tblRoom
+    where room_seq = voc.room_seq;
+    
+    dbms_output.put_line('[개설 과정 삭제]' || chr(10) 
+                            || 'No.' || pseq || ' ' || vc.course_name 
+                            || '(' || voc.oc_startdate || ' ~ ' || voc.oc_enddate 
+                            || ', ' || vr.room_name || ')');
+                            
     delete from tblOpenCourse
     where oc_seq = pseq;
     
-    dbms_output.put_line('개설 과정 삭제 성공: No.' || pseq || ' ' || pcname 
-                            || '(' || pstartdate || ' ~ ' || penddate 
-                            || ', ' || prname || ')');
+    dbms_output.put_line('성공!');
 exception
     when others then
-        dbms_output.put_line('개설 과정 삭제 실패:');
-        dbms_output.put_line(sqlerrm);
+        dbms_output.put_line('실패; ' || sqlerrm);
 end procDeleteOpenCourse;
 
 
