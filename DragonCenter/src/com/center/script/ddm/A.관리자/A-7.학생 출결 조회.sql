@@ -55,9 +55,9 @@ declare
     vmonth number := 2; -- 월
     vday number := 0; -- 일
     vresult sys_refcursor;
-    vrow vwattendance%rowtype;
+    vrow vwAttendance%rowtype;
 begin
-    procadminattendance(vcseq, vsseq, vyear, vmonth, vday, vresult);
+    procAdminAttendance(vcseq, vsseq, vyear, vmonth, vday, vresult);
     
     dbms_output.put_line(chr(10));
     dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
