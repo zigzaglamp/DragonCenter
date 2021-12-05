@@ -4,37 +4,47 @@
 -- 프로시저(교사 -> 학생 출결 조회)
 create or replace procedure procTeacherAttendance
 (
-    ptseq number,
-    pcseq number,
-    psseq number,
-    pyear number,
-    pmonth number,
-    pday number,
+    ptseq number, -- 교사 번호
+    pcseq number, -- 과정 번호
+    psseq number, -- 학생 번호
+    pyear number, -- 년
+    pmonth number, -- 월
+    pday number, -- 일
     presult out sys_refcursor
 )
 is
 begin
-
+    
+    -- 특정 교사, 특정 과정 출결 조회
     if ptseq != 0 and pcseq != 0 and psseq = 0 and pyear = 0 and pmonth = 0 and pday = 0 then
         open presult
             for select * from vwattendance where "교사번호" = ptseq and "과정번호" = pcseq;
+            
+    -- 특정 교사, 특정 과정, 특정 학생 출결 조회            
     elsif ptseq != 0 and pcseq != 0 and psseq != 0 and pyear = 0 and pmonth = 0 and pday = 0 then
         open presult
             for select * from vwattendance where "교사번호" = ptseq and "과정번호" = pcseq and "학생번호" = psseq;
+            
+    -- 특정 교사, 특정 과정, 특정 학생, 특정 연도 출결 조회            
     elsif ptseq != 0 and pcseq != 0 and psseq != 0 and pyear != 0 and pmonth = 0 and pday = 0 then
         open presult
             for select * from vwattendance where "교사번호" = ptseq and "과정번호" = pcseq and "학생번호" = psseq and to_char("출결일", 'YYYY') = to_char(pyear);
+    
+    -- 특정 교사, 특정 과정, 특정 학생, 특정 연도, 특정월 출결 조회            
     elsif ptseq != 0 and pcseq != 0 and psseq != 0 and pyear != 0 and pmonth != 0 and pday = 0 then
         open presult
             for select * from vwattendance where "교사번호" = ptseq and "과정번호" = pcseq and "학생번호" = psseq and to_char("출결일", 'YYYY') = to_char(pyear) and to_number(to_char("출결일", 'MM')) = pmonth;
+            
+    -- 특정 교사, 특정 과정, 특정 학생, 특정 연도, 특정월, 특정일 출결 조회
     elsif ptseq != 0 and pcseq != 0 and psseq != 0 and pyear != 0 and pmonth != 0 and pday != 0 then
         open presult
-            for select * from vwattendance where "교사번호" = ptseq and "과정번호" = pcseq and "학생번호" = psseq and to_char("출결일", 'YYYY') = to_char(pyear) and to_number(to_char("출결일", 'MM')) = pmonth and to_number(to_char("출결일", 'DD')) = pday;
+            for select * from vwattendance where "교사번호" = ptseq and "과정번호" = pcseq and "학생번호" = psseq and to_char("출결일", 'YYYY') = to_char(pyear) 
+            and to_number(to_char("출결일", 'MM')) = pmonth and to_number(to_char("출결일", 'DD')) = pday;
     end if;
     
 exception
     when others then
-        dbms_output.put_line('값을 잘못 입력하셨습니다');    
+        dbms_output.put_line('잘못된 값입니다');    
 
 end procTeacherAttendance;
 
@@ -66,5 +76,13 @@ begin
         dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
         
     end loop;
+    
+exception
+    when others then
+        dbms_output.put_line('잘못된 값입니다');    
   
 end;
+
+
+
+
