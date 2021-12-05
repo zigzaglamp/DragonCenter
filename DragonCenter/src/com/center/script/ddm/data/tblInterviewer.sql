@@ -336,3 +336,5 @@ insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, o
 insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '최윤은', '010-0760-4254',22, to_date('2021-12-14', 'YY-MM-DD'));
 insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '민연하', '010-0344-3057', 22, to_date('2021-12-15', 'YY-MM-DD'));
 insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '정경림', '010-9522-2583', 22, to_date('2021-12-11', 'YY-MM-DD'));
+
+commit;

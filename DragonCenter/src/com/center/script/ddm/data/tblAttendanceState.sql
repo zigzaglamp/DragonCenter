@@ -1,4 +1,22 @@
 -- 출결 상태
+
+create table tblAttendanceState (
+	attendance_seq NUMBER,
+	as_state_in varchar2(6) NOT NULL,
+    as_state_out varchar2(6) NOT NULL
+    );
+
+create sequence attendance_seq;
+
+alter table tblAttendanceState
+    add constraint tblas_attendance_seq_pk primary key(attendate_seq);
+    
+alter table tblAttendanceState
+    add constraint tblasattendance_seq_fk foreign key(attendance_seq) references tblAttendance(attendance_seq);
+
+alter table tblAttendanceState
+    add constraint tblas_employee_insurance_ck check (employee_insurance in ('정상', '자각', '조퇴', '결석');
+
 -- 실제
 insert into tblAttendanceState(attendance_seq, as_state_in, as_state_out) values(1, '지각’, ‘정상');
 insert into tblAttendanceState(attendance_seq, as_state_in, as_state_out) values(2, '지각’, ‘정상');
@@ -1014,3 +1032,5 @@ insert into tblAttendanceState(attendance_seq, as_state_in, as_state_out) values
 insert into tblAttendanceState(attendance_seq, as_state_in, as_state_out) values(1008, '지각', '조퇴');
 insert into tblAttendanceState(attendance_seq, as_state_in, as_state_out) values(1009, '지각', '정상');
 insert into tblAttendanceState(attendance_seq, as_state_in, as_state_out) values(1010, '지각', '정상');
+
+commit;

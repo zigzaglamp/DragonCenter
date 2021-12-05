@@ -1,3 +1,32 @@
+drop table tblEmployee;
+
+create table tblEmployee
+(
+    pm_seq number,
+    rc_seq number not null,
+    employee_hiredate date default sysdate not null,
+    employee_insurance varchar2(1) not null,
+    employee_salary number not null
+);
+
+alter table tblEmployee
+    add constraint tblep_employee_seq_pk primary key(pm_seq);
+alter table tblEmployee
+    add constraint tblep_pm_seq_fk foreign key(pm_seq) references tblPostManagement(pm_seq);
+    
+    
+alter table tblEmployee
+    add constraint tblep_rc_seq_fk foreign key(rc_seq) references tblRecruitCategory(rc_seq);
+
+alter table tblEmployee
+    add constraint tblep_employee_insurance_ck check (employee_insurance in ('Y','N'));
+
+
+
+
+
+
+
 insert into tblEmployee (pm_seq,rc_seq,employee_hiredate,employee_insurance,employee_salary) values (6,7,to_date('19/06/16','rr/mm/dd'),'Y',2700);
 insert into tblEmployee (pm_seq,rc_seq,employee_hiredate,employee_insurance,employee_salary) values (7,20,to_date('19/06/18','rr/mm/dd'),'N',2600);
 insert into tblEmployee (pm_seq,rc_seq,employee_hiredate,employee_insurance,employee_salary) values (8,6,to_date('19/06/19','rr/mm/dd'),'Y',2800);
@@ -188,3 +217,5 @@ insert into tblEmployee (pm_seq,rc_seq,employee_hiredate,employee_insurance,empl
 insert into tblEmployee (pm_seq,rc_seq,employee_hiredate,employee_insurance,employee_salary) values (198,3,to_date('18/01/13','rr/mm/dd'),'Y',3300);
 insert into tblEmployee (pm_seq,rc_seq,employee_hiredate,employee_insurance,employee_salary) values (199,14,to_date('18/01/26','rr/mm/dd'),'Y',3300);
 insert into tblEmployee (pm_seq,rc_seq,employee_hiredate,employee_insurance,employee_salary) values (200,12,to_date('18/02/26','rr/mm/dd'),'N',2700);
+
+commit;

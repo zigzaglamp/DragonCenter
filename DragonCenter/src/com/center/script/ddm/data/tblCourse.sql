@@ -1,6 +1,4 @@
-select * from tblCourse;
 
-drop table tblCourse;
 
 -- 과정 10개
 create table tblCourse
@@ -10,7 +8,7 @@ create table tblCourse
     course_period number not null 
 );
 
-create sequence course_seq
+create sequence course_seq;
 
 alter table tblCourse
     add constraint tblc_course_seq_pk primary key(course_seq);
@@ -27,3 +25,5 @@ insert into tblCourse(course_seq, course_name, course_period) values(course_seq.
 insert into tblCourse(course_seq, course_name, course_period) values(course_seq.nextval, 'github 기반의 스프링을 활용한 프레임워크 구축 개발자', 6);
 insert into tblCourse(course_seq, course_name, course_period) values(course_seq.nextval, '웹기반 빅데이터 분석 응용SW개발자 양성과정', 6);
 insert into tblCourse(course_seq, course_name, course_period) values(course_seq.nextval, '애자일 기법에 기반한 클라우드 웹어플리케이션 개발자', 6);
+
+commit;

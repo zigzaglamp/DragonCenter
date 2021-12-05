@@ -238,3 +238,5 @@ insert into tblTest (test_seq, test_file, os_seq, test_type, test_date)
     values (test_seq.nextVal, 'https://www.sycenter.net/document/00735', 32, '실기', '19-06-23');
 insert into tblTest (test_seq, test_file, os_seq, test_type, test_date)
     values (test_seq.nextVal, 'https://www.sycenter.net/document/00486', 56, '실기', '01-08-04');
+    
+    commit;

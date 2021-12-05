@@ -1,3 +1,20 @@
+create table tblSubject
+(
+	subject_seq number,
+	subject_name varchar2(60) not null,
+	subject_period number not null
+);
+
+create sequence subject_seq;
+
+alter table tblSubject
+    add constraint tbls_subject_seq_pk primary key(subject_seq);
+
+
+
+
+
+
 insert into tblSubject (subject_seq, subject_name, subject_period)
     values (subject_seq.nextVal, '오라클 활용 개론', 1.7);
 insert into tblSubject (subject_seq, subject_name, subject_period)
@@ -98,3 +115,5 @@ insert into tblSubject (subject_seq, subject_name, subject_period)
     values (subject_seq.nextVal, 'C언어 전문 개론', 2.5);
 insert into tblSubject (subject_seq, subject_name, subject_period)
     values (subject_seq.nextVal, 'SQL 기반 1', 1.3);
+    
+    commit;

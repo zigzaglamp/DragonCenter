@@ -441,3 +441,5 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(408, 9, 1, 0, 0, 7, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(409, 0, 7, 8, 3, 2, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(410, 9, 9, 4, 9, 1, null);
+
+commit;

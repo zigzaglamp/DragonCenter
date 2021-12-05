@@ -1,5 +1,6 @@
 -- 중도 탈락
 
+
 create table tblAbandonment (   
     abandonment_seq number not null,
     enrollment_seq number not null, 
@@ -57,3 +58,5 @@ insert into tblAbandonment(abandonment_seq, enrollment_seq, abandonment_date) va
 insert into tblAbandonment(abandonment_seq, enrollment_seq, abandonment_date) values (abandonment_seq.nextVal, 9, '21-02-18');
 insert into tblAbandonment(abandonment_seq, enrollment_seq, abandonment_date) values (abandonment_seq.nextVal, 1, '21-08-01');
 insert into tblAbandonment(abandonment_seq, enrollment_seq, abandonment_date) values (abandonment_seq.nextVal, 4, '21-02-03');
+
+commit;

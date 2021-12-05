@@ -1,3 +1,7 @@
+
+
+
+
 insert into tblScorePercent (os_seq, sp_seq, exam_per, skill_per, attendance_per)
     values (1, 1, 43, 28, 29);
 insert into tblScorePercent (os_seq, sp_seq, exam_per, skill_per, attendance_per)
@@ -98,3 +102,5 @@ insert into tblScorePercent (os_seq, sp_seq, exam_per, skill_per, attendance_per
     values (49, 49, 41, 30, 29);
 insert into tblScorePercent (os_seq, sp_seq, exam_per, skill_per, attendance_per)
     values (50, 50, 45, 20, 35);
+
+commit;

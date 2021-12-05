@@ -583,3 +583,5 @@ insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (299,3,to_date('20-11-11', 'yy-mm-dd'),'exerd 파일에 사용된 논리/물리명을 바탕으로 용어사전을 자동 생성할 수 있습니다.');
 --행 300
 insert into tblAnswer (question_seq, teacher_seq, answer_regdate, answer_content) values (300,8,to_date('21-05-19', 'yy-mm-dd'),'오라클의 연결 문자를 직접 입력 할 수 있습니다.');
+
+commit;

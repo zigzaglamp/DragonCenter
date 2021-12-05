@@ -1,3 +1,26 @@
+drop table tblbook;
+drop sequence book_seq;
+create table tblBook
+(
+	book_seq number,
+	book_name varchar2(100) not null,
+	book_publisher varchar2(50) not null,
+	book_price number null,
+	subject_seq number not null
+);
+
+create sequence book_seq;
+
+alter table tblBook
+    add constraint tblb_book_seq_pk primary key(book_seq);
+
+alter table tblBook
+    add constraint tblb_subject_seq_fk foreign key(subject_seq) references tblSubject(subject_seq);
+
+
+
+
+
 insert into tblBook (book_seq, book_name, book_publisher, book_price, subject_seq)
     values (book_seq.nextVal, '클라우드 이해하기', '한월북스', 33000, 5);
 insert into tblBook (book_seq, book_name, book_publisher, book_price, subject_seq)
@@ -98,3 +121,5 @@ insert into tblBook (book_seq, book_name, book_publisher, book_price, subject_se
     values (book_seq.nextVal, '기초 JavaScript 개론', '장갑출판사', 38000, 15);
 insert into tblBook (book_seq, book_name, book_publisher, book_price, subject_seq)
     values (book_seq.nextVal, '기초 보안 실습', '(주)장사출판', 22000, 15);
+
+commit;

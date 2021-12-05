@@ -1,3 +1,5 @@
+drop table tblEnrollment cascade constraints purge;
+drop sequence enrollment_seq;
 create table tblEnrollment (
     enrollment_seq number not null, 
     oc_seq number not null,

@@ -12,5 +12,5 @@ select
 from tblinterviewer ir 
     inner join tblinterview i 
         on ir.interviewer_seq = i.interviewer_seq; 
-
+commit;
 select * from vwinterviewinfo;

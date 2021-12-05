@@ -58,4 +58,4 @@ insert into tblHoliday (holiday_seq, holiday_date, holiday_name) values (holiday
 insert into tblHoliday (holiday_seq, holiday_date, holiday_name) values (holiday_seq.nextVal,to_date('21-10-09', 'rr-mm-dd'),'한글날');
 insert into tblHoliday (holiday_seq, holiday_date, holiday_name) values (holiday_seq.nextVal,to_date('21-12-25', 'rr-mm-dd'),'크리스마스');
 
-
+commit;

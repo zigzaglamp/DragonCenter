@@ -1,7 +1,4 @@
---
-drop table tblRecruitInfo;
-drop sequence ri_seq;
---
+
 create table tblRecruitInfo (
     ri_seq number,
     company_seq number not null,
@@ -141,4 +138,4 @@ insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_
 insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,40,8,3000,to_date('18/03/18','rr/mm/dd'),to_date('20/02/23','rr/mm/dd'));
 insert into tblRecruitInfo (ri_seq,company_seq,rc_seq,ri_salary,ri_startdate,ri_enddate) values (ri_seq.nextVal,48,13,3100,to_date('19/02/01','rr/mm/dd'),to_date('19/03/18','rr/mm/dd'));
 
-
+commit;

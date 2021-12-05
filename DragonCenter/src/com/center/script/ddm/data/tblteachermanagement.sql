@@ -1,6 +1,4 @@
-drop sequence tm_seq;  
-create sequence tm_seq;
-delete from tblteachermanagement;    
+
 insert into tblTeacherManagement(tm_seq, oc_seq, teacher_seq, tm_state) values (tm_seq.nextval,  1,  1, '배치'); 
 insert into tblTeacherManagement(tm_seq, oc_seq, teacher_seq, tm_state) values (tm_seq.nextval,  2,  2, '배치');
 insert into tblTeacherManagement(tm_seq, oc_seq, teacher_seq, tm_state) values (tm_seq.nextval,  3,  3, '배치');
@@ -101,3 +99,5 @@ insert into tblTeacherManagement(tm_seq, oc_seq, teacher_seq, tm_state) values (
 insert into tblTeacherManagement(tm_seq, oc_seq, teacher_seq, tm_state) values (tm_seq.nextval, 10, 4, '교체');
 insert into tblTeacherManagement(tm_seq, oc_seq, teacher_seq, tm_state) values (tm_seq.nextval, 15, 9, '배치');
 insert into tblTeacherManagement(tm_seq, oc_seq, teacher_seq, tm_state) values (tm_seq.nextval, 19, 8, '배치');
+
+commit;

@@ -308,3 +308,4 @@ insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.
 insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,38,7);
 --행 150
 insert into tblSubjectTeacher (st_seq, subject_seq, teacher_seq) values (st_seq.nextVal,29,1);
+commit;

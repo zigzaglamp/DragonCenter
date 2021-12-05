@@ -1,4 +1,29 @@
 -- 상담 일지
+drop table  tblCounselLog;
+drop sequence cl_seq;
+
+create table tblCounselLog
+(
+    cl_seq number,
+    enrollment_seq number not null,
+    cl_date date default sysdate not null,
+    cl_content varchar2(300) not null,
+    cc_seq number not null
+);
+
+create sequence cl_seq;
+
+alter table tblCounselLog
+    add constraint tblcl_cl_seq_pk primary key(cl_seq);
+
+alter table tblCounselLog
+    add constraint tblcl_enrollment_seq_fk foreign key(enrollment_seq) references tblEnrollment(enrollment_seq);
+
+alter table tblCounselLog
+    add constraint tblcl_cc_seq_fk foreign key(cc_seq) references tblCounselCategory(cc_seq);
+
+
+
 -- 실제
 insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 1, '19-02-09', 3, '취업연계과정에 대한 전반적인 설명');
 insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 2, '19-02-09', 3, '취업연계과정이 알바도 포함되는건지 질문에 대한 답변');
@@ -304,3 +329,5 @@ insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) v
 insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 36, '21-11-21', 3, 'test288');
 insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 92, '21-03-20', 1, 'test289');
 insert into tblCounselLog(cl_seq, enrollment_seq, cl_date, cc_seq, cl_content) values(cl_seq.nextVal, 193, '21-05-20', 1, 'test290');
+
+commit;

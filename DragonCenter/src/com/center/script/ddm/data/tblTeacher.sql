@@ -8,3 +8,5 @@ insert into tblTeacher (teacher_seq, teacher_name, teacher_ssn, teacher_tel) val
 insert into tblTeacher (teacher_seq, teacher_name, teacher_ssn, teacher_tel) values (teacher_seq.nextVal,'유재인','791107-2724868','010-4854-4900');
 insert into tblTeacher (teacher_seq, teacher_name, teacher_ssn, teacher_tel) values (teacher_seq.nextVal,'표영숙','780913-2946161','010-7553-3233');
 insert into tblTeacher (teacher_seq, teacher_name, teacher_ssn, teacher_tel) values (teacher_seq.nextVal,'설희재','790322-1426621','010-9322-5042');
+
+commit;

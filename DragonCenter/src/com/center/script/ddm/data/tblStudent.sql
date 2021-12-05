@@ -625,3 +625,5 @@ insert into tblStudent (student_seq, student_name, student_ssn, student_tel, stu
 insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum) values (student_seq.nextVal,'오승연','911017-2357523','010-3141-8462',1);
 --행 300
 insert into tblStudent (student_seq, student_name, student_ssn, student_tel, student_coursenum) values (student_seq.nextVal,'한연하','751108-2922915','010-5767-6708',4);
+
+commit;

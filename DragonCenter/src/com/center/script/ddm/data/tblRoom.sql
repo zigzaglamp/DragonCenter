@@ -1,6 +1,4 @@
-select * from tblroom;
 
-drop table tblroom;
 
 -- 강의실 6개
 create table tblRoom
@@ -23,3 +21,5 @@ insert into tblRoom(room_seq, room_name, room_capacity) values (room_seq.nextval
 insert into tblRoom(room_seq, room_name, room_capacity) values (room_seq.nextval, room_seq.nextval || '강의실', 26);
 insert into tblRoom(room_seq, room_name, room_capacity) values (room_seq.nextval, room_seq.nextval || '강의실', 26);
 insert into tblRoom(room_seq, room_name, room_capacity) values (room_seq.nextval, room_seq.nextval || '강의실', 26);
+
+commit;

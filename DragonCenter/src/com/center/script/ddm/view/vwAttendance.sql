@@ -44,3 +44,4 @@ from tblenrollment en
                                                                 on t.teacher_seq = tm.teacher_seq
 where h.holiday_date is null and to_char(ad.attendance_date, 'd') not in ('1', '7')
 order by ad.attendance_date, s.student_name, oc.oc_seq;
+commit;

@@ -1,4 +1,4 @@
-drop table tblJobSeeker;
+
 
 create table tblJobSeeker (
     pm_seq number,
@@ -120,3 +120,4 @@ insert into tblJobSeeker (pm_seq,js_salary,area_seq,rc_seq) values (98,3300,48,1
 insert into tblJobSeeker (pm_seq,js_salary,area_seq,rc_seq) values (99,2400,18,18);
 insert into tblJobSeeker (pm_seq,js_salary,area_seq,rc_seq) values (100,2600,217,20);
 
+commit;

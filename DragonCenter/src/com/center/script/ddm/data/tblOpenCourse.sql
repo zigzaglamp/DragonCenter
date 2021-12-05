@@ -73,3 +73,5 @@ insert into tblOpenCourse(oc_seq, course_seq, oc_startdate, oc_enddate, room_seq
     values (oc_seq.nextval, 5, '2022-01-07', add_months('2022-01-07', (select course_period from tblcourse c where c.course_seq = 5)), 3);
 insert into tblOpenCourse(oc_seq, course_seq, oc_startdate, oc_enddate, room_seq)
     values (oc_seq.nextval, 1, '2021-12-11', add_months('2021-12-11', (select course_period from tblcourse c where c.course_seq = 1)), 4);
+
+commit;

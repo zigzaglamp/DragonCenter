@@ -646,3 +646,5 @@ insert into tblQuestion (question_seq, student_seq, question_date, question_cont
 insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,93,to_date('21-05-15', 'yy-mm-dd'),'++연산자로 시간 출력하기');
 --행 10
 insert into tblQuestion (question_seq, student_seq, question_date, question_content) values (question_seq.nextVal,173,to_date('20-06-23', 'yy-mm-dd'),'pygame mask 충돌');
+
+commit;

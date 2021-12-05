@@ -31,4 +31,4 @@ from tblopensubject os
                inner join tbltest te
                 on te.os_seq = os.os_seq
                  inner join tblcourse c
-                  on oc.course_seq = c.course_seq
+                  on oc.course_seq = c.course_seq;

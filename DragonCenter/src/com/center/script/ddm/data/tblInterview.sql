@@ -322,3 +322,5 @@ insert into tblinterview(interviewer_seq, interview_date, interview_result) valu
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(299, '2020-03-05', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(300, '2021-07-20', 'Y');
 insert into tblinterview(interviewer_seq, interview_date, interview_result) values(302, '2019-09-20', 'Y');
+
+commit;

@@ -32,3 +32,6 @@ from tblstudent s
                                     full outer join tblabandonment ab
                                         on en.enrollment_seq = ab.enrollment_seq
 order by s.student_seq;
+
+
+

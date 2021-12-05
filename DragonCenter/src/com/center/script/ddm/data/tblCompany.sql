@@ -73,3 +73,5 @@ insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (c
 insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)정호이앤씨','010-8683-3111',71);
 insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)링크','010-6204-7649',72);
 insert into tblCompany (company_seq,company_name,company_tel,area_seq) values (company_seq.nextVal,'(주)온웨어','010-5918-8396',34);
+
+commit;

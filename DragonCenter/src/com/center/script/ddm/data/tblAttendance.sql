@@ -10,8 +10,6 @@ create table tblAttendance (
 
 create sequence attendance_seq;
 
-drop sequence attendance_seq;
-
 alter table tblAttendance
     add constraint tbla_attendance_seq_pk primary key(attendance_seq);
     
@@ -1120,3 +1118,5 @@ insert into tblAttendance(attendance_seq, enrollment_seq, attendance_date, atten
 insert into tblAttendance(attendance_seq, enrollment_seq, attendance_date, attendance_entertime, attendance_leavetime) values(attendance_seq.nextVal, 282, to_date('19-04-05','yy-mm-dd'), to_date('19-04-05 09:32:49','yy-mm-dd hh24:mi:ss'), to_date('19-04-05 17:58:04','yy-mm-dd hh24:mi:ss'));
 insert into tblAttendance(attendance_seq, enrollment_seq, attendance_date, attendance_entertime, attendance_leavetime) values(attendance_seq.nextVal, 206, to_date('20-03-24','yy-mm-dd'), to_date('20-03-24 09:02:42','yy-mm-dd hh24:mi:ss'), to_date('20-03-24 17:23:14','yy-mm-dd hh24:mi:ss'));
 insert into tblAttendance(attendance_seq, enrollment_seq, attendance_date, attendance_entertime, attendance_leavetime) values(attendance_seq.nextVal, 251, to_date('21-09-14','yy-mm-dd'), to_date('21-09-14 10:04:09','yy-mm-dd hh24:mi:ss'), to_date('21-09-14 17:11:53','yy-mm-dd hh24:mi:ss'));
+
+commit;

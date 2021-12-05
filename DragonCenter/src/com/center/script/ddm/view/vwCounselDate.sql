@@ -13,3 +13,4 @@ FROM tblCourse c
 					INNER JOIN tblAnswer a ON  q.question_seq = a.question_seq
 						INNER JOIN tblTeacher t ON a.teacher_seq = t.teacher_seq
 							INNER JOIN tblCounselLog cl ON cl.enrollment_seq = e.enrollment_seq;
+commit;

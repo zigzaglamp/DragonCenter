@@ -41,47 +41,47 @@ insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddat
     
     
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 25, 7, '19-09-02', add_months('2019-02-01', (select subject_period from tblSubject s where c.subject_seq = 25))); 
+    values (os_seq.nextVal, 25, 7, '19-09-02', add_months('2019-02-01', (select subject_period from tblSubject s where s.subject_seq = 25))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 11, 7, '19-11-22', add_months('2019-11-01', (select subject_period from tblSubject s where c.subject_seq = 7))); 
+    values (os_seq.nextVal, 11, 7, '19-11-22', add_months('2019-11-01', (select subject_period from tblSubject s where s.subject_seq = 7))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 14, 8, '19-08-11', add_months('2019-08-01', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 14, 8, '19-08-11', add_months('2019-08-01', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 51, 8, '19-10-15', add_months('2019-10-15', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 51, 8, '19-10-15', add_months('2019-10-15', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 32, 9, '19-08-05', add_months('2019-08-05', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 32, 9, '19-08-05', add_months('2019-08-05', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 18, 9, '19-10-11', add_months('2019-10-11', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 18, 9, '19-10-11', add_months('2019-10-11', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 44, 10, '19-09-10', add_months('2019-09-10', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 44, 10, '19-09-10', add_months('2019-09-10', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 36, 10, '19-12-21', add_months('2019-12-21', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 36, 10, '19-12-21', add_months('2019-12-21', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 42, 11, '20-02-09', add_months('2020-02-09', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 42, 11, '20-02-09', add_months('2020-02-09', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 52, 11, '20-04-15', add_months('2020-04-15', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 52, 11, '20-04-15', add_months('2020-04-15', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 19, 12, '20-03-02', add_months('2020-03-02', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 19, 12, '20-03-02', add_months('2020-03-02', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 54, 12, '20-05-18', add_months('2020-05-18', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 54, 12, '20-05-18', add_months('2020-05-18', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 59, 13, '20-03-08', add_months('2020-03-08', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 59, 13, '20-03-08', add_months('2020-03-08', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 1, 13, '20-05-17', add_months('2020-05-17', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 1, 13, '20-05-17', add_months('2020-05-17', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 54, 14, '20-04-11', add_months('2020-04-11', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 54, 14, '20-04-11', add_months('2020-04-11', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 2, 14, '20-06-25', add_months('2020-06-25', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 2, 14, '20-06-25', add_months('2020-06-25', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 9, 14, '20-09-08', add_months('2020-09-08', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 9, 14, '20-09-08', add_months('2020-09-08', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 40, 15, '20-04-13', add_months('2020-04-13', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 40, 15, '20-04-13', add_months('2020-04-13', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 1, 15, '20-06-23', add_months('2020-06-23', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 1, 15, '20-06-23', add_months('2020-06-23', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 7, 16, '20-09-27', add_months('2020-09-27', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 7, 16, '20-09-27', add_months('2020-09-27', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
-    values (os_seq.nextVal, 22, 16, '20-12-06', add_months('2020-12-06', (select subject_period from tblSubject s where c.subject_seq = 5))); 
+    values (os_seq.nextVal, 22, 16, '20-12-06', add_months('2020-12-06', (select subject_period from tblSubject s where s.subject_seq = 5))); 
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
     values (os_seq.nextVal, 19, 17, '20-11-02', '21-01-15');
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
@@ -120,3 +120,5 @@ insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddat
     values (os_seq.nextVal, 2, 25, '21-11-11', '22-01-07');
 insert into tblOpenSubject (os_seq, subject_seq, oc_seq, os_startdate, os_enddate)
     values (os_seq.nextVal, 2, 26, '21-11-07', '22-01-03');
+    
+    commit;

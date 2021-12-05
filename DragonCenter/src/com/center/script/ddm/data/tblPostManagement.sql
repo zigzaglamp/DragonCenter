@@ -319,3 +319,5 @@ insert into tblPostManagement (pm_seq,enrollment_seq,pm_employee,pm_jobseeker) v
 insert into tblPostManagement (pm_seq,enrollment_seq,pm_employee,pm_jobseeker) values (pm_seq.nextVal,298,'N','N');
 insert into tblPostManagement (pm_seq,enrollment_seq,pm_employee,pm_jobseeker) values (pm_seq.nextVal,162,'N','N');
 insert into tblPostManagement (pm_seq,enrollment_seq,pm_employee,pm_jobseeker) values (pm_seq.nextVal,23,'Y','N');
+
+commit;

@@ -1,3 +1,19 @@
+create table tblArea
+(
+    area_seq number,
+    area_name varchar2(300) not null
+);
+
+create sequence area_seq;
+
+alter table tblArea
+    add constraint tblarea_area_seq_pk primary key(area_seq);
+
+alter table tblArea
+    add constraint tblarea_area_name_uq unique (area_name);
+
+
+
 insert into tblArea (area_seq,area_name) values (area_seq.nextVal,'서울특별시 종로구');
 insert into tblArea (area_seq,area_name) values (area_seq.nextVal,'서울특별시 중구');
 insert into tblArea (area_seq,area_name) values (area_seq.nextVal,'서울특별시 용산구');
@@ -227,3 +243,5 @@ insert into tblArea (area_seq,area_name) values (area_seq.nextVal,'경상남도 
 insert into tblArea (area_seq,area_name) values (area_seq.nextVal,'경상남도 합천군');
 insert into tblArea (area_seq,area_name) values (area_seq.nextVal,'제주특별자치도 제주시');
 insert into tblArea (area_seq,area_name) values (area_seq.nextVal,'제주특별자치도 서귀포시');
+
+commit;

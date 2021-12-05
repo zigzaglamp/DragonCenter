@@ -1,3 +1,20 @@
+create table tblRecruitCategory
+(
+    rc_seq number,
+    rc_name varchar2(100) not null
+);
+
+create sequence rc_seq;
+
+alter table tblRecruitCategory
+    add constraint tblrc_rc_seq_pk primary key(rc_seq);
+
+alter table tblRecruitCategory
+    add constraint tblrc_rc_name_uq unique (rc_name);
+
+
+
+
 insert into tblRecruitCategory(rc_seq,rc_name) values (rc_seq.nextVal,'web_designer');
 insert into tblRecruitCategory(rc_seq,rc_name) values (rc_seq.nextVal,'game_designer');
 insert into tblRecruitCategory(rc_seq,rc_name) values (rc_seq.nextVal,'web_planner');
@@ -18,3 +35,5 @@ insert into tblRecruitCategory(rc_seq,rc_name) values (rc_seq.nextVal,'security_
 insert into tblRecruitCategory(rc_seq,rc_name) values (rc_seq.nextVal,'machine_learning_engineer');
 insert into tblRecruitCategory(rc_seq,rc_name) values (rc_seq.nextVal,'full_stack_developer');
 insert into tblRecruitCategory(rc_seq,rc_name) values (rc_seq.nextVal,'python_developer');
+
+commit;

@@ -1,4 +1,18 @@
 -- 관리자
+create table tblAdmin (
+	admin_seq NUMBER,
+	admin_name varchar2(20) NOT NULL,
+	admin_ssn varchar2(14) NOT NULL,
+	admin_tel varchar2(20) NOT NULL
+);
+
+create sequence admin_seq;
+
+alter table tblAdmin
+    add constraint tbladmin_admin_seq_pk primary key(admin_seq);
+
+alter table tblAdmin
+    add constraint tbladmin_admin_ssn_uq UNIQUE (admin_seq);
 
 
 -- 실제, 더미
