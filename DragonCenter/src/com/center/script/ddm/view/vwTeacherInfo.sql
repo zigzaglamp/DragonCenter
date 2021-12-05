@@ -1,17 +1,18 @@
 /* 교사 정보 */
 
-create view vwTeacherInfo
+create or replace view vwTeacherSchedule
 as
 select
-    tt.teacher_name as "교사명",
-    tc.course_name as "과정명",
-    toc.oc_startdate as "시작일",
-    toc.oc_enddate as "종료일",
+    tt.teacher_seq as teacher_seq,
+    tt.teacher_name as teacher_name,
+    tc.course_name as course_name,
+    toc.oc_startdate as oc_startdate,
+    toc.oc_enddate as oc_enddate,
     case
         when toc.oc_startdate > sysdate then '예정'
         when toc.oc_enddate >= sysdate then '진행'
         when toc.oc_enddate < sysdate then '종료'
-    end as "상태"
+    end as state
 from tblOpenCourse toc inner join tblCourse tc
     on (toc.course_seq = tc.course_seq) inner join tblTeacherManagement ttm
     on (ttm.oc_seq = toc.oc_seq) inner join tblTeacher tt
