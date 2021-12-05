@@ -4,18 +4,18 @@
 -- 프로시저(교사 -> 교사 평가 조회)
 create or replace procedure procEvaluationCheck
 (
-    psseq number,
-    pcseq number,
+    ptseq number, -- 교사 번호
+    pcseq number, -- 과정 번호
     presult out sys_refcursor
 )
 is
 begin
     open presult
-        for select * from vwteacherevaluation where "교사번호" = psseq and "과정번호" = pcseq;
+        for select * from vwteacherevaluation where "교사번호" = ptseq and "과정번호" = pcseq;
         
 exception
     when others then
-        dbms_output.put_line('값을 잘못 입력하셨습니다'); 
+        dbms_output.put_line('잘못된 값입니다'); 
 
 end procEvaluationCheck;
 
@@ -45,9 +45,15 @@ begin
         || chr(9) || chr(9) || chr(9) || chr(9) || vrow."근무태도" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."학생지원" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."총점" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."후기");
         dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
     end loop;
+    
+exception
+    when others then
+        dbms_output.put_line('잘못된 값입니다');
+    
 end;  
 
--- #테스트(교사 평점 조회)
+-- #테스트(교사 평균 점수 조회)
+-- 1번 교사, 1번 과정 조회
 select
     t.teacher_name as 교사명,
     c.course_name as 과정명,
@@ -67,3 +73,7 @@ from tblteacherevaluation te
                                         on c.course_seq = oc.course_seq
 where oc.oc_enddate < sysdate and t.teacher_seq = 1 and oc.oc_seq = 1
 group by t.teacher_name, c.course_name, oc.oc_startdate, oc.oc_enddate;
+
+
+
+
