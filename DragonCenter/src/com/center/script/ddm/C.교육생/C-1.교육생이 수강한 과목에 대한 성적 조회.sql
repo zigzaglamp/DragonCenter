@@ -1,6 +1,7 @@
+--------------------------------------------------------------------------------
 -- C-1. 교육생이 수강한 과목에 대한 성적 조회
 -- C-1.1) 과목번호, 과목명, 과목기간, 교재명, 교사명, 배점정보, 성적정보, 과목별 시험날짜, 시험문제 출력
--- B-2.3) 중복
+--------------------------------------------------------------------------------
 select
     distinct s.subject_name as "개설과목명",
     s.subject_period as "개설과목기간",
@@ -27,10 +28,11 @@ from tblopensubject os
          inner join tblteacher t
           on tm.teacher_seq = t.teacher_seq
            inner join tblscore sc
-            on os.oc_seq = sc.os_seq
+            on os.os_seq = sc.os_seq
              inner join tblScorePercent sp
               on sp.os_seq = os.oc_seq
                inner join tbltest te
                 on te.os_seq = os.os_seq
                  inner join tblcourse c
                   on oc.course_seq = c.course_seq
+--------------------------------------------------------------------------------
