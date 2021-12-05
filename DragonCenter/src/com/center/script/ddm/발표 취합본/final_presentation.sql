@@ -20,10 +20,9 @@ begin
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
-        dbms_output.put_line('|' || to_char(vrow.course_seq, '99') || '|  ' 
-                                || rpad(vrow.course_name || '(' 
-                                || vrow.course_period || '개월)', 69) || '|');
-        dbms_output.put_line('-----------------------------------------------------------------------------');
+        dbms_output.put_line('| ' || to_char(vrow.course_seq, '00') || '|' || vrow.course_name || chr(9)
+                                || '|' || to_char(vrow.course_period, '0.0') || '개월|');
+        dbms_output.put_line('--------------------------------------------------');
     end loop;
 end;
 
@@ -35,9 +34,10 @@ create or replace procedure procGetCourse(
 is
 begin
     dbms_output.put_line('[과정 정보 조회]');
-    dbms_output.put_line('-----------------------------------------------------------------------------');
-    dbms_output.put_line('|No.|' || lpad('과정명(기간)', 39) || lpad('|',33));
-    dbms_output.put_line('-----------------------------------------------------------------------------');
+        dbms_output.put_line('--------------------------------------------------');
+    dbms_output.put_line('|No.|' || lpad('과정명', 43) || lpad('|', 39) 
+                            || '   기간   |');
+        dbms_output.put_line('--------------------------------------------------');
     open presult
         for select * from tblCourse order by course_seq;
 end procGetCourse;
@@ -202,21 +202,15 @@ end procDeleteCourse;
 declare
     vresult sys_refcursor;
     vrow vwOpenCourse%rowtype;
-    vname vwOpenCourse.course_name%type;
 begin
     procGetOpenCourse(vresult);
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
-        if length(vrow.course_name) > 27 then 
-            vname := rpad(vrow.course_name, 40) || '...';
-        else
-            vname := vrow.course_name;
-        end if;
-        dbms_output.put_line('|' || to_char(vrow.oc_seq, '99') || '|' || rpad(vname, 44) 
+        dbms_output.put_line('| ' || to_char(vrow.oc_seq, '00') || '|' || vrow.course_name || chr(9)
                                 || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
                                 || '|' || vrow.room_name || '|' || vrow.room_capacity || '명|');
-        dbms_output.put_line('---------------------------------------------------------------------------------');
+        dbms_output.put_line('--------------------------------------------------------------------');
     end loop;
 end;
 
@@ -228,11 +222,11 @@ create or replace procedure procGetOpenCourse(
 is
 begin
     dbms_output.put_line('[개설 과정 조회]');
-    dbms_output.put_line('---------------------------------------------------------------------------------');
-    dbms_output.put_line('|No.|' || lpad('과정명', 24) || lpad('|', 21) 
-                            || lpad('기간', 11) || lpad('|', 7) 
-                            || ' 강의실' || '|' || '수용' || '|');
-    dbms_output.put_line('---------------------------------------------------------------------------------');
+    dbms_output.put_line('--------------------------------------------------------------------');
+    dbms_output.put_line('|No.|' || lpad('과정명', 43) || lpad('|', 39) 
+                            || lpad('기간', 17) || lpad('|', 13) 
+                            || '  강의실|수용|');
+    dbms_output.put_line('--------------------------------------------------------------------');
     open presult
         for select * from vwOpenCourse
             order by oc_seq;
@@ -498,17 +492,12 @@ begin
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
-        if length(vrow.course_name) > 20 then 
-            vname := rpad(vrow.course_name, 30) || '...';
-        else
-            vname := vrow.course_name;
-        end if;
-        dbms_output.put_line('|' || to_char(vrow.oc_seq, '99') || '|' || rpad(vname, 33) 
+        dbms_output.put_line('| ' || to_char(vrow.oc_seq, '00') || '|' || vrow.course_name || chr(9)
                                 || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
                                 || '|' || vrow.room_name || '|' 
-                                || to_char(vrow.num, '99') || '명|    '
-                                || vrow.regsub || '    |');
-        dbms_output.put_line('---------------------------------------------------------------------------------');
+                                || to_char(vrow.num, '00') || '명|      '
+                                || vrow.regsub || '     |');
+        dbms_output.put_line('----------------------------------------------------------------------------');
     end loop;
 end;
 
@@ -520,15 +509,17 @@ create or replace procedure procGetOpenCourseInfo(
 is
 begin
     dbms_output.put_line('[개설 과정 상세 조회]');
-    dbms_output.put_line('---------------------------------------------------------------------------------');
-    dbms_output.put_line('|No.|' || lpad('과정명', 18) || lpad('|', 16) 
-                            || lpad('기간', 11) || lpad('|', 7) 
-                            || ' 강의실| 등록|과목 개설|');
-    dbms_output.put_line('---------------------------------------------------------------------------------');
+    dbms_output.put_line('----------------------------------------------------------------------------');
+    dbms_output.put_line('|No.|' || lpad('과정명', 43) || lpad('|', 39) 
+                            || lpad('기간', 17) || lpad('|', 13) 
+                            || ' 강의실|  등록|과목 개설|');
+    dbms_output.put_line('----------------------------------------------------------------------------');
     open presult
         for select * from vwOpenCourse
             order by oc_seq;
 end procGetOpenCourseInfo;
+
+
 --------------------------------------------------------------------------------
 
 ------------------------------개설 과목 입력------------------------------------
