@@ -22,10 +22,9 @@ begin
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
-        dbms_output.put_line('|' || to_char(vrow.course_seq, '99') || '|  ' 
-                                || rpad(vrow.course_name || '(' 
-                                || vrow.course_period || '개월)', 69) || '|');
-        dbms_output.put_line('-----------------------------------------------------------------------------');
+        dbms_output.put_line('| ' || to_char(vrow.course_seq, '00') || '|' || vrow.course_name || chr(9)
+                                || '|' || to_char(vrow.course_period, '0.0') || '개월|');
+        dbms_output.put_line('--------------------------------------------------');
     end loop;
 end;
 
@@ -37,9 +36,10 @@ create or replace procedure procGetCourse(
 is
 begin
     dbms_output.put_line('[과정 정보 조회]');
-    dbms_output.put_line('-----------------------------------------------------------------------------');
-    dbms_output.put_line('|No.|' || lpad('과정명(기간)', 39) || lpad('|',33));
-    dbms_output.put_line('-----------------------------------------------------------------------------');
+        dbms_output.put_line('--------------------------------------------------');
+    dbms_output.put_line('|No.|' || lpad('과정명', 43) || lpad('|', 39) 
+                            || '   기간   |');
+        dbms_output.put_line('--------------------------------------------------');
     open presult
         for select * from tblCourse order by course_seq;
 end procGetCourse;
