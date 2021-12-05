@@ -16,9 +16,16 @@ begin
     insert into tblstudent values(student_seq.nextval, pname, pssn, ptel, pseq);
 
     open presult
-        for select * from tblstudent;
+        for select * from tblstudent order by student_seq;
+        
+exception
+    when others then
+        dbms_output.put_line('잘못된 값입니다');            
     
 end procAddStudent;
+
+-- #합격자 조회
+select ir.interviewer_name as 합격자 from tblinterviewer ir inner join tblinterview i on i.interviewer_seq = ir.interviewer_seq where upper(i.interview_result) = upper('Y') order by ir.interviewer_seq desc; 
 
 -- #테스트(교육생 추가)
 declare
@@ -39,13 +46,22 @@ begin
         then procAddStudent(vname, vssn, vtel, vseq, vresult);
     end if;
     
+    dbms_output.put_line(chr(10));
+    dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
+    dbms_output.put_line('학생번호' || chr(9) || chr(9) || '학생명' || chr(9)|| chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '주민등록번호' || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '연락처' || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '수강횟수');
+    dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
+    
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;    
         
-        dbms_output.put_line(vrow.student_seq || vrow.student_name || chr(9) || vrow.student_ssn || vrow.student_tel || vrow.student_coursenum);
-        
+        dbms_output.put_line(chr(9) || lpad(vrow.student_seq, 3, ' ') || chr(9) || chr(9) || chr(9) || rpad(vrow.student_name, 8, ' ') || chr(9) || chr(9) || chr(9) || chr(9) || vrow.student_ssn || chr(9) || chr(9) || chr(9) || vrow.student_tel || chr(9) || chr(9) || chr(9) || chr(9) || vrow.student_coursenum);
+        dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
     end loop;
+    
+exception
+    when others then
+        dbms_output.put_line('잘못된 값입니다');        
     
 end;
 
@@ -56,15 +72,15 @@ set
     student_name = '김경아',
     student_tel = '010-1234-5678',
     student_coursenum = 2
-where student_seq = 3;
+where student_seq = 3;      
 
 -- 교육생 삭제
-delete tblstudent where student_seq = 3;
+delete from tblstudent where student_seq = 3;
 
 
 
 -- A-5-2 전체 교육생 조회
--- #전체 교육생 조회
+-- 전체 교육생 조회
 select distinct "학생번호", "학생명", substr("학생 주민등록번호", 8) as "학생 주민등록번호", "학생 연락처", "학생 수강횟수" from vwstudent order by "학생번호";
 
 
@@ -92,12 +108,12 @@ from vwstudent where "학생번호" = 3;
 
 
 -- A-5-4 교육생 중도탈락 처리
--- #교육생 중도탈락 처리
+-- 교육생 중도탈락 처리
 
--- #테스트 - EX) 2019년 5월 1일에 3번 교육생이 중도 탈락
+-- 테스트 - EX) 2019년 5월 1일에 3번 교육생이 중도 탈락
 insert into tblabandonment(abandonment_seq, enrollment_seq, abandonment_date) values (abandonment_seq.nextval, 3, '19-05-01');
 
--- #테스트 - 3번 교육생의 중도 탈락 정보 확인
+-- 테스트 - 3번 교육생의 중도 탈락 정보 확인
 select "학생번호", "학생명", "과정명", "과정시작일", "과정종료일", "탈락일" from vwstudent where "학생 수강신청 번호" = 3;
 
 

@@ -47,7 +47,7 @@ exception
 
 end procAdminAttendance;
 
--- #테스트(관리자 -> 학생 출결 조회)
+-- 테스트(관리자 -> 학생 출결 조회)
 declare
     vcseq number := 3; -- 과정 번호
     vsseq number := 3; -- 학생 번호
