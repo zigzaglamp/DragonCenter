@@ -48,7 +48,7 @@ exception
 
 end procTeacherAttendance;
 
--- #테스트(교사 -> 학생 출결 조회)
+-- 테스트(교사 -> 학생 출결 조회)
 declare
     vtseq number := 1; -- 교사 번호
     vcseq number := 3; -- 과정 번호

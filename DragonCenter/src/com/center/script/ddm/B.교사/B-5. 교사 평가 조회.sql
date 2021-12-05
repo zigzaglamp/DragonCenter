@@ -31,18 +31,18 @@ begin
     dbms_output.put_line(chr(10));
     dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
     dbms_output.put_line('교사이름' || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) 
-                                        || chr(9) || '과정명' || chr(9)|| chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '과정종료일' || chr(9) || chr(9) 
+                                        || chr(9) || '과정명' || chr(9)|| chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '과정종료일' || chr(9) || chr(9) 
                                         || '수업준비' || chr(9) || '수업실행' || chr(9) || chr(9) || '전문성' || chr(9) || chr(9)
-                                        || '태도' || chr(9) || chr(9) || '학생지원' || chr(9) || chr(9) || chr(9) || '총점' || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '기타의견');
+                                        || lpad('태도', 6, ' ') || chr(9) || chr(9) || '학생지원' || chr(9) || chr(9) || chr(9) || '총점' || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '기타의견');
     dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
     
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;    
         
-        dbms_output.put_line(vrow."교사이름" || chr(9) || chr(9) || chr(9) || vrow."과정명" || chr(9) || chr(9) || vrow."과정종료일" || chr(9) || chr(9) || chr(9) || chr(9) 
+        dbms_output.put_line(lpad(vrow."교사이름", 8, ' ') || chr(9) || chr(9) || chr(9) || vrow."과정명" || chr(9) || chr(9) || vrow."과정종료일" || chr(9) || chr(9) || chr(9) || chr(9) 
         || vrow."수업준비" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."수업실행" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."전문성" 
-        || chr(9) || chr(9) || chr(9) || chr(9) || vrow."근무태도" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."학생지원" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."총점" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."후기");
+        || chr(9) || chr(9) || chr(9) || chr(9) || vrow."근무태도" || chr(9) || chr(9) || chr(9) || chr(9) || lpad(vrow."학생지원", 2, ' ') || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || vrow."총점" || chr(9) || chr(9) || chr(9) || chr(9) || vrow."후기");
         dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
     end loop;
     
