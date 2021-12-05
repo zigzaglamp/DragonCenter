@@ -44,8 +44,8 @@ end procStudentAttendance;
 declare
     vseq number := 3; -- 학생 번호
     vyear number := 2019; -- 년
-    vmonth number := 2; -- 월
-    vday number := 1; -- 일
+    vmonth number := 0; -- 월
+    vday number := 0; -- 일
     vresult sys_refcursor;
     vrow vwstudentattendance%rowtype;
 begin
@@ -53,18 +53,18 @@ begin
     procstudentattendance(vseq, vyear, vmonth, vday, vresult);
     
     dbms_output.put_line(chr(10));
-    dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
-    dbms_output.put_line(chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '과정명' 
+    dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
+    dbms_output.put_line(chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '과정명' || chr(9)
                                         || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || chr(9) || '출결일' || chr(9)|| chr(9) 
                                         || '입실시간' || chr(9) || '입실상태' || chr(9) || '퇴실시간' || chr(9) || '퇴실상태' || chr(9) || chr(9) || chr(9));
-    dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
+    dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
     
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
         
-        dbms_output.put_line(vrow."과정명" || chr(9) || vrow."출결일" || chr(9) || vrow."입실시간" || chr(9) || vrow."입실상태" || chr(9) || chr(9) || vrow."퇴실시간" || chr(9) || vrow."퇴실상태");
-        dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
+        dbms_output.put_line(vrow."과정명" || chr(9) || chr(9) || vrow."출결일" || chr(9) || vrow."입실시간" || chr(9) || vrow."입실상태" || chr(9) || chr(9) || vrow."퇴실시간" || chr(9) || vrow."퇴실상태");
+        dbms_output.put_line('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
         
     end loop;
     
