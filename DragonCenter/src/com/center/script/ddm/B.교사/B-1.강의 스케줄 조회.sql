@@ -23,15 +23,10 @@ begin
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
-        if length(vrow.course_name) > 25 then 
-            vname := rpad(vrow.course_name, 51) || '...';
-        else
-            vname := vrow.course_name;
-        end if;
-        dbms_output.put_line('|' || rpad(vname, 54) 
+        dbms_output.put_line('|' || chr(9) || vrow.course_name || chr(9)
                                 || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
                                 || '|' || vrow.state || '|');
-        dbms_output.put_line('-------------------------------------------------------------------------------');
+        dbms_output.put_line('------------------------------------------------------------');
     end loop;
 end;
 
@@ -49,12 +44,12 @@ begin
     from tblTeacher
     where teacher_seq = pseq;
     
-    dbms_output.put_line('[' || vc.teacher_name || ' 선생님 강의 스케줄 조회]');
-    dbms_output.put_line('-------------------------------------------------------------------------------');
-    dbms_output.put_line('|' || lpad('과정명', 29) || lpad('|', 26) 
-                            || lpad('기간', 11) || lpad('|', 7) 
+    dbms_output.put_line('[ ' || vc.teacher_name || ' 선생님 강의 스케줄 조회 ]');
+        dbms_output.put_line('------------------------------------------------------------');
+        dbms_output.put_line('|' || lpad('과정명', 43) || lpad('|', 41) 
+                            || lpad('기간', 17) || lpad('|', 13) 
                             || '상태|');
-    dbms_output.put_line('-------------------------------------------------------------------------------');
+        dbms_output.put_line('------------------------------------------------------------');
     
     open presult
         for select * from vwTeacherSchedule
