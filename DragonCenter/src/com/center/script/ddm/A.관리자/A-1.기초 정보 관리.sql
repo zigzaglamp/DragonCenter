@@ -108,20 +108,25 @@ create or replace procedure procUpdateCourse (
     pperiod number    
 )
 is
+    vinfo varchar2(1000);
 begin
     dbms_output.put_line('[과정 정보 수정]'); 
+
+    vinfo := 'No.' || pseq || ' ' || pname 
+                || '(' || to_char(pperiod, '0.0') || '개월)' || chr(10); 
                             
-    if
-    
+    if to_char(pperiod, '0.0') not in ('5.5', '6', '7') then
+        dbms_output.put_line(vinfo || '실패; 기간 부적합');
+    else 
+        update tblCourse set course_name = pname, 
+                             course_period = pperiod
+        where course_seq = pseq;
+        
+        dbms_output.put_line('성공!');    
     end if;
-    update tblCourse set course_name = pname, 
-                         course_period = pperiod
-    where course_seq = pseq;
-    
-    dbms_output.put_line('성공!');
 exception
     when others then
-        dbms_output.put_line('실패; ' || sqlerrm);
+        dbms_output.put_line(vinfo || '실패; ' || sqlerrm);
 end procUpdateCourse;
 
 
@@ -130,7 +135,7 @@ end procUpdateCourse;
 --------------------------------------------------------------------------------
 begin
 --    procDeleteCourse(번호);
-    procDeleteCourse(62);
+    procDeleteCourse(3);
 end;
 
 
