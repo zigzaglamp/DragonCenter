@@ -19,17 +19,14 @@ declare
 begin
     procGetCourse(vresult);
     
-    dbms_output.put_line('-----------------------------------------------------------------------------');
-    dbms_output.put_line('|No.|' || lpad('과정명(기간)', 39) || lpad('|',33));
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
-        dbms_output.put_line('-----------------------------------------------------------------------------');
         dbms_output.put_line('|' || to_char(vrow.course_seq, '99') || '|  ' 
                                 || rpad(vrow.course_name || '(' 
                                 || vrow.course_period || '개월)', 69) || '|');
+        dbms_output.put_line('-----------------------------------------------------------------------------');
     end loop;
-    dbms_output.put_line('-----------------------------------------------------------------------------');
 end;
 
 
@@ -39,6 +36,10 @@ create or replace procedure procGetCourse(
 )
 is
 begin
+    dbms_output.put_line('[과정 정보 조회]');
+    dbms_output.put_line('-----------------------------------------------------------------------------');
+    dbms_output.put_line('|No.|' || lpad('과정명(기간)', 39) || lpad('|',33));
+    dbms_output.put_line('-----------------------------------------------------------------------------');
     open presult
         for select * from tblCourse order by course_seq;
 end procGetCourse;
@@ -49,7 +50,7 @@ end procGetCourse;
 --------------------------------------------------------------------------------
 begin
 --    procAddCourse(과정명, 기간);
-    procAddCourse('짱 쉬운 개발자 과정', 5.5);
+    procAddCourse('짱 쉬운 개발자 과정', 5);
 end;
 
 
@@ -59,17 +60,20 @@ create or replace procedure procAddCourse (
     pperiod number
 )
 is
+    vinfo varchar2(300);
 begin
-    insert into tblCourse (course_seq, course_name, course_period) 
-        values (course_seq.nextVal, pname, pperiod);
-        
-    dbms_output.put_line('과정 등록 성공: No.' || course_seq.currVal || ' ' 
+    dbms_output.put_line('[과정 정보 등록]' || chr(10) 
+                            || 'No.' || course_seq.nextVal || ' ' 
                             || pname || '(' || pperiod || '개월)');
+    
+    insert into tblCourse (course_seq, course_name, course_period) 
+        values (course_seq.currVal, pname, pperiod);
+        
+    dbms_output.put_line('성공!');
+    
 exception
     when others then
-        dbms_output.put_line('과정 등록 실패: No.' || course_seq.currVal || ' ' 
-                                || pname || '(' || pperiod || '개월)'); 
-        dbms_output.put_line(sqlerrm);
+        dbms_output.put_line('실패; ' || sqlerrm);
 end procAddCourse;
 
 
@@ -78,7 +82,22 @@ end procAddCourse;
 --------------------------------------------------------------------------------
 begin
 --    procUpdateCourse(번호, 과정명, 기간);
-    procUpdateCourse(56, '약간 어려운 개발자 과정', 5.5);
+    procUpdateCourse(62, '약간 어려운 개발자 과정', 4);
+end;
+
+
+    /* 과정 수정 트리거 */
+create or replace trigger trgUpdateCourse
+    after
+    update on tblCourse
+    for each row
+begin 
+    dbms_output.put_line('수정 전: No.' || :old.course_seq || ' ' 
+                            || :old.course_name || '(' 
+                            || to_char(:old.course_period, '0.0') || '개월)');
+    dbms_output.put_line('수정 후: No.' || :new.course_seq || ' ' 
+                            || :new.course_name || '(' 
+                            || to_char(:new.course_period, '0.0') || '개월)');
 end;
 
 
@@ -90,52 +109,53 @@ create or replace procedure procUpdateCourse (
 )
 is
 begin
+    dbms_output.put_line('[과정 정보 수정]'); 
+                            
+    if
+    
+    end if;
     update tblCourse set course_name = pname, 
                          course_period = pperiod
     where course_seq = pseq;
     
-    dbms_output.put_line('과정 변경 성공: No.' || pseq || ' ' 
-                            || pname || '(' || pperiod || '개월)');
+    dbms_output.put_line('성공!');
 exception
     when others then
-        dbms_output.put_line('과정 변경 실패: No.' || pseq || ' '
-                                || pname || '(' || pperiod || '개월)');
-        dbms_output.put_line(sqlerrm);
+        dbms_output.put_line('실패; ' || sqlerrm);
 end procUpdateCourse;
 
 
 --------------------------------------------------------------------------------
 -- 4. 과정 정보 삭제; 해당 번호의 과정 삭제
 --------------------------------------------------------------------------------
-declare
-    vc tblCourse%rowtype;
 begin
---    procDeleteCourse(번호, vc.course_name, vc.course_period);
-    procDeleteCourse(56, vc.course_name, vc.course_period);
+--    procDeleteCourse(번호);
+    procDeleteCourse(62);
 end;
 
 
     /* 과정 삭제 프로시저 */
 create or replace procedure procDeleteCourse (
-    pseq number,
-    pname out varchar2,
-    pperiod out number    
+    pseq number
 )
 is
+    vc tblCourse%rowtype;
 begin
-    select course_name, course_period 
-        into pname, pperiod from tblCourse 
+    select *
+        into vc from tblCourse 
     where course_seq = pseq;
+    
+    dbms_output.put_line('[과정 정보 삭제]' || chr(10) 
+                            || 'No.' || pseq || ' ' || vc.course_name 
+                            || '(' || vc.course_period || '개월)');    
+    
     delete from tblCourse 
     where course_seq = pseq;
     
-    dbms_output.put_line('과정 삭제 성공: No.' || pseq || ' ' 
-                            || pname || '(' || pperiod || '개월)');
+    dbms_output.put_line('성공!');
 exception
     when others then
-        dbms_output.put_line('과정 삭제 실패: No.' || pseq || ' '                
-                                || pname || '(' || pperiod || '개월)');
-        dbms_output.put_line(sqlerrm);
+        dbms_output.put_line('실패; ' || sqlerrm);
 end procDeleteCourse;
 
 
@@ -209,7 +229,6 @@ exception
                                 || pname || '(' || to_char(pperiod, '0.0') || '개월)');
         dbms_output.put_line(sqlerrm);
 end procUpdateSubject;
-
 
 --------------------------------------------------------------------------------
 -- 4. 과목 정보 삭제; 해당 과목 번호의 과목 삭제

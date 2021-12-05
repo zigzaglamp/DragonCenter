@@ -64,7 +64,7 @@ end;
 
 
     /* 개설 가능한 날짜 함수 */
-create or replace function fnValidDate (
+create or replace function fnIsValidDate (
     pdate date
 ) return varchar2
 is
@@ -85,11 +85,11 @@ begin
     end if;
     
     return vcheck;
-end fnValidDate;
+end fnIsValidDate;
 
 
     /* 개설 가능한 강의실 함수 */
-create or replace function fnValidRoom (
+create or replace function fnIsValidRoom (
     pseq number,
     pstartdate date
 ) return varchar2
@@ -109,18 +109,18 @@ begin
     end if;
     
     return vcheck;
-end fnValidRoom;
+end fnIsValidRoom;
 
 
     /* 개설 과정 종료일 계산 함수 */
-create or replace function fnEnddate (
+create or replace function fnIsEnddate (
     pdate date,
     pperiod number
 ) return date
 is
 begin
     return add_months(pdate, pperiod);
-end fnEnddate;
+end fnIsEnddate;
 
 
     /* 개설 과정 등록 프로시저 */
@@ -140,18 +140,18 @@ begin
     select * into vr from tblRoom
     where room_seq = prseq;
     
-    venddate := fnEnddate(pstartdate, vc.course_period);
+    venddate := fnIsEnddate(pstartdate, vc.course_period);
     
     dbms_output.put_line('[개설 과정 등록]' || chr(10) 
                             || 'No.' || oc_seq.nextVal || ' ' || vc.course_name 
                             || '(' || pstartdate || ' ~ ' || venddate 
                             || ', ' || vr.room_name || ')');
 
-    if fnValidDate(pstartdate) = 'N' then
+    if fnIsValidDate(pstartdate) = 'N' then
         dbms_output.put_line('실패; 시작일 부적합');
-    elsif fnValidDate(venddate) = 'N' then
+    elsif fnIsValidDate(venddate) = 'N' then
         dbms_output.put_line('실패; 종료일 부적합');
-    elsif fnvalidRoom(prseq, pstartdate) = 'N' then
+    elsif fnIsValidRoom(prseq, pstartdate) = 'N' then
         dbms_output.put_line('실패; 강의실 부적합');
     else
         insert into tblOpenCourse (oc_seq, course_seq, oc_startdate, oc_enddate, room_seq) 
@@ -174,6 +174,55 @@ begin
     procUpdateOpenCourse(50, 3, '21-12-13', '22-02-03', 2);
 end;
 
+
+    /* 과목명 반환 함수 */
+create or replace function fnGetCourseName (
+    pseq number
+) return varchar2
+is
+    vname tblCourse.course_name%type;
+begin
+    select course_name 
+        into vname 
+    from tblCourse
+    where course_seq = pseq;
+    
+    return vname;
+end fnGetCourseName;
+
+
+    /* 강의실명 반환 함수 */
+create or replace function fnGetRoomName (
+    pseq number
+) return varchar2
+is
+    vname tblRoom.room_name%type;
+begin
+    select room_name 
+        into vname 
+    from tblRoom
+    where room_seq = pseq;
+    
+    return vname;
+end fnGetRoomName;
+    
+    
+    /* 개설 과정 수정 트리거 */
+create or replace trigger trgUpdateOpenCourse
+    after
+    update on tblOpenCourse
+    for each row
+begin 
+    dbms_output.put_line('수정 전: No.' || :old.oc_seq || ' ' 
+                            || fnGetCourseName(:old.course_seq)
+                            || '(' || :old.oc_startdate || ' ~ ' || :old.oc_enddate 
+                            || ', ' || fnGetRoomName(:old.room_seq) || ')');
+    dbms_output.put_line('수정 후: No.' || :new.oc_seq || ' ' 
+                            || fnGetCourseName(:new.course_seq)
+                            || '(' || :new.oc_startdate || ' ~ ' || :new.oc_enddate 
+                            || ', ' || fnGetRoomName(:new.room_seq) || ')');
+end;
+
     
     /*  개설 과정 수정 프로시저 */
 create or replace procedure procUpdateOpenCourse (
@@ -184,43 +233,21 @@ create or replace procedure procUpdateOpenCourse (
     prseq number
 )
 is
-    voc tblOpenCourse%rowtype;
-    vcbefore tblCourse%rowtype;
-    vrbefore tblRoom%rowtype;
-    vc tblCourse%rowtype;
-    vr tblRoom%rowtype;
+    vinfo varchar2(1000);
 begin
-    select * into voc from tblOpenCourse
-    where oc_seq = pseq;
-
-    select * into vcbefore from tblCourse
-    where course_seq = voc.course_seq;
-
-    select * into vrbefore from tblRoom
-    where room_seq = voc.room_seq;
-
-    dbms_output.put_line('[개설 과정 수정]' || chr(10) 
-                            || 'No.' || pseq || ' ' || vcbefore.course_name 
-                            || '(' || voc.oc_startdate || ' ~ ' || voc.oc_enddate 
-                            || ', ' || vrbefore.room_name || ')');
-
-    select * into vc from tblCourse
-    where course_seq = pcseq;
-
-    select * into vr from tblRoom
-    where room_seq = prseq;
+    dbms_output.put_line('[개설 과정 수정]');
     
-    dbms_output.put_line('-> No.' || pseq || ' ' || vc.course_name 
-                            || '(' || pstartdate || ' ~ ' || penddate 
-                            || ', ' || vr.room_name || ')');
+    vinfo := 'No.' || pseq || ' ' || fnGetCourseName(pcseq)
+                || '(' || pstartdate || ' ~ ' || penddate 
+                || ', ' || fnGetRoomName(prseq) || ')' || chr(10); 
     
     if fnValidDate(pstartdate) = 'N' then
-        dbms_output.put_line('실패; 시작일 부적합');
+        dbms_output.put_line(vinfo || '실패; 시작일 부적합');
     elsif fnValidDate(penddate) = 'N' 
         or penddate < pstartdate then
-        dbms_output.put_line('실패; 종료일 부적합');
+        dbms_output.put_line(vinfo || '실패; 종료일 부적합');
     elsif fnvalidRoom(prseq, pstartdate) = 'N' then
-        dbms_output.put_line('실패; 강의실 부적합');
+        dbms_output.put_line(vinfo || '실패; 강의실 부적합');
     else 
         update tblOpenCourse set course_seq = pcseq, 
                                  oc_startdate = pstartdate,
@@ -233,7 +260,7 @@ begin
     
 exception
     when others then
-        dbms_output.put_line('실패; ' || sqlerrm);
+        dbms_output.put_line(vinfo || '실패; ' || sqlerrm);
 end procUpdateOpenCourse;
 
 
@@ -242,7 +269,7 @@ end procUpdateOpenCourse;
 --------------------------------------------------------------------------------
 begin
 --    procDeleteOpenCourse(번호);
-    procDeleteOpenCourse(51);
+    procDeleteOpenCourse(52);
 end;
 
 
@@ -252,23 +279,14 @@ create or replace procedure procDeleteOpenCourse (
 )
 is
     voc tblOpenCourse%rowtype;
-    vc tblCourse%rowtype;
-    vr tblRoom%rowtype;
-    venddate date;
 begin
     select * into voc from tblOpenCourse
     where oc_seq = pseq;
     
-    select * into vc from tblCourse
-    where course_seq = voc.course_seq;
-
-    select * into vr from tblRoom
-    where room_seq = voc.room_seq;
-    
     dbms_output.put_line('[개설 과정 삭제]' || chr(10) 
-                            || 'No.' || pseq || ' ' || vc.course_name 
+                            || 'No.' || pseq || ' ' || fnGetCourseName(voc.course_seq)
                             || '(' || voc.oc_startdate || ' ~ ' || voc.oc_enddate 
-                            || ', ' || vr.room_name || ')');
+                            || ', ' || fnGetRoomName(voc.room_seq) || ')');
                             
     delete from tblOpenCourse
     where oc_seq = pseq;
