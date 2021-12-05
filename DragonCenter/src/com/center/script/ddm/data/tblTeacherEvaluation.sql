@@ -1,8 +1,37 @@
---교사 평가
+-- 교사 평가
+
+create table tblTeacherEvaluation ( 
+    enrollment_seq number not null,
+    preparing number not null,
+    implement number not null,
+    professionalism number not null, 
+    attitude number not null,
+    studentsupport number not null,
+    otheropinion varchar2(300)
+);
+
+alter table tblTeacherEvaluation
+   add constraint tblte_enrollment_seq_pk primary key(enrollment_seq);
+
+alter table tblTeacherEvaluation
+    add constraint tblte_enrollment_seq_fk foreign key (enrollment_seq) references tblEnrollment(enrollment_seq); 
+alter table tblTeacherEvaluation
+    add constraint tblte_preparing_ck check(preparing between 0 and 10);
+alter table tblTeacherEvaluation
+    add constraint implement_ck check(implement between 0 and 10);
+alter table tblTeacherEvaluation
+    add constraint tblte_professionalism_ck check(professionalism between 0 and 10);
+alter table tblTeacherEvaluation
+    add constraint tblte_attitude_ck check(attitude between 0 and 10);
+alter table tblTeacherEvaluation
+    add constraint tblte_studentsupport_ck check(studentsupport between 0 and 10);
+    
+delete tblteacherevaluation;
+    
 --실제
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(1, 8, 3, 1, 5, 0, '감사합니다!');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(2, 5, 9, 4, 9, 7, '선생님 강의 너무 잘 들었습니다');
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(3, 6, 2, 4, 6, 7, '어려웠는데 덕분에 잘 배웠습니다.');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(3, 0, 0, 0, 0, 0, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(4, 0, 6, 2, 4, 2, '개발자 취업 했어요.');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(5, 2, 0, 2, 4, 3, '자신감이 생겼습니다.!');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(6, 7, 2, 6, 0, 9, '점심시간이 너무 짧았어요.');
@@ -11,18 +40,17 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(9, 6, 3, 7, 6, 6, '긴 과정이었지만 보람찼습니다');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(10, 0, 3, 2, 6, 9, '너무 어렵네요..');
 
-
 -- 더미
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(11, 8, 3, 1, 5, 0, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(12, 5, 9, 4, 9, 7, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(13, 6, 2, 4, 6, 7, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(14, 0, 6, 2, 4, 2, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(15, 2, 0, 2, 4, 3, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(16, 7, 2, 6, 0, 9, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(17, 6, 0, 5, 6, 5, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(18, 7, 0, 1, 8, 9, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(19, 6, 3, 7, 6, 6, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(20, 0, 3, 2, 6, 9, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(11, 8, 3, 1, 5, 0, '잘 배우고 갑니다');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(12, 5, 9, 4, 9, 7, '오라클 재미가 없어요');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(13, 6, 2, 4, 6, 7, '자바 재밌어요');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(14, 0, 6, 2, 4, 2, '아쉬워요');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(15, 2, 0, 2, 4, 3, '좋아요 굿굿');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(16, 7, 2, 6, 0, 9, '수업 속도가 느려요');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(17, 6, 0, 5, 6, 5, '초보도 쉽게 따라갈 수 있어서 좋았어요');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(18, 7, 0, 1, 8, 9, '피드백 잘 받아주셔서 감사했어요');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(19, 6, 3, 7, 6, 6, '비전공자도 이해하기 쉽게 설명해주세요');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(20, 0, 3, 2, 6, 9, '너무 좋아요 호호호');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(21, 8, 6, 9, 8, 6, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(22, 9, 5, 1, 5, 7, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(23, 2, 1, 8, 7, 0, null);
@@ -30,7 +58,7 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(25, 5, 7, 6, 7, 4, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(26, 5, 7, 6, 8, 5, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(27, 2, 8, 7, 3, 7, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(28, 4, 9, 6, 8, 8, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(28, 4, 9, 6, 8, 8, '잘 배우고 갑니다');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(29, 1, 0, 9, 0, 9, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(30, 7, 9, 7, 5, 5, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(31, 0, 5, 6, 9, 0, null);
@@ -67,7 +95,7 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(62, 4, 4, 0, 6, 4, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(63, 7, 1, 6, 0, 4, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(64, 4, 9, 0, 2, 9, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(65, 5, 8, 3, 9, 4, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(65, 5, 8, 3, 9, 4, '오라클 재미가 없어요');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(66, 8, 2, 2, 6, 7, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(67, 0, 2, 4, 9, 9, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(68, 4, 6, 8, 0, 3, null);
@@ -96,7 +124,7 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(91, 5, 2, 1, 3, 9, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(92, 8, 0, 2, 2, 3, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(93, 3, 0, 7, 0, 2, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(94, 9, 0, 1, 6, 5, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(94, 9, 0, 1, 6, 5, '자바 재밌어요');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(95, 8, 4, 8, 2, 2, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(96, 3, 4, 3, 7, 4, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(97, 9, 9, 3, 7, 3, null);
@@ -144,7 +172,7 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(139, 1, 5, 3, 8, 6, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(140, 0, 6, 5, 6, 2, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(141, 8, 2, 9, 9, 4, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(142, 6, 9, 2, 3, 8, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(142, 6, 9, 2, 3, 8, '아쉬워요');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(143, 6, 9, 3, 0, 8, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(144, 7, 2, 8, 2, 6, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(145, 7, 6, 4, 9, 4, null);
@@ -230,16 +258,16 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(225, 4, 1, 0, 6, 6, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(226, 3, 0, 3, 3, 6, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(227, 8, 9, 8, 2, 6, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(228, 2, 7, 0, 8, 7, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(228, 2, 7, 0, 8, 7, '좋아요 굿굿');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(229, 0, 7, 6, 0, 6, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(230, 8, 7, 5, 0, 2, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(230, 8, 7, 5, 0, 2, '수업 속도가 느려요');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(231, 5, 0, 8, 8, 6, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(232, 4, 4, 5, 1, 9, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(233, 2, 4, 5, 2, 1, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(234, 4, 8, 2, 6, 1, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(235, 2, 8, 3, 9, 9, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(236, 5, 0, 9, 5, 8, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(237, 6, 3, 7, 7, 5, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(236, 5, 0, 9, 5, 8, '초보도 쉽게 따라갈 수 있어서 좋았어요');
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(237, 6, 3, 7, 7, 5, '피드백 잘 받아주셔서 감사했어요');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(238, 6, 0, 5, 9, 8, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(239, 8, 5, 4, 4, 1, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(240, 9, 4, 6, 8, 2, null);
@@ -271,7 +299,7 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(266, 0, 3, 5, 2, 7, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(267, 1, 2, 0, 4, 1, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(268, 8, 3, 9, 9, 6, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(269, 3, 7, 3, 4, 3, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(269, 3, 7, 3, 4, 3, '비전공자도 이해하기 쉽게 설명해주세요');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(270, 0, 9, 2, 3, 4, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(271, 2, 5, 0, 0, 0, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(272, 6, 2, 2, 2, 3, null);
@@ -285,7 +313,7 @@ insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professio
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(280, 7, 7, 9, 5, 8, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(281, 4, 0, 6, 9, 4, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(282, 0, 2, 5, 2, 3, null);
-insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(283, 7, 0, 7, 0, 3, null);
+insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(283, 7, 0, 7, 0, 3, '너무 좋아요 호호호');
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(284, 0, 7, 7, 9, 2, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(285, 9, 3, 2, 7, 0, null);
 insert into tblTeacherEvaluation(enrollment_seq, preparing, implement, professionalism, attitude, studentsupport, otheropinion) values(286, 6, 8, 2, 2, 1, null);
