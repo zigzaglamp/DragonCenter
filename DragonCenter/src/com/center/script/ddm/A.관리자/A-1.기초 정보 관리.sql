@@ -50,8 +50,25 @@ end procGetCourse;
 --------------------------------------------------------------------------------
 begin
 --    procAddCourse(과정명, 기간);
-    procAddCourse('짱 쉬운 개발자 과정', 5);
+    procAddCourse('짱 쉬운 개발자 과정', 6);
 end;
+
+
+    /* 과정 기간 확인 함수 */
+create or replace function fnIsValidPeriod (
+    pperiod number
+) return varchar2
+is
+    vcheck varchar2(1);
+begin
+    if pperiod in (5.5, 6, 7) then
+        vcheck := 'Y';
+    else 
+        vcheck := 'N';
+    end if;
+    
+    return vcheck;
+end fnIsValidPeriod;
 
 
     /* 과정 등록 프로시저 */
@@ -66,10 +83,14 @@ begin
                             || 'No.' || course_seq.nextVal || ' ' 
                             || pname || '(' || pperiod || '개월)');
     
-    insert into tblCourse (course_seq, course_name, course_period) 
-        values (course_seq.currVal, pname, pperiod);
+    if fnIsValidPeriod(pperiod) = 'N' then
+        dbms_output.put_line(vinfo || '실패; 기간 부적합');
+    else 
+        insert into tblCourse (course_seq, course_name, course_period) 
+            values (course_seq.currVal, pname, pperiod);
         
-    dbms_output.put_line('성공!');
+        dbms_output.put_line('성공!');    
+    end if;
     
 exception
     when others then
@@ -82,7 +103,7 @@ end procAddCourse;
 --------------------------------------------------------------------------------
 begin
 --    procUpdateCourse(번호, 과정명, 기간);
-    procUpdateCourse(62, '약간 어려운 개발자 과정', 4);
+    procUpdateCourse(88, '약간 어려운 개발자 과정', 7);
 end;
 
 
@@ -115,7 +136,7 @@ begin
     vinfo := 'No.' || pseq || ' ' || pname 
                 || '(' || to_char(pperiod, '0.0') || '개월)' || chr(10); 
                             
-    if to_char(pperiod, '0.0') not in ('5.5', '6', '7') then
+    if fnIsValidPeriod(pperiod) = 'N' then
         dbms_output.put_line(vinfo || '실패; 기간 부적합');
     else 
         update tblCourse set course_name = pname, 
