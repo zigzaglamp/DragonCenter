@@ -10,16 +10,49 @@
 --------------------------------------------------------------------------------
 -- B-1.1) 현재 강의 스케줄 확인
 --------------------------------------------------------------------------------
--- 교사 번호에 해당하는 과정 상태(예정/진행/종료) 출력
+-- 해당 교사의 과정과 상태(예정/진행/종료) 출력
 --------------------------------------------------------------------------------
-select
-    course_name as "과정명",
-    oc_startdate as "시작일",
-    oc_enddate as "종료일",
-    state  as "상태"
-from vwTeacherInfo
-where tt.teacher_seq = 교사_번호
-order by oc_startdate desc;
+declare
+    vresult sys_refcursor;
+    vrow vwTeacherSchedule%rowtype;
+    vname vwTeacherSchedule.course_name%type;
+begin
+--    procGetTeacherSchedule(vresult, 교사_번호);
+    procGetTeacherSchedule(vresult, 1);
+    
+    dbms_output.put_line('-------------------------------------------------------------------------------');
+    dbms_output.put_line('|이  름|' || lpad('과정명', 26) || lpad('|', 22) 
+                            || lpad('기간', 11) || lpad('|', 7) 
+                            || '상태|');
+    loop
+        fetch vresult into vrow;
+        exit when vresult%notfound;
+        if length(vrow.course_name) > 25 then 
+            vname := rpad(vrow.course_name, 44) || '...';
+        else
+            vname := vrow.course_name;
+        end if;
+        dbms_output.put_line('-------------------------------------------------------------------------------');
+        dbms_output.put_line('|' || vrow.teacher_name || '|' || rpad(vname, 47) 
+                                || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
+                                || '|' || vrow.state || '|');
+    end loop;
+    dbms_output.put_line('-------------------------------------------------------------------------------');
+end;
+
+
+    /* 강의 스케줄 조회 프로시저 */
+create or replace procedure procGetTeacherSchedule(
+    presult out sys_refcursor,
+    pseq number
+)
+is
+begin
+    open presult
+        for select * from vwTeacherSchedule
+            where teacher_seq = pseq
+            order by oc_startdate desc;
+end procGetTeacherSchedule;
 
 
 
@@ -39,10 +72,11 @@ select
     book_name as "교재",
     (select count(*) from tblEnrollment 
      group by oc_seq having oc_seq = v.oc_seq) as "등록 인원"
-from vwOpenCourseInfo v
-where teacher_seq = 교사_번호
-    and oc_seq = 개설_과정_번호;
-
+from vwOpenCourse v
+--where teacher_seq = 교사_번호
+--    and oc_seq = 개설_과정_번호;
+where teacher_seq = 1
+    and oc_seq = 20;
 
 
 --------------------------------------------------------------------------------
@@ -63,3 +97,4 @@ select
 from vwStudentInfo v
 where oc.seq = 개설_과정_번호
 order by name;
+
