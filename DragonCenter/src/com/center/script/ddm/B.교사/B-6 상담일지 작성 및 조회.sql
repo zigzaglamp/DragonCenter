@@ -129,7 +129,7 @@ SELECT
 	cc.cc_content,
 	cl.cl_content 
 FROM tblCounselcategory cc
-	INNER JOIN tblCounselLog cl ON cc.cc_seq = cl.cc_seq
+	LEFT OUTER JOIN tblCounselLog cl ON cc.cc_seq = cl.cc_seq
 		ORDER BY cc.cc_content;
 -- 카테고리는 프로시저화 시키면 문장이 더 길어진다.
 
