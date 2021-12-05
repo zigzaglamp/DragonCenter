@@ -308,12 +308,8 @@ declare
     vrow vwOpenCourse%rowtype;
     vname vwOpenCourse.course_name%type;
 begin
-    procGetOpenCourse(vresult);
+    procGetOpenCourseInfo(vresult);
     
-    dbms_output.put_line('---------------------------------------------------------------------------------');
-    dbms_output.put_line('|No.|' || lpad('과정명', 18) || lpad('|', 16) 
-                            || lpad('기간', 11) || lpad('|', 7) 
-                            || ' 강의실| 등록|과목 개설|');
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
@@ -322,15 +318,32 @@ begin
         else
             vname := vrow.course_name;
         end if;
-        dbms_output.put_line('---------------------------------------------------------------------------------');
         dbms_output.put_line('|' || to_char(vrow.oc_seq, '99') || '|' || rpad(vname, 33) 
                                 || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
                                 || '|' || vrow.room_name || '|' 
                                 || to_char(vrow.num, '99') || '명|    '
                                 || vrow.regsub || '    |');
+        dbms_output.put_line('---------------------------------------------------------------------------------');
     end loop;
-    dbms_output.put_line('---------------------------------------------------------------------------------');
 end;
+
+
+    /* 개설 과정 상세 조회 프로시저 */
+create or replace procedure procGetOpenCourseInfo(
+    presult out sys_refcursor
+)
+is
+begin
+    dbms_output.put_line('[개설 과정 상세 조회]');
+    dbms_output.put_line('---------------------------------------------------------------------------------');
+    dbms_output.put_line('|No.|' || lpad('과정명', 18) || lpad('|', 16) 
+                            || lpad('기간', 11) || lpad('|', 7) 
+                            || ' 강의실| 등록|과목 개설|');
+    dbms_output.put_line('---------------------------------------------------------------------------------');
+    open presult
+        for select * from vwOpenCourse
+            order by oc_seq;
+end procGetOpenCourseInfo;
 
 
 
