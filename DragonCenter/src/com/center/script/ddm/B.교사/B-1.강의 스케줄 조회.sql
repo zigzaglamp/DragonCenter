@@ -20,10 +20,6 @@ begin
 --    procGetTeacherSchedule(vresult, 교사_번호);
     procGetTeacherSchedule(vresult, 1);
     
-    dbms_output.put_line('-------------------------------------------------------------------------------');
-    dbms_output.put_line('|이  름|' || lpad('과정명', 26) || lpad('|', 22) 
-                            || lpad('기간', 11) || lpad('|', 7) 
-                            || '상태|');
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
@@ -32,12 +28,11 @@ begin
         else
             vname := vrow.course_name;
         end if;
-        dbms_output.put_line('-------------------------------------------------------------------------------');
         dbms_output.put_line('|' || vrow.teacher_name || '|' || rpad(vname, 47) 
                                 || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
                                 || '|' || vrow.state || '|');
+        dbms_output.put_line('-------------------------------------------------------------------------------');
     end loop;
-    dbms_output.put_line('-------------------------------------------------------------------------------');
 end;
 
 
@@ -48,6 +43,12 @@ create or replace procedure procGetTeacherSchedule(
 )
 is
 begin
+    dbms_output.put_line('-------------------------------------------------------------------------------');
+    dbms_output.put_line('|이  름|' || lpad('과정명', 26) || lpad('|', 22) 
+                            || lpad('기간', 11) || lpad('|', 7) 
+                            || '상태|');
+    dbms_output.put_line('-------------------------------------------------------------------------------');
+    
     open presult
         for select * from vwTeacherSchedule
             where teacher_seq = pseq
