@@ -24,11 +24,11 @@ begin
         fetch vresult into vrow;
         exit when vresult%notfound;
         if length(vrow.course_name) > 25 then 
-            vname := rpad(vrow.course_name, 44) || '...';
+            vname := rpad(vrow.course_name, 51) || '...';
         else
             vname := vrow.course_name;
         end if;
-        dbms_output.put_line('|' || vrow.teacher_name || '|' || rpad(vname, 47) 
+        dbms_output.put_line('|' || rpad(vname, 54) 
                                 || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
                                 || '|' || vrow.state || '|');
         dbms_output.put_line('-------------------------------------------------------------------------------');
@@ -42,9 +42,16 @@ create or replace procedure procGetTeacherSchedule(
     pseq number
 )
 is
+    vc tblTeacher%rowtype;
 begin
+    select * 
+        into vc 
+    from tblTeacher
+    where teacher_seq = pseq;
+    
+    dbms_output.put_line('[' || vc.teacher_name || ' 선생님 강의 스케줄 조회]');
     dbms_output.put_line('-------------------------------------------------------------------------------');
-    dbms_output.put_line('|이  름|' || lpad('과정명', 26) || lpad('|', 22) 
+    dbms_output.put_line('|' || lpad('과정명', 29) || lpad('|', 26) 
                             || lpad('기간', 11) || lpad('|', 7) 
                             || '상태|');
     dbms_output.put_line('-------------------------------------------------------------------------------');
