@@ -4,24 +4,31 @@
 -- 프로시저(학생 -> 학생 출결 조회)
 create or replace procedure procStudentAttendance
 (
-    pseq number,
-    pyear number,
-    pmonth number,
-    pday number,
+    pseq number, -- 학생 번호
+    pyear number, -- 년
+    pmonth number, -- 월
+    pday number, -- 일
     presult out sys_refcursor
 )
 is
 begin
     
+    -- 특정 학생 전체 출결 조회
     if pseq != 0 and pyear = 0 and pmonth = 0 and pday = 0 then
         open presult
             for select * from vwstudentattendance where "학생번호" = pseq;
+            
+    -- 특정 학생, 특정 연도 출결 조회            
     elsif pseq != 0 and pyear != 0 and pmonth = 0 and pday = 0 then
         open presult
             for select * from vwstudentattendance where "학생번호" = pseq and to_char("출결일", 'YYYY') = to_char(pyear);
+            
+    -- 특정 학생, 특정 연도, 특정월 출결 조회               
     elsif pseq != 0 and pyear != 0 and pmonth != 0 and pday = 0 then
         open presult
             for select * from vwstudentattendance where "학생번호" = pseq and to_char("출결일", 'YYYY') = to_char(pyear) and to_number(to_char("출결일", 'MM')) = pmonth;
+            
+    -- 특정 학생, 특정 연도, 특정월, 특정일 출결 조회               
     elsif pseq != 0 and pyear != 0 and pmonth != 0 and pday != 0 then
         open presult
             for select * from vwstudentattendance where "학생번호" = pseq and to_char("출결일", 'YYYY') = to_char(pyear) and to_number(to_char("출결일", 'MM')) = pmonth and to_number(to_char("출결일", 'DD')) = pday;
@@ -29,7 +36,7 @@ begin
     
 exception
     when others then
-        dbms_output.put_line('값을 잘못 입력하셨습니다');
+        dbms_output.put_line('잘못된 값입니다');
 
 end procStudentAttendance;
 
@@ -63,6 +70,10 @@ begin
     
 exception
     when others then
-        dbms_output.put_line('값을 잘못 입력하셨습니다');
+        dbms_output.put_line('잘못된 값입니다');
   
 end;
+
+
+
+
