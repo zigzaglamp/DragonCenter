@@ -1,4 +1,3 @@
-drop sequence interviewer_seq;
 create table tblInterviewer (
     interviewer_seq number not null,
     interviewer_name varchar2(30) not null,
@@ -328,12 +327,12 @@ insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, o
 insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '윤지진', '010-2420-9852', 11, to_date('2021-08-18', 'YY-MM-DD'));
 
 --실제 null
-insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '신민석', '010-9910-1091', 21, to_date('2021-12-02', 'YY-MM-DD'));
-insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '이대은', '010-8594-8932', 21, to_date('2019-09-09', 'YY-MM-DD'));
-insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '주주재', '010-4005-2630', 21, to_date('2021-12-06', 'YY-MM-DD'));
-insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '김성권', '010-4618-9178', 21, to_date('2021-12-07', 'YY-MM-DD'));
-insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '신은권', '010-5020-3424', 22, to_date('2021-12-03', 'YY-MM-DD'));
+insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '신민석', '010-9910-1091', 21, to_date('2021-12-12', 'YY-MM-DD'));
+insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '이대은', '010-8594-8932', 21, to_date('2021-12-19', 'YY-MM-DD'));
+insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '주주재', '010-4005-2630', 21, to_date('2021-12-16', 'YY-MM-DD'));
+insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '김성권', '010-4618-9178', 22, to_date('2021-12-07', 'YY-MM-DD'));
+insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '신은권', '010-5020-3424', 22, to_date('2021-12-13', 'YY-MM-DD'));
 insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '신유재', '010-3351-4437', 22, to_date('2021-12-16', 'YY-MM-DD'));
 insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '최윤은', '010-0760-4254',22, to_date('2021-12-14', 'YY-MM-DD'));
-insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '민연하', '010-0344-3057', 22, to_date('2021-12-05', 'YY-MM-DD'));
+insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '민연하', '010-0344-3057', 22, to_date('2021-12-15', 'YY-MM-DD'));
 insert into tblinterviewer(interviewer_seq, interviewer_name, interviewer_tel, oc_seq, interviewer_date) values (interviewer_seq.nextval, '정경림', '010-9522-2583', 22, to_date('2021-12-11', 'YY-MM-DD'));
