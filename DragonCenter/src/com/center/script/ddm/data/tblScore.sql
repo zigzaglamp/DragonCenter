@@ -1,41 +1,6 @@
-drop table tblscore;
 drop sequence score_seq;
-
-
-create table tblScore (
-	score_seq NUMBER,
-	enrollment_seq NUMBER NOT NULL,
-	os_seq NUMBER NOT NULL,
-	sp_seq NUMBER NOT NULL,
-	score_exam NUMBER NOT NULL ,
-	score_skill NUMBER NOT NULL ,
-	Score_attendance NUMBER NOT NULL 
-);
-
 create sequence score_seq;
-
-alter table tblScore
-    add constraint tbls_score_seq_pk primary key(score_seq);
-    
-alter table tblScore
-    add constraint tbls_enrollment_seq_fk foreign key(enrollment_seq) references tblEnrollment(enrollment_seq);
-    
-alter table tblScore
-    add constraint tbls_os_seq_fk foreign key(os_seq) references tblOpenSubject(os_seq);
-    
-alter table tblScore
-    add constraint tbls_sp_seq_fk foreign key(sp_seq) references tblScorePercent(sp_seq);
-
-alter table tblScore
-    add constraint tbls_score_exam_ck check (score_exam BETWEEN 0 AND 50);
-
-alter table tblScore
-    add constraint tbls_score_skill_ck check (score_skill BETWEEN 0 AND 50);
-
-alter table tblScore
-    add constraint tbls_Score_attendance_ck check (Score_attendance BETWEEN 0 AND 50);
-
-
+delete from tblScore;
 insert into tblScore (score_seq, enrollment_seq, os_seq, sp_seq, score_exam, score_skill, score_attendance)
     values (score_seq.nextVal, 3, 1, 1, 2, 7, 14);
 insert into tblScore (score_seq, enrollment_seq, os_seq, sp_seq, score_exam, score_skill, score_attendance)
