@@ -18,7 +18,7 @@ declare
     vname vwTeacherSchedule.course_name%type;
 begin
 --    procGetTeacherSchedule(vresult, 교사_번호);
-    procGetTeacherSchedule(vresult, 1);
+    procGetTeacherSchedule(vresult, 2);
     
     loop
         fetch vresult into vrow;
@@ -44,7 +44,7 @@ begin
     from tblTeacher
     where teacher_seq = pseq;
     
-    dbms_output.put_line('[ ' || vc.teacher_name || ' 선생님 강의 스케줄 조회 ]');
+    dbms_output.put_line(chr(10) || '[ ' || vc.teacher_name || ' 선생님 강의 스케줄 조회 ]');
         dbms_output.put_line('------------------------------------------------------------');
         dbms_output.put_line('|' || lpad('과정명', 43) || lpad('|', 41) 
                             || lpad('기간', 17) || lpad('|', 13) 
