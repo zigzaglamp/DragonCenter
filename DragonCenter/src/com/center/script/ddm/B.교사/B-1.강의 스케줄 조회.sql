@@ -10,29 +10,34 @@
 --------------------------------------------------------------------------------
 -- B-1.1) 현재 강의 스케줄 확인
 --------------------------------------------------------------------------------
--- 해당 교사의 과정과 상태(예정/진행/종료) 출력
+-- 강의 스케줄 뷰
 --------------------------------------------------------------------------------
-declare
-    vresult sys_refcursor;
-    vrow vwTeacherSchedule%rowtype;
-    vname vwTeacherSchedule.course_name%type;
-begin
---    procGetTeacherSchedule(vresult, 교사_번호);
-    procGetTeacherSchedule(vresult, 2);
-    
-    loop
-        fetch vresult into vrow;
-        exit when vresult%notfound;
-        dbms_output.put_line('|' || chr(9) || vrow.course_name || chr(9)
-                                || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
-                                || '|' || vrow.state || '|');
-        dbms_output.put_line('------------------------------------------------------------');
-    end loop;
-end;
+create or replace view vwTeacherSchedule
+as
+select
+    tt.teacher_seq as teacher_seq,
+    tt.teacher_name as teacher_name,
+    tc.course_name as course_name,
+    toc.oc_startdate as oc_startdate,
+    toc.oc_enddate as oc_enddate,
+    case
+        when toc.oc_startdate > sysdate then '예정'
+        when toc.oc_enddate >= sysdate then '진행'
+        when toc.oc_enddate < sysdate then '종료'
+    end as state
+from tblOpenCourse toc inner join tblCourse tc
+    on (toc.course_seq = tc.course_seq) inner join tblTeacherManagement ttm
+    on (ttm.oc_seq = toc.oc_seq) inner join tblTeacher tt
+    on (tt.teacher_seq = ttm.teacher_seq) inner join (select max(tm_seq) as final
+                                                    from tblTeacherManagement
+                                                    group by oc_seq) ttmr
+    on (ttm.tm_seq = ttmr.final) 
+order by toc.oc_startdate desc;
 
-
-    /* 강의 스케줄 조회 프로시저 */
-create or replace procedure procGetTeacherSchedule(
+--------------------------------------------------------------------------------
+-- 강의 스케줄 저장 프로시저
+--------------------------------------------------------------------------------
+create or replace procedure procSetTeacherSchedule(
     presult out sys_refcursor,
     pseq number
 )
@@ -55,8 +60,37 @@ begin
         for select * from vwTeacherSchedule
             where teacher_seq = pseq
             order by oc_startdate desc;
+end procSetTeacherSchedule;
+
+--------------------------------------------------------------------------------
+-- 강의 스케줄 조회 프로시저
+--------------------------------------------------------------------------------
+create or replace procedure procGetTeacherSchedule(
+    pseq number
+)
+is
+    vresult sys_refcursor;
+    vrow vwTeacherSchedule%rowtype;
+    vname vwTeacherSchedule.course_name%type;
+begin
+    procSetTeacherSchedule(vresult, pseq);
+    
+    loop
+        fetch vresult into vrow;
+        exit when vresult%notfound;
+        dbms_output.put_line('|' || chr(9) || vrow.course_name || chr(9)
+                                || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
+                                || '|' || vrow.state || '|');
+        dbms_output.put_line('------------------------------------------------------------');
+    end loop;
 end procGetTeacherSchedule;
 
+--------------------------------------------------------------------------------
+-- 해당 교사의 강의 스케줄 조회
+--------------------------------------------------------------------------------
+begin
+    procGetTeacherSchedule(2);
+end;
 
 
 --------------------------------------------------------------------------------
