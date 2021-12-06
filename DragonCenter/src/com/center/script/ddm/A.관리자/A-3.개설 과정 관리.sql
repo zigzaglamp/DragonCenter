@@ -12,26 +12,42 @@
 --------------------------------------------------------------------------------
 -- A-3.1) 개설 과정 정보 관리(tblOpenCourse)
 --------------------------------------------------------------------------------
--- 1. 개설 과정 조회; 번호, 과정명, 시작일, 종료일, 강의실 출력
+-- 1. 개설 과정 조회
 --------------------------------------------------------------------------------
-declare
-    vresult sys_refcursor;
-    vrow vwOpenCourse%rowtype;
-begin
-    procGetOpenCourse(vresult);
-    loop
-        fetch vresult into vrow;
-        exit when vresult%notfound;
-        dbms_output.put_line('| ' || to_char(vrow.oc_seq, '00') || '|' || vrow.course_name || chr(9)
-                                || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
-                                || '|' || vrow.room_name || '|' || vrow.room_capacity || '명|');
-        dbms_output.put_line('--------------------------------------------------------------------');
-    end loop;
-end;
+-- 개설 과정 뷰
+--------------------------------------------------------------------------------
+create or replace view vwOpenCourse
+as
+select
+    toc.oc_seq as oc_seq,
+    tc.course_name as course_name,
+    toc.oc_startdate as oc_startdate,
+    toc.oc_enddate as oc_enddate,
+    tr.room_seq as room_seq,
+    tr.room_name as room_name,
+    tr.room_capacity as room_capacity,
+    case
+        when (select count(*) from tblOpenSubject 
+              group by oc_seq having oc_seq = toc.oc_seq) > 0 then 'Y'
+        else 'N'
+    end as regsub,
+    (select 
+         case count(*)
+             when 1 then 0
+             else count(*)
+         end
+     from tblEnrollment e full outer join tblOpenCourse oc
+         on (e.oc_seq = oc.oc_seq)
+     group by oc.oc_seq having oc.oc_seq = toc.oc_seq) as num
+from tblOpenCourse toc inner join tblCourse tc
+    on (toc.course_seq = tc.course_seq) inner join tblRoom tr
+    on (toc.room_seq = tr.room_seq) 
+order by toc.oc_startdate desc;
 
-
-    /* 개설 과정 조회 프로시저 */
-create or replace procedure procGetOpenCourse(
+--------------------------------------------------------------------------------
+-- 개설 과정 정보 저장 프로시저
+--------------------------------------------------------------------------------
+create or replace procedure procSetOpenCourse(
     presult out sys_refcursor
 )
 is
@@ -45,22 +61,40 @@ begin
     open presult
         for select * from vwOpenCourse
             order by oc_seq;
+end procSetOpenCourse;
+
+--------------------------------------------------------------------------------
+-- 개설 과정 조회 프로시저
+--------------------------------------------------------------------------------
+create or replace procedure procGetOpenCourse 
+is
+    vresult sys_refcursor;
+    vrow vwOpenCourse%rowtype;
+begin
+    procSetOpenCourse(vresult);
+    loop
+        fetch vresult into vrow;
+        exit when vresult%notfound;
+        dbms_output.put_line('| ' || to_char(vrow.oc_seq, '00') || '|' || vrow.course_name || chr(9)
+                                || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
+                                || '|' || vrow.room_name || '|' || vrow.room_capacity || '명|');
+        dbms_output.put_line('--------------------------------------------------------------------');
+    end loop;
 end procGetOpenCourse;
 
-
 --------------------------------------------------------------------------------
--- 2. 개설 과정 등록; 과정번호, 시작일, 강의실 번호 입력
+-- 개설 과정 조회 
 --------------------------------------------------------------------------------
 begin
---    procAddOpenCourse(과정_번호, 강의실_번호, 시작일);
-    procAddOpenCourse(2, 1, '21-12-23');
+    procGetOpenCourse;
 end;
 
-drop sequence oc_seq;
-create sequence oc_seq;
 
-
-    /* 개설 가능한 날짜 함수 */
+--------------------------------------------------------------------------------
+-- 2. 개설 과정 등록
+--------------------------------------------------------------------------------
+-- 개설 가능한 날짜 함수
+--------------------------------------------------------------------------------
 create or replace function fnIsValidDate (
     pdate date
 ) return varchar2
@@ -84,8 +118,9 @@ begin
     return vcheck;
 end fnIsValidDate;
 
-
-    /* 개설 가능한 강의실 함수 */
+--------------------------------------------------------------------------------
+-- 개설 가능한 강의실 함수
+--------------------------------------------------------------------------------
 create or replace function fnIsValidRoom (
     pseq number,
     pstartdate date
@@ -108,8 +143,9 @@ begin
     return vcheck;
 end fnIsValidRoom;
 
-
-    /* 개설 과정 종료일 계산 함수 */
+--------------------------------------------------------------------------------
+-- 종료일 계산 함수
+--------------------------------------------------------------------------------
 create or replace function fnGetEnddate (
     pdate date,
     pseq number
@@ -123,40 +159,9 @@ begin
     return add_months(pdate, vperiod);
 end fnGetEnddate;
 
-
-    /* 과목명 반환 함수 */
-create or replace function fnGetCourseName (
-    pseq number
-) return varchar2
-is
-    vname tblCourse.course_name%type;
-begin
-    select course_name 
-        into vname 
-    from tblCourse
-    where course_seq = pseq;
-    
-    return vname;
-end fnGetCourseName;
-
-
-    /* 강의실명 반환 함수 */
-create or replace function fnGetRoomName (
-    pseq number
-) return varchar2
-is
-    vname tblRoom.room_name%type;
-begin
-    select room_name 
-        into vname 
-    from tblRoom
-    where room_seq = pseq;
-    
-    return vname;
-end fnGetRoomName;
-    
-    
-    /* 개설 과정 등록 프로시저 */
+--------------------------------------------------------------------------------
+-- 개설 과정 등록 프로시저
+--------------------------------------------------------------------------------
 create or replace procedure procAddOpenCourse (
     pseq number, 
     prseq number,
@@ -190,17 +195,20 @@ exception
         dbms_output.put_line('☞실패; ' || sqlerrm);
 end procAddOpenCourse;
 
-
 --------------------------------------------------------------------------------
--- 3. 개설 과정 수정; 해당 번호의 과정 번호, 시작일, 종료일, 강의실 수정
+-- 개설 과정 등록
 --------------------------------------------------------------------------------
 begin
---    procUpdateOpenCourse(번호, 과정_번호, 시작일, 종료일, 강의실_번호);
-    procUpdateOpenCourse(30, 2, '21-12-24', '22-02-03', 6);
+--    procAddOpenCourse(과정_번호, 강의실_번호, 시작일);
+    procAddOpenCourse(2, 4, '21-12-23');
 end;
 
-    
-    /* 개설 과정 수정 트리거 */
+
+--------------------------------------------------------------------------------
+-- 3. 개설 과정 수정
+--------------------------------------------------------------------------------
+-- 개설 과정 수정 트리거
+--------------------------------------------------------------------------------
 create or replace trigger trgUpdateOpenCourse
     after
     update on tblOpenCourse
@@ -216,8 +224,9 @@ begin
                             || ', ' || fnGetRoomName(:new.room_seq) || ')');
 end;
 
-    
-    /*  개설 과정 수정 프로시저 */
+--------------------------------------------------------------------------------
+-- 개설 과정 수정 프로시저
+--------------------------------------------------------------------------------
 create or replace procedure procUpdateOpenCourse (
     pseq number,
     pcseq number, 
@@ -256,17 +265,21 @@ exception
         dbms_output.put_line(vinfo || '실패; ' || sqlerrm);
 end procUpdateOpenCourse;
 
-
 --------------------------------------------------------------------------------
--- 4. 개설 과정 삭제; 해당 번호의 개설 과정 정보 삭제
+-- 개설 과정 수정
 --------------------------------------------------------------------------------
 begin
---    procDeleteOpenCourse(번호);
-    procDeleteOpenCourse(30);
+--    procUpdateOpenCourse(번호, 과정_번호, 시작일, 종료일, 강의실_번호);
+    procUpdateOpenCourse(24, 2, '21-12-24', '22-02-03', 6);
 end;
 
 
-    /* 개설 과정 삭제 프로시저 */
+
+--------------------------------------------------------------------------------
+-- 4. 개설 과정 삭제
+--------------------------------------------------------------------------------
+-- 개설 과정 삭제 프로시저
+--------------------------------------------------------------------------------
 create or replace procedure procDeleteOpenCourse (
     pseq number
 )
@@ -290,34 +303,21 @@ exception
         dbms_output.put_line('☞실패; ' || sqlerrm);
 end procDeleteOpenCourse;
 
+--------------------------------------------------------------------------------
+-- 개설 과정 삭제
+--------------------------------------------------------------------------------
+begin
+--    procDeleteOpenCourse(번호);
+    procDeleteOpenCourse(3);
+end;
+
 
 --------------------------------------------------------------------------------
 -- A-3.2) 개설 과정 상세 정보 조회
 --------------------------------------------------------------------------------
--- 과정명, 기간, 강의실, 개설 과목 등록 여부, 교육생 등록 인원
+-- 개설 과정 상세 정보 저장 프로시저
 --------------------------------------------------------------------------------
-declare
-    vresult sys_refcursor;
-    vrow vwOpenCourse%rowtype;
-    vname vwOpenCourse.course_name%type;
-begin
-    procGetOpenCourseInfo(vresult);
-    
-    loop
-        fetch vresult into vrow;
-        exit when vresult%notfound;
-        dbms_output.put_line('| ' || to_char(vrow.oc_seq, '00') || '|' || vrow.course_name || chr(9)
-                                || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
-                                || '|' || vrow.room_name || '|' 
-                                || to_char(vrow.num, '00') || '명|      '
-                                || vrow.regsub || '     |');
-        dbms_output.put_line('----------------------------------------------------------------------------');
-    end loop;
-end;
-
-
-    /* 개설 과정 상세 조회 프로시저 */
-create or replace procedure procGetOpenCourseInfo(
+create or replace procedure procSetOpenCourseInfo(
     presult out sys_refcursor
 )
 is
@@ -331,7 +331,37 @@ begin
     open presult
         for select * from vwOpenCourse
             order by oc_seq;
+end procSetOpenCourseInfo;
+
+--------------------------------------------------------------------------------
+-- 개설 과정 상세 정보 조회 프로시저
+--------------------------------------------------------------------------------
+create or replace procedure procGetOpenCourseInfo
+is
+    vresult sys_refcursor;
+    vrow vwOpenCourse%rowtype;
+    vname vwOpenCourse.course_name%type;
+begin
+    procSetOpenCourseInfo(vresult);
+    
+    loop
+        fetch vresult into vrow;
+        exit when vresult%notfound;
+        dbms_output.put_line('| ' || to_char(vrow.oc_seq, '00') || '|' || vrow.course_name || chr(9)
+                                || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
+                                || '|' || vrow.room_name || '|' 
+                                || to_char(vrow.num, '00') || '명|      '
+                                || vrow.regsub || '     |');
+        dbms_output.put_line('----------------------------------------------------------------------------');
+    end loop;
 end procGetOpenCourseInfo;
+
+--------------------------------------------------------------------------------
+-- 개설 과정 상세 조회
+--------------------------------------------------------------------------------
+begin
+    procGetOpenCourseInfo;
+end;
 
 
 
