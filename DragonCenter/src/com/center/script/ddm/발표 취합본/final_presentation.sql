@@ -620,6 +620,16 @@ end procOpenSubjectOutput;
 -- A-5 교육생 관리
 -- A-5-1 교육생 추가
 
+-- 트리거(교육생 추가)
+create or replace trigger trgAddStudent
+after insert on tblStudent
+for each row
+begin
+    if inserting then
+        dbms_output.put_line('교육생이 추가되었습니다');
+    end if;
+end;
+
 -- 프로시저(교육생 추가)
 create or replace procedure procAddStudent
 (
@@ -638,8 +648,10 @@ begin
         for select * from tblstudent order by student_seq;
         
 exception
+    when no_data_found then
+        dbms_output.put_line('존재하지 않는 값입니다');
     when others then
-        dbms_output.put_line('잘못된 값입니다');            
+        dbms_output.put_line('잘못된 값입니다');             
     
 end procAddStudent;
 
@@ -1116,8 +1128,10 @@ begin
         for select * from vwteacherevaluation where "교사번호" = ptseq and "과정번호" = pcseq;
         
 exception
+    when no_data_found then
+        dbms_output.put_line('존재하지 않는 값입니다');
     when others then
-        dbms_output.put_line('잘못된 값입니다'); 
+        dbms_output.put_line('잘못된 값입니다');  
 
 end procEvaluationCheck;
 
@@ -1150,8 +1164,10 @@ begin
     end loop;
     
 exception
+    when no_data_found then
+        dbms_output.put_line('존재하지 않는 값입니다');
     when others then
-        dbms_output.put_line('잘못된 값입니다');
+        dbms_output.put_line('잘못된 값입니다'); 
     
 end;  
 
@@ -1584,6 +1600,16 @@ end;
 -- C-3. 학생 -> 교사 평가
 -- 수강 완료한 과정에 대한 교사 평가
 
+-- 트리거(학생 -> 교사 평가)
+create or replace trigger trgUpdateEvaluation
+after update on tblTeacherEvaluation
+for each row
+begin
+    if updating then
+        dbms_output.put_line('교사 평가가 반영되었습니다');
+    end if;
+end;
+
 -- 프로시저(학생 -> 교사 평가)
 create or replace procedure procTeacherEvaluation
 (
@@ -1612,8 +1638,10 @@ begin
         -- 과정 종료일이 현재 날짜 기준보다 이전인지(과정이 끝났는지) 검사
         
 exception
+    when no_data_found then
+        dbms_output.put_line('존재하지 않는 값입니다');
     when others then
-        dbms_output.put_line('잘못된 값입니다');                
+        dbms_output.put_line('잘못된 값입니다');                 
         
 end procTeacherEvaluation;
 
@@ -1630,8 +1658,10 @@ begin
     procTeacherEvaluation(vseq, vpreparing, vimplement, vprofessionalism, vattitude, vstudentsupport, votheropinion);
     
 exception
+    when no_data_found then
+        dbms_output.put_line('존재하지 않는 값입니다');
     when others then
-        dbms_output.put_line('잘못된 값입니다');
+        dbms_output.put_line('잘못된 값입니다'); 
     
 end;    
 
@@ -1663,8 +1693,10 @@ begin
     end loop;
     
 exception
+    when no_data_found then
+        dbms_output.put_line('존재하지 않는 값입니다');
     when others then
-        dbms_output.put_line('잘못된 값입니다');
+        dbms_output.put_line('잘못된 값입니다'); 
     
 end;  
 
