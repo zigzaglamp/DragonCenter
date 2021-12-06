@@ -1293,6 +1293,31 @@ END procDeleteCounselLog;
 
 --------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------
+-- 상담 내용 조회
+create or replace view vwCounselDate
+as
+SELECT 
+	cl.cl_date, 
+	cl_content,
+	s.student_name
+FROM tblCourse c
+	LEFT OUTER JOIN tblOpenCourse oc ON c.course_seq = oc.course_seq
+		LEFT OUTER JOIN tblEnrollment e ON oc.OC_SEQ = e.OC_SEQ
+			LEFT OUTER JOIN  tblStudent s ON e.student_seq = s.student_seq
+				LEFT OUTER JOIN tblQuestion q ON s.student_seq = q.student_seq
+					LEFT OUTER JOIN tblAnswer a ON  q.question_seq = a.question_seq
+						LEFT OUTER JOIN tblTeacher t ON a.teacher_seq = t.teacher_seq
+							LEFT OUTER JOIN tblCounselLog cl ON cl.enrollment_seq = e.enrollment_seq
+								LEFT OUTER JOIN TBLCOUNSELCATEGORY cc ON cl.cc_seq = cc.cc_seq
+									ORDER BY cl.CL_SEQ ;
+									
+
+select. * from vwCounselDate;
+
+
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 -- 상담 삭제 procedure 사용법
 BEGIN
 	procDeleteCounselLog(310);
@@ -1424,6 +1449,8 @@ END;
 --------------------------------------------------------------------------------------------------
 -- 과정, 교육생, 날짜별로 질의 목록 조회 가능
 --------------------------------------------------------------------------------------------------
+create or replace view vwQuestionDate
+as
 SELECT 
 	c.course_name,
 	s.student_name,
@@ -1439,6 +1466,7 @@ FROM tblCourse c
 							WHERE question_date BETWEEN TO_DATE('21-10', 'yy-mm') AND TO_DATE('21-11', 'yy-mm') -- 조회할 기간 설정
 								ORDER BY question_date desc;
 
+select * from vwQuestionDate;
 							
 							
 							
