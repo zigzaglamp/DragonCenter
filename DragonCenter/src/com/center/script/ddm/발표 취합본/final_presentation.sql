@@ -1433,7 +1433,7 @@ FROM tblCourse c
 				LEFT OUTER JOIN tblQuestion q ON q.student_seq = s.student_seq 
 					LEFT OUTER JOIN tblAnswer a ON  a.question_seq = q.question_seq
 						LEFT OUTER JOIN tblTeacher t ON t.teacher_seq = a.teacher_seq
-							WHERE question_date BETWEEN TO_DATE('21-12', 'yy-mm') AND TO_DATE('22-01', 'yy-mm') -- 조회할 기간 설정
+							WHERE question_date BETWEEN TO_DATE('21-10', 'yy-mm') AND TO_DATE('21-11', 'yy-mm') -- 조회할 기간 설정
 								ORDER BY question_date desc;
 
 							
