@@ -1,4 +1,4 @@
--- 완성
+
 
 --------------------------------------------------------------------------------------------------
 -- B-8. 질의응답 답변 작성 및 조회
@@ -98,18 +98,53 @@ SELECT
 	q.question_date,
 	q.question_content
 FROM tblCourse c
-	INNER JOIN tblOpenCourse oc ON c.course_seq = oc.course_seq
-		INNER JOIN tblEnrollment e ON oc.OC_SEQ = e.OC_SEQ
-			INNER JOIN tblStudent s ON e.student_seq = s.student_seq
-				INNER JOIN tblQuestion q ON s.student_seq = q.student_seq
-					INNER JOIN tblAnswer a ON  q.question_seq = a.question_seq
-						INNER JOIN tblTeacher t ON a.teacher_seq = t.teacher_seq;
-					
-SELECT * FROM vwQuestionDate;	-- vwQuestionDate라는 이름의 뷰로 만들어져있다.
+	LEFT OUTER JOIN tblOpenCourse oc ON  oc.course_seq = c.course_seq
+		LEFT OUTER JOIN tblEnrollment e ON e.OC_SEQ = oc.OC_SEQ
+			LEFT OUTER JOIN tblStudent s ON  s.student_seq = e.student_seq
+				LEFT OUTER JOIN tblQuestion q ON q.student_seq = s.student_seq 
+					LEFT OUTER JOIN tblAnswer a ON  a.question_seq = q.question_seq
+						LEFT OUTER JOIN tblTeacher t ON t.teacher_seq = a.teacher_seq
+							WHERE question_date BETWEEN TO_DATE('21-12', 'yy-mm') AND TO_DATE('22-01', 'yy-mm') -- 조회할 기간 설정
+								ORDER BY question_date desc;
 
-
-
-
+							
+							
+							
+--------------------------------------------------------------------------------------------------
+-- tblAnswer insert trigger
+CREATE OR REPLACE TRIGGER trigInsertAnswer
+    AFTER
+    INSERT ON tblAnswer
+BEGIN
+    dbms_output.put_line('정상적으로 입력되었습니다.');
+END;
 
 
 --------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+-- tblAnswer update trigger
+CREATE OR REPLACE TRIGGER trigUpdateAnswer
+    AFTER
+    UPDATE ON tblAnswer
+BEGIN
+    dbms_output.put_line('정상적으로 수정되었습니다.');
+END;
+
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+-- tblAnswer delete trigger
+CREATE OR REPLACE TRIGGER trigDeleteAnswer
+    AFTER
+    DELETE ON tblAnswer
+BEGIN
+    dbms_output.put_line('정상적으로 삭제되었습니다.');
+END;
+
+
+--------------------------------------------------------------------------------------------------
+
+
+
+
+
