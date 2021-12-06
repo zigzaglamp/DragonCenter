@@ -46,9 +46,9 @@ from tblOpenCourse toc inner join tblCourse tc
 order by toc.oc_startdate desc;
 
 --------------------------------------------------------------------------------
--- 개설 과정 조회 프로시저
+-- 개설 과정 정보 저장 프로시저
 --------------------------------------------------------------------------------
-create or replace procedure procGetOpenCourse(
+create or replace procedure procSetOpenCourse(
     presult out sys_refcursor
 )
 is
@@ -62,16 +62,17 @@ begin
     open presult
         for select * from vwOpenCourse
             order by oc_seq;
-end procGetOpenCourse;
+end procSetOpenCourse;
 
 --------------------------------------------------------------------------------
--- 개설 과정 조회
+-- 개설 과정 조회 프로시저
 --------------------------------------------------------------------------------
-declare
+create or replace procedure procGetOpenCourse 
+is
     vresult sys_refcursor;
     vrow vwOpenCourse%rowtype;
 begin
-    procGetOpenCourse(vresult);
+    procSetOpenCourse(vresult);
     loop
         fetch vresult into vrow;
         exit when vresult%notfound;
@@ -80,6 +81,13 @@ begin
                                 || '|' || vrow.room_name || '|' || vrow.room_capacity || '명|');
         dbms_output.put_line('--------------------------------------------------------------------');
     end loop;
+end procGetOpenCourse;
+
+--------------------------------------------------------------------------------
+-- 개설 과정 조회 
+--------------------------------------------------------------------------------
+begin
+    procGetOpenCourse;
 end;
 
 
@@ -308,14 +316,34 @@ end;
 --------------------------------------------------------------------------------
 -- A-3.2) 개설 과정 상세 정보 조회
 --------------------------------------------------------------------------------
--- 개설 과정 상세 조회 프로시저
+-- 개설 과정 상세 정보 저장 프로시저
 --------------------------------------------------------------------------------
-declare
+create or replace procedure procSetOpenCourseInfo(
+    presult out sys_refcursor
+)
+is
+begin
+    dbms_output.put_line(chr(10) || '[개설 과정 상세 조회]');
+    dbms_output.put_line('----------------------------------------------------------------------------');
+    dbms_output.put_line('|No.|' || lpad('과정명', 43) || lpad('|', 39) 
+                            || lpad('기간', 17) || lpad('|', 13) 
+                            || ' 강의실|  등록|과목 개설|');
+    dbms_output.put_line('----------------------------------------------------------------------------');
+    open presult
+        for select * from vwOpenCourse
+            order by oc_seq;
+end procSetOpenCourseInfo;
+
+--------------------------------------------------------------------------------
+-- 개설 과정 상세 정보 조회 프로시저
+--------------------------------------------------------------------------------
+create or replace procedure procGetOpenCourseInfo
+is
     vresult sys_refcursor;
     vrow vwOpenCourse%rowtype;
     vname vwOpenCourse.course_name%type;
 begin
-    procGetOpenCourseInfo(vresult);
+    procSetOpenCourseInfo(vresult);
     
     loop
         fetch vresult into vrow;
@@ -327,28 +355,13 @@ begin
                                 || vrow.regsub || '     |');
         dbms_output.put_line('----------------------------------------------------------------------------');
     end loop;
-end;
+end procGetOpenCourseInfo;
 
 --------------------------------------------------------------------------------
 -- 개설 과정 상세 조회
 --------------------------------------------------------------------------------
-declare
-    vresult sys_refcursor;
-    vrow vwOpenCourse%rowtype;
-    vname vwOpenCourse.course_name%type;
 begin
-    procGetOpenCourseInfo(vresult);
-    
-    loop
-        fetch vresult into vrow;
-        exit when vresult%notfound;
-        dbms_output.put_line('| ' || to_char(vrow.oc_seq, '00') || '|' || vrow.course_name || chr(9)
-                                || '|' || vrow.oc_startdate || '~' || vrow.oc_enddate 
-                                || '|' || vrow.room_name || '|' 
-                                || to_char(vrow.num, '00') || '명|      '
-                                || vrow.regsub || '     |');
-        dbms_output.put_line('----------------------------------------------------------------------------');
-    end loop;
+    procGetOpenCourseInfo;
 end;
 
 --------------------------------------------------------------------------------
@@ -925,9 +938,9 @@ from tblOpenCourse toc inner join tblCourse tc
 order by toc.oc_startdate desc;
 
 --------------------------------------------------------------------------------
--- 강의 스케줄 조회 프로시저
+-- 강의 스케줄 저장 프로시저
 --------------------------------------------------------------------------------
-create or replace procedure procGetTeacherSchedule(
+create or replace procedure procSetTeacherSchedule(
     presult out sys_refcursor,
     pseq number
 )
@@ -950,18 +963,20 @@ begin
         for select * from vwTeacherSchedule
             where teacher_seq = pseq
             order by oc_startdate desc;
-end procGetTeacherSchedule;
+end procSetTeacherSchedule;
 
 --------------------------------------------------------------------------------
--- 해당 교사의 강의 스케줄 조회
+-- 강의 스케줄 조회 프로시저
 --------------------------------------------------------------------------------
-declare
+create or replace procedure procGetTeacherSchedule(
+    pseq number
+)
+is
     vresult sys_refcursor;
     vrow vwTeacherSchedule%rowtype;
     vname vwTeacherSchedule.course_name%type;
 begin
---    procGetTeacherSchedule(vresult, 교사_번호);
-    procGetTeacherSchedule(vresult, 2);
+    procSetTeacherSchedule(vresult, pseq);
     
     loop
         fetch vresult into vrow;
@@ -971,6 +986,13 @@ begin
                                 || '|' || vrow.state || '|');
         dbms_output.put_line('------------------------------------------------------------');
     end loop;
+end procGetTeacherSchedule;
+
+--------------------------------------------------------------------------------
+-- 해당 교사의 강의 스케줄 조회
+--------------------------------------------------------------------------------
+begin
+    procGetTeacherSchedule(2);
 end;
 
 
