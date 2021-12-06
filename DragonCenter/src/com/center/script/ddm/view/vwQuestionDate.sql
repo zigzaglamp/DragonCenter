@@ -2,9 +2,9 @@
 CREATE OR REPLACE VIEW vwQuestionDate
 AS
 SELECT 
-  q.question_date,
 	c.course_name,
 	s.student_name,
+	q.question_date,
 	q.question_content
 FROM tblCourse c
 	INNER JOIN tblOpenCourse oc ON c.course_seq = oc.course_seq
@@ -12,4 +12,5 @@ FROM tblCourse c
 			INNER JOIN tblStudent s ON e.student_seq = s.student_seq
 				INNER JOIN tblQuestion q ON s.student_seq = q.student_seq
 					INNER JOIN tblAnswer a ON  q.question_seq = a.question_seq
-						INNER JOIN tblTeacher t ON a.teacher_seq = t.teacher_seq;
+						INNER JOIN tblTeacher t ON a.teacher_seq = t.teacher_seq
+							ORDER BY q.question_seq ;
