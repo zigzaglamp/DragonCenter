@@ -104,9 +104,7 @@ end procAddCourse;
 -- 과정 정보 등록
 --------------------------------------------------------------------------------
 begin
---    procAddCourse(과정명, 기간);
-    procAddCourse('짱 쉬운 개발자 과정', 4);
---    procAddCourse('짱 쉬운 개발자 과정', 7);
+    procAddCourse(과정명, 기간);
 end;
 
 
@@ -165,9 +163,7 @@ end procUpdateCourse;
 -- 과정 수정
 --------------------------------------------------------------------------------
 begin
---    procUpdateCourse(번호, 과정명, 기간);
-    procUpdateCourse(11, '약간 어려운 개발자 개발자 과정', 4);
---    procUpdateCourse(11, '약간 어려운 개발자 개발자 과정', 7);
+    procUpdateCourse(번호, 과정명, 기간);
 end;
 
 
@@ -203,8 +199,7 @@ end procDeleteCourse;
 -- 과정 삭제 
 --------------------------------------------------------------------------------
 begin
---    procDeleteCourse(번호);
-    procDeleteCourse(2);
+    procDeleteCourse(번호);
 end;
 
 
